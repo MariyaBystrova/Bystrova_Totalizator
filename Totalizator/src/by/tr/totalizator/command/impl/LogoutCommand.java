@@ -9,11 +9,12 @@ import by.tr.totalizator.command.Command;
 public class LogoutCommand implements Command {
 
 	private final static String URL_INDEX = "http://localhost:8080/Totalizator/";
+	private final static String LOCAL = "local";
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		if (request.getSession(false).getAttribute("local") != null) {
-			response.addCookie(new Cookie("local", request.getSession(false).getAttribute("local").toString()));
+		if (request.getSession(false).getAttribute(LOCAL) != null) {
+			response.addCookie(new Cookie(LOCAL, request.getSession(false).getAttribute(LOCAL).toString()));
 		}
 		request.getSession(false).invalidate();
 

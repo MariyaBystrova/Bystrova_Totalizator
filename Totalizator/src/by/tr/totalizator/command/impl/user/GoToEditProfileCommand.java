@@ -19,8 +19,6 @@ public class GoToEditProfileCommand implements Command {
 		String page;
 		User user = (User) request.getSession(false).getAttribute(USER);
 		if (user != null && user.getRole().equals(USER)) {
-			
-			
 			page = PageName.USER_PAGE_EDIT_PROFILE;
 		} else {
 			page = PageName.INDEX_PAGE;

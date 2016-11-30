@@ -27,16 +27,6 @@ public final class Validator {
 		return true;
 	}
 
-	/*public static boolean authenticationValidator(String login, String password) {
-		if (login.isEmpty() || !matcher("\\w+", login)) {
-			return false;
-		}
-		if (password.isEmpty() || !matcher("\\w+", password)) {
-			return false;
-		}
-		return true;
-	}*/
-
 	public static boolean registrationValidator(String fName, String lName, String sex, String email, String country,
 			String city, String address, String role, String login, byte[] password, byte[] passwordRep) {
 		

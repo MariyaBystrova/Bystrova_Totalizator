@@ -74,8 +74,6 @@ public class EditTotalizator implements TotalizatorService {
 			start = Timestamp.valueOf(startDate);
 			end = Timestamp.valueOf(endDate);
 		} else {
-
-			// может проверять конкретную ошибку?
 			throw new ServiceException("Invalid data.");
 		}
 

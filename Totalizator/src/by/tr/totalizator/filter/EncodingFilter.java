@@ -10,12 +10,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 
 public class EncodingFilter implements Filter {
-	private final static Logger logger = LogManager.getLogger(EncodingFilter.class.getName());
 	private final static String CHARSET_ENCODING = "charsetEncoding";
 	
 	private String encoding;
@@ -32,7 +28,6 @@ public class EncodingFilter implements Filter {
 		((HttpServletRequest) request).setCharacterEncoding(encoding);
 		((HttpServletRequest) request).setCharacterEncoding(encoding);
 		servletContext.log("Charset was set.");
-		logger.info("Filter was done: charset encoding was set.");
 		
 		chain.doFilter(request, response);
 	}
@@ -40,7 +35,7 @@ public class EncodingFilter implements Filter {
 	public void init(FilterConfig fConfig) throws ServletException {
 		encoding = fConfig.getInitParameter(CHARSET_ENCODING);
 		servletContext = fConfig.getServletContext();
-		logger.info("Filter was initialized.");
+		servletContext.log("Filter was initialized.");
 	}
 
 }

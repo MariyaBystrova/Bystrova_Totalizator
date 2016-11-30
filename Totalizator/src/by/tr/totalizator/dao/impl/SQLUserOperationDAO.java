@@ -36,7 +36,7 @@ public class SQLUserOperationDAO implements UserOperationDAO {
 			ps.setString(8, user.getCity());
 			ps.setString(9, user.getAddress());
 			ps.setString(10, user.getRole());
-			if (ps.executeUpdate() != 0) {						//проверить
+			if (ps.executeUpdate() != 0) {					
 				return true;
 			} else {
 				return false;

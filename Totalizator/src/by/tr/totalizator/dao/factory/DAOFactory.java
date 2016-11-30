@@ -12,7 +12,7 @@ public class DAOFactory {
 
 	private TotalizatorOperationDAO totalizatorOperationDAO = new SQLTotalizatorOperationDAO();
 	private UserOperationDAO userOperationDAO = new SQLUserOperationDAO();
-	////
+	
 	private SourceInitDAO sourceInitDAO = new SQLInit();
 
 	private DAOFactory() {
@@ -30,7 +30,6 @@ public class DAOFactory {
 		return userOperationDAO;
 	}
 
-	////
 	public SourceInitDAO getSourceInitDAO(){
 		return sourceInitDAO;
 	}

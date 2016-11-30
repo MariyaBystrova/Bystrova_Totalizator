@@ -25,17 +25,6 @@ public class RegisterUserCommand implements Command {
 	private final static String LOGIN = "login";
 	private final static String PASSWORD = "password";
 	private final static String PASSWORD_AGAIN = "password-again";
-//	private final static String FIRST_NAME = "firstName";
-//	private final static String LAST_NAME = "lastName";
-//	private final static String SEX = "sex";
-//	private final static String EMAIL = "email";
-//	private final static String COUNTRY = "country";
-//	private final static String CITY = "city";
-//	private final static String ADDRESS = "address";
-//	private final static String USER = "user";
-//	private final static String LOGIN = "login";
-//	private final static String PASSWORD = "password";
-//	private final static String PASSWORD_AGAIN = "passwordAgain";
 	private final static String GO_TO_REGISTRATION_URL = "http://localhost:8080/Totalizator/Controller?command=go-to-registration";
 	private final static String RESULT = "resultAdd";
 
