@@ -1,11 +1,12 @@
-package by.tr.totalizator.entity;
+package by.tr.totalizator.bean;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
-public class User implements Serializable {
+public class UserBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	private int id;
+
+	private String id;
 	private String firstName;
 	private String lastName;
 	private String sex;
@@ -14,11 +15,14 @@ public class User implements Serializable {
 	private String city;
 	private String address;
 	private String role;
+	private String login;
+	private byte[] password;
+	private byte[] repPassword;
 
-	public User() {
+	public UserBean() {
 	}
-	
-	public User(String fName, String lName, String sex, String email, String country, String city, String address,
+
+	public UserBean(String fName, String lName, String sex, String email, String country, String city, String address,
 			String role) {
 		this.firstName = fName;
 		this.lastName = lName;
@@ -30,17 +34,28 @@ public class User implements Serializable {
 		this.role = role;
 	}
 
-	public User(int id, String fName, String lName, String sex, String email, String country, String city,
+	public UserBean(String fName, String lName, String sex, String email, String country, String city, String address,
+			String role, String login, byte[] password, byte[] repPassword) {
+		this(fName, lName, sex, email, country, city, address, role);
+		this.password = password;
+		this.repPassword = repPassword;
+		this.login = login;
+	}
+
+	public UserBean(String id, String fName, String lName, String sex, String email, String country, String city,
 			String address, String role) {
 		this(fName, lName, sex, email, country, city, address, role);
 		this.id = id;
 	}
+	
+	
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", sex=" + sex + ", email="
-				+ email + ", country=" + country + ", city=" + city + ", address=" + address + ", role=" + role
-				+ "]";
+		return "UserBean [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", sex=" + sex
+				+ ", email=" + email + ", country=" + country + ", city=" + city + ", address=" + address + ", role="
+				+ role + ", login=" + login + ", password=" + Arrays.toString(password) + ", repPassword="
+				+ Arrays.toString(repPassword) + "]";
 	}
 
 	@Override
@@ -52,8 +67,11 @@ public class User implements Serializable {
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + Arrays.hashCode(password);
+		result = prime * result + Arrays.hashCode(repPassword);
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
 		return result;
@@ -70,7 +88,7 @@ public class User implements Serializable {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		User other = (User) obj;
+		UserBean other = (UserBean) obj;
 		if (address == null) {
 			if (other.address != null) {
 				return false;
@@ -106,7 +124,11 @@ public class User implements Serializable {
 		} else if (!firstName.equals(other.firstName)) {
 			return false;
 		}
-		if (id != other.id) {
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
 		}
 		if (lastName == null) {
@@ -114,6 +136,19 @@ public class User implements Serializable {
 				return false;
 			}
 		} else if (!lastName.equals(other.lastName)) {
+			return false;
+		}
+		if (login == null) {
+			if (other.login != null) {
+				return false;
+			}
+		} else if (!login.equals(other.login)) {
+			return false;
+		}
+		if (!Arrays.equals(password, other.password)) {
+			return false;
+		}
+		if (!Arrays.equals(repPassword, other.repPassword)) {
 			return false;
 		}
 		if (role == null) {
@@ -133,12 +168,11 @@ public class User implements Serializable {
 		return true;
 	}
 
-	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -204,6 +238,42 @@ public class User implements Serializable {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public byte[] getPassword() {
+		return password;
+	}
+
+	public void setPassword(byte[] password) {
+		this.password = password;
+	}
+	
+	public void setPassword(byte b) {
+		for(int i=0; i<password.length; i++){
+			password[i]=b;
+		}
+	}
+
+	public byte[] getRepPassword() {
+		return repPassword;
+	}
+
+	public void setRepPassword(byte[] repPassword) {
+		this.repPassword = repPassword;
+	}
+	
+	public void setRepPassword(byte b) {
+		for(int i=0; i<repPassword.length; i++){
+			repPassword[i]=b;
+		}
 	}
 
 }

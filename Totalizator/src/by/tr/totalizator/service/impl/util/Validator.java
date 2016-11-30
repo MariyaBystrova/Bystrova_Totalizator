@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import by.tr.totalizator.bean.MatchBean;
+import by.tr.totalizator.bean.UserBean;
 
 public final class Validator {
 	private final static String LOGIN_PATTERN = "\\w+";
@@ -27,33 +28,32 @@ public final class Validator {
 		return true;
 	}
 
-	public static boolean registrationValidator(String fName, String lName, String sex, String email, String country,
-			String city, String address, String role, String login, byte[] password, byte[] passwordRep) {
+	public static boolean registrationValidator(UserBean user) {
 		
-		if (!Arrays.equals(password, passwordRep) || (password.length < 1)) {
+		if (!Arrays.equals(user.getPassword(), user.getRepPassword()) || (user.getPassword().length < 1)) {
 			return false;
 		}
 
-		if (login.isEmpty() || !matcher(LOGIN_PATTERN, login)) {
+		if (user.getLogin().isEmpty() || !matcher(LOGIN_PATTERN, user.getLogin())) {
 			return false;
 		}
 
-		if (fName.isEmpty() || !matcher(NAME_PATTERN, fName)) {
+		if (user.getFirstName().isEmpty() || !matcher(NAME_PATTERN, user.getFirstName())) {
 			return false;
 		}
-		if (lName.isEmpty() || !matcher(NAME_PATTERN, lName)) {
+		if (user.getLastName().isEmpty() || !matcher(NAME_PATTERN, user.getLastName())) {
 			return false;
 		}
-		if (sex.isEmpty()) {
+		if (user.getSex().isEmpty()) {
 			return false;
 		}
-		if (email.isEmpty() || !matcher(EMAIL_PATTERN, email)) {
+		if (user.getEmail().isEmpty() || !matcher(EMAIL_PATTERN, user.getEmail())) {
 			return false;
 		}
-		if (country.isEmpty() || !matcher(NAME_PATTERN, country)) {
+		if (user.getCountry().isEmpty() || !matcher(NAME_PATTERN, user.getCountry())) {
 			return false;
 		}
-		if (role.isEmpty()) {
+		if (user.getRole().isEmpty()) {
 			return false;
 		}
 
@@ -81,7 +81,7 @@ public final class Validator {
 				return false;
 			}
 		}
-		if (match.getName().isEmpty()) { // как еще?
+		if (match.getName().isEmpty()) {
 			return false;
 		}
 		if (match.getTeamOne().isEmpty()) {
@@ -103,6 +103,9 @@ public final class Validator {
 	}
 
 	///////////////////
+	
+	
+	// не дописано
 	public static boolean validateParams(Map<String, String[]> params) {
 		if (params.size() <= 15) {
 			return false;

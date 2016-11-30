@@ -1,6 +1,10 @@
 package by.tr.totalizator.bean;
 
-public class MatchBean {
+import java.io.Serializable;
+
+public class MatchBean implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private String id;
 	private String name;
 	private String couponId;

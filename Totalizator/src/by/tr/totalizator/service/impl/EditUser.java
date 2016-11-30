@@ -2,6 +2,7 @@ package by.tr.totalizator.service.impl;
 
 import java.util.Arrays;
 
+import by.tr.totalizator.bean.UserBean;
 import by.tr.totalizator.dao.UserOperationDAO;
 import by.tr.totalizator.dao.exception.DAOException;
 import by.tr.totalizator.dao.factory.DAOFactory;
@@ -14,26 +15,32 @@ import by.tr.totalizator.service.impl.util.Validator;
 public class EditUser implements UserService {
 
 	@Override
-	public boolean registerUser(String fName, String lName, String sex, String email, String country, String city,
-			String address, String role, String login, byte[] password, byte[] passwordRep) throws ServiceException {
+	public boolean registerUser(UserBean userBean) throws ServiceException {
 
-		if (!Validator.registrationValidator(fName, lName, sex, email, country, city, address, role, login, password,
-				passwordRep)) {
+		if (!Validator.registrationValidator(userBean)) {
 			throw new ServiceException("Invalid date.");
 		}
 
-		city = city.isEmpty() ? null : city; // city and address are unnecessary for fulfilling
-		address = address.isEmpty() ? null : address;
-		User user = new User(fName, lName, sex, email, country, city, address, role);
+		// city and address are unnecessary for fulfilling
+		if (userBean.getCity().isEmpty()) {
+			userBean.setCity(null);
+		}
+		if (userBean.getAddress().isEmpty()) {
+			userBean.setAddress(null);
+		}
+
+		User user = new User(userBean.getFirstName(), userBean.getLastName(), userBean.getSex(), userBean.getEmail(),
+				userBean.getCountry(), userBean.getCity(), userBean.getAddress(), userBean.getRole());
+
+		String passwordHash = HashMd5Coder.hashMd5(userBean.getPassword());
 		
-		String passwordHash = HashMd5Coder.hashMd5(password);
-		Arrays.fill(password, (byte)0);
-		Arrays.fill(passwordRep, (byte)0);
-		
+		userBean.setPassword((byte) 0);
+		userBean.setRepPassword((byte) 0);
+
 		DAOFactory factory = DAOFactory.getInstance();
 		UserOperationDAO userDAO = factory.getUserOperationDAO();
 		try {
-			userDAO.createUser(user, login, passwordHash);
+			userDAO.createUser(user, userBean.getLogin(), passwordHash);
 		} catch (DAOException e) {
 			throw new ServiceException("Create user failed.", e);
 		}
@@ -47,8 +54,8 @@ public class EditUser implements UserService {
 			throw new ServiceException("Invalid login or password.");
 		}
 		String passwordHash = HashMd5Coder.hashMd5(password);
-		Arrays.fill(password, (byte)0);
-		
+		Arrays.fill(password, (byte) 0);
+
 		DAOFactory factory = DAOFactory.getInstance();
 		UserOperationDAO userOpDao = factory.getUserOperationDAO();
 		try {

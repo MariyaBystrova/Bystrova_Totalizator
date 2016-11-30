@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import by.tr.totalizator.bean.UserBean;
 import by.tr.totalizator.command.Command;
 import by.tr.totalizator.service.UserService;
 import by.tr.totalizator.service.exception.ServiceException;
@@ -37,18 +38,22 @@ public class RegisterUserCommand implements Command {
 		try {
 			byte[] password = request.getParameter(PASSWORD).getBytes();
 			byte[] rpassword = request.getParameter(PASSWORD_AGAIN).getBytes();
-			boolean result = userService.registerUser(request.getParameter(FIRST_NAME), request.getParameter(LAST_NAME),
+
+			UserBean user = new UserBean(request.getParameter(FIRST_NAME), request.getParameter(LAST_NAME),
 					request.getParameter(SEX), request.getParameter(EMAIL), request.getParameter(COUNTRY),
 					request.getParameter(CITY), request.getParameter(ADDRESS), USER, request.getParameter(LOGIN),
 					password, rpassword);
+
+			boolean result = userService.registerUser(user);
+
 			request.getSession(false).setAttribute(RESULT, result);
-			
+
 		} catch (ServiceException e) {
 			logger.error(e);
 			request.getSession(false).setAttribute(RESULT, false);
 		}
 		page = GO_TO_REGISTRATION_URL;
-		
+
 		return page;
 
 	}
