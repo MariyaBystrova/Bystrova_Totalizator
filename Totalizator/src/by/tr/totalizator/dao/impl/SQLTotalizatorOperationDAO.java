@@ -35,6 +35,8 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 	private final static String LAST_INSERTED_ID = "SELECT LAST_INSERT_ID();";
 	private final static String INSERT_INTO_USER_BET_DETAIL = "INSERT INTO `user_bet_detail`(`bet_id`,`match_id`,`result`,`win_flag`) VALUES (?,?,?,NULL);";
 
+	private final static String RESULT = "result";
+	
 	@Override
 	public List<Match> getCuponMatches(int cuponId) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -251,7 +253,7 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 			try {
 				ps.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new DAOException("Database access error.", e);
 			}
 			
 
@@ -263,12 +265,12 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 			try {
 				s.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new DAOException("Database access error.", e);
 			}
 			try {
 				rs.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new DAOException("Database access error.", e);
 			}
 			
 
@@ -281,12 +283,12 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 			try {
 				s.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new DAOException("Database access error.", e);
 			}
 			try {
 				rs.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new DAOException("Database access error.", e);
 			}
 			
 
@@ -294,7 +296,7 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 				ps = con.prepareStatement(INSERT_INTO_USER_BET_DETAIL);
 				ps.setInt(1, betId);
 				ps.setInt(2, matchId.get(i));
-				ps.setString(3, res.get("result" + new Integer(i + 1).toString()));
+				ps.setString(3, res.get(RESULT + new Integer(i + 1).toString()));
 				ps.executeUpdate();
 			}
 			con.commit();
@@ -302,8 +304,7 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				throw new DAOException("Database rollback error.", e);
 			}
 			throw new DAOException("Database access error.", e);
 		} catch (ConnectionPoolException e) {
