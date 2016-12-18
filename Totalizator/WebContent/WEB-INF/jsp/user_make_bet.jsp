@@ -39,37 +39,36 @@
 	<div class="content">
 		<article class="main-toto">
 			<div>
-				<form action="Controller" method="get">
-					<input type="hidden" name="command" value="go-to-make-bet">
-					
+				<form action="Controller" method="post">
+					<input type="hidden" name="command" value="make-bet">
+				
+					<jsp:useBean id="map" class="by.tr.totalizator.tag.bean.JspMapBean"
+						scope="request" />
 					<jsp:useBean id="list"
 						class="by.tr.totalizator.tag.bean.JSPListBean" scope="request" />
-					<c:if test="${not empty list.list}">
+				
+					<tag:bet-choices list="${list}" map="${map}" result="result"
+						team="team"></tag:bet-choices>
+					<div class="form-group">
 						<div>
-							<h2>
-								<c:out value="${toto_coupon}" />
-								<c:out value="${requestScope.coupon}" />
-							</h2>
+							<label for="amount"><c:out value="${amount}" />:</label>
 						</div>
 						<div>
-							<tag:table-tag list="${list}" date="${date}" teams="${match}"
-								result1="1" result2="X" result3="2" />
+							<input type="text" name="amount" value="${requestScope.amount }"
+								id="amount" class="form-control" disabled/>
+							<input type="hidden" name="amount" value="${requestScope.amount}"/>
 						</div>
-						<div class="form-group">
-							<div>
-								<label for="amount"><c:out value="${amount}" />:</label>
-							</div>
-							<div>
-								<input type="text" name="amount" value="${requestScope.minBetAmount}" id="amount"
-									class="form-control" placeholder="${enter_amount}"
-									required="required" />
-							</div>
+					</div>
+					<div class="form-group">
+						<div>
+							<label for="credit-card-number">Credit card number:</label>
 						</div>
-						<input type="submit" value="${make_bet}" class="btn btn-default">
-					</c:if>
-					<c:if test="${empty list.list}">
-						<h2>Coupon games are playing. Wait for the next coupon.</h2>
-					</c:if>
+						<div>
+							<input type="text" name="credit-card-number" value=""
+								id="credit-card-number" class="form-control" placeholder="xxxx-xxxx-xxxx-xxxx" required/>
+						</div>
+					</div>
+					<input type="submit" value="${make_bet}" class="btn btn-default">
 				</form>
 			</div>
 		</article>

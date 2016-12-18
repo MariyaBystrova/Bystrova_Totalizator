@@ -28,10 +28,14 @@ public class GoToFormMatchesCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-
+		
+		if (request.getSession(false) == null) {
+			return PageName.INDEX_PAGE;
+		}
+		
 		request.getSession(false).setAttribute(CURRENT_URL, URL);
-
 		String page = null;
+		
 		User user = (User) request.getSession(false).getAttribute(USER);
 		if (user != null && user.getRole().equals(ADMIN)) {
 

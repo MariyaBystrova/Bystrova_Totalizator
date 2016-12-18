@@ -21,9 +21,8 @@ public class UserBean implements Serializable {
 
 	public UserBean() {
 	}
-
-	public UserBean(String fName, String lName, String sex, String email, String country, String city, String address,
-			String role) {
+	
+	public UserBean(String fName, String lName, String sex, String email, String country, String city, String address) {
 		this.firstName = fName;
 		this.lastName = lName;
 		this.sex = sex;
@@ -31,6 +30,11 @@ public class UserBean implements Serializable {
 		this.country = country;
 		this.city = city;
 		this.address = address;
+	}
+
+	public UserBean(String fName, String lName, String sex, String email, String country, String city, String address,
+			String role) {
+		this(fName, lName, sex, email, country, city, address);
 		this.role = role;
 	}
 

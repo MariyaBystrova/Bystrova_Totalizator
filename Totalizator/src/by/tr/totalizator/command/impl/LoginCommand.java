@@ -28,6 +28,9 @@ public class LoginCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		if (request.getSession(false) == null) {
+			return GO_TO_INDEX;
+		}
 		String url = null;
 
 		ServiceFactory factory = ServiceFactory.getInstance();

@@ -2,9 +2,9 @@ package by.tr.totalizator.service.impl;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Map;
 
 import by.tr.totalizator.bean.MatchBean;
+import by.tr.totalizator.bean.RegisterBetBean;
 import by.tr.totalizator.dao.TotalizatorOperationDAO;
 import by.tr.totalizator.dao.exception.DAOException;
 import by.tr.totalizator.dao.factory.DAOFactory;
@@ -47,6 +47,24 @@ public class EditTotalizator implements TotalizatorService {
 		}
 		return list;
 	}
+	
+
+	@Override
+	public int getMinBetAmount(int couponId) throws ServiceException {
+		if(couponId<=0){
+			throw new ServiceException("CouponId must be greater then 0.");
+		}
+		
+		DAOFactory factory = DAOFactory.getInstance();
+		TotalizatorOperationDAO totoDAO = factory.getTotalizatorOperationDAO();
+		
+		try {
+			return totoDAO.getMinBetAmount(couponId);
+		} catch (DAOException e) {
+			throw new ServiceException("Get min bet amount failed.", e);
+		}
+	}
+
 
 	@Override
 	public List<Coupon> getEmptyValidCoupons() throws ServiceException {
@@ -93,17 +111,20 @@ public class EditTotalizator implements TotalizatorService {
 	}
 
 	@Override
-	public boolean registerBet(Map<String, String[]> params) throws ServiceException {
-		boolean result = Validator.validateParams(params);
-		if (result) {
-			for (int i = 0; i < params.size(); i++) {
-				// String[] lineParams = params.get("result" + new
-				// Integer(i+1).toString());
-
-			}
+	public boolean registerBet(RegisterBetBean bean) throws ServiceException {
+		
+		boolean result = Validator.validateBet(bean.getMap(), bean.getAmount(), bean.getCreditCardNumber(), bean.getUserId(), bean.getCouponId());
+		if (!result) {
+			throw new ServiceException("Invalid data.");
 		}
-
-		return false;
+		DAOFactory factory = DAOFactory.getInstance();
+		TotalizatorOperationDAO totoDAO = factory.getTotalizatorOperationDAO();
+		try {
+			result = totoDAO.registerBet(bean.getMap(), bean.getAmount(), bean.getCreditCardNumber(), bean.getUserId(), Integer.parseInt(bean.getCouponId()));
+		} catch (DAOException e) {
+			throw new ServiceException("Register bet failed.", e);
+		}
+		return result;
 	}
 
 	@Override

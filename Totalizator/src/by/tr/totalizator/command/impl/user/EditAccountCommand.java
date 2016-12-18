@@ -6,23 +6,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.tr.totalizator.bean.UserBean;
 import by.tr.totalizator.command.Command;
 import by.tr.totalizator.entity.User;
 import by.tr.totalizator.service.UserService;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 
-public class EditProfileCommand implements Command {
+public class EditAccountCommand implements Command {
 	private final static Logger logger = LogManager.getLogger(RegisterUserCommand.class.getName());
 
-	private final static String FIRST_NAME = "first-name";
-	private final static String LAST_NAME = "last-name";
-	private final static String SEX = "sex";
-	private final static String EMAIL = "email";
-	private final static String COUNTRY = "country";
-	private final static String CITY = "city";
-	private final static String ADDRESS = "address";
+	private final static String PASSWORD = "password";
+	private final static String PASSWORD_AGAIN = "password-again";
 
 	private final static String USER = "user";
 	private final static String GO_TO_EDIT_PROFILE_URL = "http://localhost:8080/Totalizator/Controller?command=go-to-edit-profile&operation=";
@@ -42,39 +36,24 @@ public class EditProfileCommand implements Command {
 		if (user != null && user.getRole().equals(USER)) {
 			ServiceFactory sf = ServiceFactory.getInstance();
 			UserService userService = sf.getUserService();
+			
 			try {
-				UserBean userBean = new UserBean(request.getParameter(FIRST_NAME), request.getParameter(LAST_NAME),
-						request.getParameter(SEX), request.getParameter(EMAIL), request.getParameter(COUNTRY),
-						request.getParameter(CITY), request.getParameter(ADDRESS));
-				userBean.setId(Integer.toString(user.getId()));
+				byte[] password = request.getParameter(PASSWORD).getBytes();
+				byte[] rpassword = request.getParameter(PASSWORD_AGAIN).getBytes();
 
-				User userUpdated = userService.editUserPersonalInfo(userBean);
+				boolean result = userService.editUserAccountInfo(password, rpassword, user.getId());
 
-				if (userUpdated != null) {
-					user.setFirstName(userUpdated.getFirstName());
-					user.setLastName(userUpdated.getLastName());
-					user.setSex(userUpdated.getSex());
-					user.setEmail(userUpdated.getEmail());
-					user.setCountry(userUpdated.getCountry());
-					user.setCity(userUpdated.getCity());
-					user.setAddress(userUpdated.getAddress());
-
-					request.getSession(false).setAttribute(USER, user);
-					request.getSession(false).setAttribute(RESULT, true);
-				} else {
-					request.getSession(false).setAttribute(RESULT, false);
-				}
+				request.getSession(false).setAttribute(RESULT, result);
 
 			} catch (ServiceException e) {
 				logger.error(e);
 				request.getSession(false).setAttribute(RESULT, false);
 			}
 
-			page = GO_TO_EDIT_PROFILE_URL+request.getParameter(OPERATION);
+			page = GO_TO_EDIT_PROFILE_URL + request.getParameter(OPERATION);
 		} else {
 			page = GO_TO_INDEX;
 		}
 		return page;
 	}
-
 }

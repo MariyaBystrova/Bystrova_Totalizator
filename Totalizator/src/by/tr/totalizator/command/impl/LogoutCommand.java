@@ -13,11 +13,13 @@ public class LogoutCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		if (request.getSession(false).getAttribute(LOCAL) != null) {
-			response.addCookie(new Cookie(LOCAL, request.getSession(false).getAttribute(LOCAL).toString()));
+		if (request.getSession(false) != null) {
+			if (request.getSession(false).getAttribute(LOCAL) != null) {
+				response.addCookie(new Cookie(LOCAL, request.getSession(false).getAttribute(LOCAL).toString()));
+			}
+			request.getSession(false).invalidate();
 		}
-		request.getSession(false).invalidate();
-
+		
 		return URL_INDEX;
 	}
 }

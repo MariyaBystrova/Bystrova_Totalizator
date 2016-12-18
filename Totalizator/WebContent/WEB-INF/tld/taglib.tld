@@ -59,6 +59,32 @@
 	</tag>
 	
 	<tag>
+		<name>bet-choices</name>
+		<tag-class>by.tr.totalizator.tag.BetChoices</tag-class>
+		<body-contenet>empty</body-contenet>
+		<attribute>
+			<name>list</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>map</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>team</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>result</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
 		<name>table-tag-matches</name>
 		<tag-class>by.tr.totalizator.tag.TableTagMatches</tag-class>
 		<body-contenet>empty</body-contenet>

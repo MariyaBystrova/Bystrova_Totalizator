@@ -13,13 +13,13 @@ public class User implements Serializable {
 	private String country;
 	private String city;
 	private String address;
+	private String login;
 	private String role;
 
 	public User() {
 	}
 	
-	public User(String fName, String lName, String sex, String email, String country, String city, String address,
-			String role) {
+	public User(String fName, String lName, String sex, String email, String country, String city, String address) {
 		this.firstName = fName;
 		this.lastName = lName;
 		this.sex = sex;
@@ -27,19 +27,25 @@ public class User implements Serializable {
 		this.country = country;
 		this.city = city;
 		this.address = address;
+	}
+	
+	public User(String fName, String lName, String sex, String email, String country, String city, String address, String login,
+			String role) {
+		this(fName, lName, sex, email, country, city, address);
+		this.login = login;
 		this.role = role;
 	}
 
 	public User(int id, String fName, String lName, String sex, String email, String country, String city,
-			String address, String role) {
-		this(fName, lName, sex, email, country, city, address, role);
+			String address, String login, String role) {
+		this(fName, lName, sex, email, country, city, address, login, role);
 		this.id = id;
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", sex=" + sex + ", email="
-				+ email + ", country=" + country + ", city=" + city + ", address=" + address + ", role=" + role
+				+ email + ", country=" + country + ", city=" + city + ", address=" + address + ", login=" + login + ", role=" + role
 				+ "]";
 	}
 
@@ -54,6 +60,7 @@ public class User implements Serializable {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
 		return result;
@@ -114,6 +121,13 @@ public class User implements Serializable {
 				return false;
 			}
 		} else if (!lastName.equals(other.lastName)) {
+			return false;
+		}
+		if (login == null) {
+			if (other.login != null) {
+				return false;
+			}
+		} else if (!login.equals(other.login)) {
 			return false;
 		}
 		if (role == null) {
@@ -206,4 +220,12 @@ public class User implements Serializable {
 		this.address = address;
 	}
 
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	
 }

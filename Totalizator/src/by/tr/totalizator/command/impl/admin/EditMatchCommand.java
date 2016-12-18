@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 
 import by.tr.totalizator.bean.MatchBean;
 import by.tr.totalizator.command.Command;
-import by.tr.totalizator.controller.PageName;
 import by.tr.totalizator.entity.User;
 import by.tr.totalizator.service.TotalizatorService;
 import by.tr.totalizator.service.exception.ServiceException;
@@ -24,6 +23,7 @@ public class EditMatchCommand implements Command {
 	private final static String END_DATE = "match-end-date";
 	private final static String COUPON_ID = "coupon-id";
 	private final static String ADMIN_GO_TO_FORM_MATCHES_URL = "http://localhost:8080/Totalizator/Controller?command=show-coupon-matches&coupon-id=";
+	private final static String GO_TO_INDEX = "http://localhost:8080/Totalizator/index.jsp";
 	private final static String MATCH_ID = "match-id";
 	private final static String USER = "user";
 	private final static String ADMIN = "admin";
@@ -31,6 +31,10 @@ public class EditMatchCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		if (request.getSession(false) == null) {
+			return GO_TO_INDEX;
+		}
+		
 		String page;
 		User user = (User) request.getSession(false).getAttribute(USER);
 		if (user != null && user.getRole().equals(ADMIN)) {
@@ -52,7 +56,7 @@ public class EditMatchCommand implements Command {
 			}
 			page = ADMIN_GO_TO_FORM_MATCHES_URL + request.getParameter(COUPON_ID);
 		} else {
-			page = PageName.INDEX_PAGE;
+			page = GO_TO_INDEX;
 		}
 		return page;
 	}

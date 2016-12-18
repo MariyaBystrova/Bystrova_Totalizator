@@ -14,19 +14,19 @@ import org.apache.logging.log4j.Logger;
 import by.tr.totalizator.command.Command;
 import by.tr.totalizator.command.CommandProvider;
 
-public class Controller extends HttpServlet {
+public final class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final static Logger logger = LogManager.getLogger(Controller.class.getName());
-	
+
 	private static final String COMMAND_NAME = "command";
 	private final CommandProvider commandHelper = new CommandProvider();
-	
 
 	public Controller() {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		String page = null;
 		String commandName = null;
@@ -39,11 +39,15 @@ public class Controller extends HttpServlet {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 		if (dispatcher != null) {
-			try {
-				dispatcher.forward(request, response);
-			} catch (ServletException | IOException e) {
-				logger.error(e.getMessage());
-			}
+			// try {
+			dispatcher.forward(request, response);
+		
+			// } catch (ServletException | IOException e) {
+			// logger.error(e);
+			//
+
+			//
+			// }
 		}
 
 	}
@@ -62,7 +66,10 @@ public class Controller extends HttpServlet {
 		try {
 			response.sendRedirect(page);
 		} catch (IOException e) {
-			logger.error(e.getMessage());
+			logger.error(e);
+			//
+
+			//
 		}
 
 	}

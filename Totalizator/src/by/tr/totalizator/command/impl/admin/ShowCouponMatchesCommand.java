@@ -32,6 +32,10 @@ public class ShowCouponMatchesCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		if (request.getSession(false) == null) {
+			return PageName.INDEX_PAGE;
+		}
+		
 		request.getSession(false).setAttribute(CURRENT_URL, URL + request.getParameter(COUPON_ID) + AMP + COUPON + EQUALS + request.getParameter(COUPON_ID));
 
 		int couponId = 0;

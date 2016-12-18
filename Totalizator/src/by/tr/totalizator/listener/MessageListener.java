@@ -19,11 +19,13 @@ public class MessageListener implements ServletRequestListener {
 		HttpServletRequest request = (HttpServletRequest) arg0.getServletRequest();
 		String requestMethod = CommandName.getMethod(request.getParameter(COMMAND));
 		if (METHOD.equals(requestMethod)) {
-			if (request.getSession(false).getAttribute(RESULT_EDIT) != null) {
-				request.getSession(false).removeAttribute(RESULT_EDIT);
-			}
-			if (request.getSession(false).getAttribute(RESULT_ADD) != null) {
-				request.getSession(false).removeAttribute(RESULT_ADD);
+			if (request.getSession(false) != null) {
+				if (request.getSession(false).getAttribute(RESULT_EDIT) != null) {
+					request.getSession(false).removeAttribute(RESULT_EDIT);
+				}
+				if (request.getSession(false).getAttribute(RESULT_ADD) != null) {
+					request.getSession(false).removeAttribute(RESULT_ADD);
+				}
 			}
 		}
 	}

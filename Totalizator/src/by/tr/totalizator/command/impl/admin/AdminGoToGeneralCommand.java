@@ -14,16 +14,22 @@ public class AdminGoToGeneralCommand implements Command {
 	private final static String ADMIN = "admin";
 
 	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response){
-		request.getSession(false).setAttribute(CURRENT_URL_ATTR, CURRENT_URL);
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		String page;
-		User user = (User) request.getSession(false).getAttribute(USER);
-		if (user != null && user.getRole().equals(ADMIN)) { 
-			page = PageName.ADMIN_PAGE_GENERAL;
-		} else {
-			page = PageName.INDEX_PAGE;
+		if (request.getSession(false) == null) {
+			return PageName.INDEX_PAGE;
 		}
+
+		String page;
+		request.getSession(false).setAttribute(CURRENT_URL_ATTR, CURRENT_URL);
+
+		User user = (User) request.getSession(false).getAttribute(USER);
+		if (user != null && user.getRole().equals(ADMIN)) {
+			page = PageName.ADMIN_PAGE_GENERAL;
+		}else{
+			page=PageName.INDEX_PAGE;
+		}
+
 		return page;
 	}
 

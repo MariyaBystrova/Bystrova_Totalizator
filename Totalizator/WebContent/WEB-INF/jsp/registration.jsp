@@ -72,6 +72,10 @@
 			</section>
 		</form>
 	</aside>
+	
+	<aside class="sidebar-right">
+		<%@ include file="../../aside.jsp" %>
+	</aside>
 
 
 

@@ -7,15 +7,16 @@ import by.tr.totalizator.command.Command;
 import by.tr.totalizator.controller.PageName;
 
 public class UnknownCommand implements Command {
-	
+
 	private final static String CURRENT_URL_ATTR = "currentUrl";
 	private final static String CURRENT_URL = "http://localhost:8080/Totalizator/Controller?command=unknown_command";
-	
+
 	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response){
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		request.getSession(false).setAttribute(CURRENT_URL_ATTR, CURRENT_URL);
-		
+		if (request.getSession(false) != null) {
+			request.getSession(false).setAttribute(CURRENT_URL_ATTR, CURRENT_URL);
+		}
 		return PageName.ERROR_PAGE;
 
 	}

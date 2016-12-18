@@ -23,13 +23,14 @@ public class TableTag extends TagSupport {
 
 	public int doStartTag() throws JspTagException {
 		int size = new Integer(list.getSize());
+		
 		DateFormat med = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, Locale.UK);
 		try {
 			pageContext.getOut()
 					.write("<table class=\"table table-striped table-bordered table-hover table-condensed\">");
 			pageContext.getOut().write("<tr><th>");
 			pageContext.getOut().write("#" + "</th>");
-
+			
 			pageContext.getOut().write("<th>" + date + "</th>");
 			pageContext.getOut().write("<th>" + teams + "</th>");
 			pageContext.getOut().write("<th>" + result1 + "</th>");
@@ -50,16 +51,16 @@ public class TableTag extends TagSupport {
 				pageContext.getOut().write(match.getTeamOne() + " - " + match.getTeamTwo());
 				pageContext.getOut().write("</td>");
 				pageContext.getOut().write("<td>");
-				pageContext.getOut().write("<input type=\"checkbox\" name=\"result" + new Integer(i + 1).toString()
-						 + "\" value=\"1\">");
+				pageContext.getOut().write(
+						"<input type=\"checkbox\" name=\"result" + new Integer(i + 1).toString() + "\" value=\"1\">");
 				pageContext.getOut().write("</td>");
 				pageContext.getOut().write("<td>");
-				pageContext.getOut().write("<input type=\"checkbox\" name=\"result" + new Integer(i + 1).toString()
-						 + "\" value=\"X\">");
+				pageContext.getOut().write(
+						"<input type=\"checkbox\" name=\"result" + new Integer(i + 1).toString() + "\" value=\"X\">");
 				pageContext.getOut().write("</td>");
 				pageContext.getOut().write("<td>");
-				pageContext.getOut().write("<input type=\"checkbox\" name=\"result" + new Integer(i + 1).toString()
-						 + "\" value=\"2\">");
+				pageContext.getOut().write(
+						"<input type=\"checkbox\" name=\"result" + new Integer(i + 1).toString() + "\" value=\"2\">");
 				pageContext.getOut().write("</td>");
 				pageContext.getOut().write("</tr>");
 			}

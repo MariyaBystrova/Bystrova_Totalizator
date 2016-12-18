@@ -18,7 +18,7 @@ public class EditUser implements UserService {
 	public boolean registerUser(UserBean userBean) throws ServiceException {
 
 		if (!Validator.registrationValidator(userBean)) {
-			throw new ServiceException("Invalid date.");
+			throw new ServiceException("Invalid data.");
 		}
 
 		// city and address are unnecessary for fulfilling
@@ -30,17 +30,16 @@ public class EditUser implements UserService {
 		}
 
 		User user = new User(userBean.getFirstName(), userBean.getLastName(), userBean.getSex(), userBean.getEmail(),
-				userBean.getCountry(), userBean.getCity(), userBean.getAddress(), userBean.getRole());
+				userBean.getCountry(), userBean.getCity(), userBean.getAddress(), userBean.getLogin(), userBean.getRole());
 
 		String passwordHash = HashMd5Coder.hashMd5(userBean.getPassword());
-		
 		userBean.setPassword((byte) 0);
 		userBean.setRepPassword((byte) 0);
 
 		DAOFactory factory = DAOFactory.getInstance();
 		UserOperationDAO userDAO = factory.getUserOperationDAO();
 		try {
-			userDAO.createUser(user, userBean.getLogin(), passwordHash);
+			userDAO.createUser(user, passwordHash);
 		} catch (DAOException e) {
 			throw new ServiceException("Create user failed.", e);
 		}
@@ -55,7 +54,7 @@ public class EditUser implements UserService {
 		}
 		String passwordHash = HashMd5Coder.hashMd5(password);
 		Arrays.fill(password, (byte) 0);
-
+		
 		DAOFactory factory = DAOFactory.getInstance();
 		UserOperationDAO userOpDao = factory.getUserOperationDAO();
 		try {
@@ -64,5 +63,49 @@ public class EditUser implements UserService {
 			throw new ServiceException("Autentication failed. ", e);
 		}
 		return user;
+	}
+
+	@Override
+	public User editUserPersonalInfo(UserBean userBean) throws ServiceException {
+		if(!Validator.userPersonalInfoValidator(userBean)){
+			throw new ServiceException("Invalid data.");
+		}
+		User user = null;
+
+		DAOFactory factory = DAOFactory.getInstance();
+		UserOperationDAO userOpDao = factory.getUserOperationDAO();
+		try {
+			user = new User(userBean.getFirstName(), userBean.getLastName(), userBean.getSex(), userBean.getEmail(),
+					userBean.getCountry(), userBean.getCity(), userBean.getAddress());
+			user.setId(Integer.parseInt(userBean.getId()));
+			user = userOpDao.editUserPersonalInfo(user);
+		} catch (DAOException e) {
+			throw new ServiceException("Edit user personal information failed. ", e);
+		}
+		return user;
+	}
+
+	@Override
+	public boolean editUserAccountInfo(byte[] password, byte[] rpassword, int id) throws ServiceException {
+		if(!Validator.userAccountInfoValidator(password, rpassword, id)){
+			throw new ServiceException("Invalid data.");
+		}
+		String passwordHash = HashMd5Coder.hashMd5(password);
+		for(int i=0; i<password.length; i++){
+			password[i]=0;
+			rpassword[i]=0;
+		}
+		
+		boolean result = false;
+		DAOFactory factory = DAOFactory.getInstance();
+		UserOperationDAO userOpDao = factory.getUserOperationDAO();
+		
+		try {
+			result = userOpDao.editUserAccountInfo(id, passwordHash);
+		} catch (DAOException e) {
+			throw new ServiceException("Edit user account information failed. ", e);
+		}
+		
+		return result;
 	}
 }

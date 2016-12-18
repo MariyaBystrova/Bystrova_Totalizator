@@ -12,8 +12,10 @@ public class GoToRegistrationCommand implements Command {
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response){
-		request.getSession(false).setAttribute(CURRENT_URL_ATTR, CURRENT_URL);
 		
+		if (request.getSession(false) != null) {
+			request.getSession(false).setAttribute(CURRENT_URL_ATTR, CURRENT_URL);
+		}
 		return PageName.REGISTRATION_PAGE;
 	}
 }

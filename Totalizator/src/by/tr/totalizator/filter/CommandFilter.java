@@ -26,7 +26,7 @@ public class CommandFilter implements Filter {
 	public void destroy() {
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		String requestMethod = CommandName.getMethod(request.getParameter(COMMAND));
 		
 		if(requestMethod != null){
@@ -37,20 +37,20 @@ public class CommandFilter implements Filter {
 		
 		if(requestMethod!=null && requestMethod.equals(realMethod)){
 			logger.info("CommandFilter checked the method.");
-			try {
-				chain.doFilter(request, response);
-			} catch (IOException | ServletException e) {
-				logger.error(e);
-			}
+			//try {
+			chain.doFilter(request, response);
+//			} catch (IOException | ServletException e) {
+//				logger.error(e);
+//			}
 			
 		} else{
 			logger.info("Invalid command method.");
 			RequestDispatcher rd = request.getRequestDispatcher(PageName.ERROR_PAGE);
-			try {
+			//try {
 				rd.forward(request, response);
-			} catch (ServletException | IOException e) {
-				logger.error("Can't forward.", e);
-			}
+//			} catch (ServletException | IOException e) {
+//				logger.error("Can't forward.", e);
+//			}
 		}
 	}
 

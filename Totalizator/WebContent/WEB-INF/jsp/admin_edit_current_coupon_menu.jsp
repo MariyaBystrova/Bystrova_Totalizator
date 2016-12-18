@@ -11,7 +11,7 @@
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<title>Form events</title>
+<title>Edit current coupon</title>
 
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
@@ -22,9 +22,11 @@
 <fmt:message bundle="${loc}" key="local.form_coupon" var="form_coupon" />
 
 
-<fmt:message bundle="${loc}" key="local.step_one_choose_coupon" var="step_one_choose_coupon" />
+<fmt:message bundle="${loc}" key="local.step_one_choose_coupon"
+	var="step_one_choose_coupon" />
 <fmt:message bundle="${loc}" key="local.show_matches" var="show_matches" />
-<fmt:message bundle="${loc}" key="local.step_two_fill_coupon" var="step_two_fill_coupon" />
+<fmt:message bundle="${loc}" key="local.step_two_fill_coupon"
+	var="step_two_fill_coupon" />
 <fmt:message bundle="${loc}" key="local.name" var="name" />
 <fmt:message bundle="${loc}" key="local.team_one" var="team_one" />
 <fmt:message bundle="${loc}" key="local.team_two" var="team_two" />
@@ -52,7 +54,9 @@
 					value="${general}" /></a></li>
 		<li><a href="?command=admin-go-to-form-coupon"><c:out
 					value="${form_coupon}" /></a></li>
-		<li class="active"><a href="?command=admin-go-to-form-matches"><c:out
+		<li><a href="?command=admin-go-to-form-matches"><c:out
+					value="${form_matches_to_coupon}" /></a></li>
+		<li class="active"><a href="?command=admin-go-edit-current-coupon"><c:out
 					value="${form_matches_to_coupon}" /></a></li>
 		<li><hr /></li>
 		<li><form action="Controller" method="post">
@@ -74,24 +78,27 @@
 			</form>
 		</li>
 	</ul>
-	<div class="main">
+	<%-- <div class="main">
 		<div>
 			<c:if test="${not empty sessionScope.coupons }">
 				<form action="Controller" method="get">
 					<input type="hidden" name="command" value="show-coupon-matches" />
 					<div>
 						<div>
-							<label for="coupon"><c:out value="${step_one_choose_coupon}"></c:out>:</label>
+							<label for="coupon"><c:out
+									value="${step_one_choose_coupon}"></c:out>:</label>
 						</div>
 						<div>
 							<jsp:useBean id="coupons"
 								class="by.tr.totalizator.tag.bean.JSPListBean" scope="session" />
-							<tag:empty-coupon-scroll-tag list="${coupons}" active="${requestScope.coupon }" />
+							<tag:empty-coupon-scroll-tag list="${coupons}"
+								active="${requestScope.coupon }" />
 						</div>
 					</div>
 
 					<div>
-						<input type="submit" value="${show_matches}" class="btn btn-default">
+						<input type="submit" value="${show_matches}"
+							class="btn btn-default">
 					</div>
 				</form>
 			</c:if>
@@ -121,19 +128,21 @@
 						</c:if>
 					</div>
 					<div>
-						<label for="matches"><c:out value="${step_two_fill_coupon}"></c:out>:</label>
+						<label for="matches"><c:out
+								value="${step_two_fill_coupon}"></c:out>:</label>
 					</div>
 
 					<div>
 						<jsp:useBean id="list"
 							class="by.tr.totalizator.tag.bean.JSPListBean" scope="request" />
-						<tag:table-tag-matches list="${list}" matchName="${name}" teamOne="${team_one}"
-							teamTwo="${team_two}" startDate="${start_date}" endDate="${end_date}" />
+						<tag:table-tag-matches list="${list}" matchName="${name}"
+							teamOne="${team_one}" teamTwo="${team_two}"
+							startDate="${start_date}" endDate="${end_date}" />
 					</div>
 				</div>
 			</c:if>
 		</div>
-	</div>
+	</div> --%>
 	<script src="JS/script.js"></script>
 </body>
 </html>

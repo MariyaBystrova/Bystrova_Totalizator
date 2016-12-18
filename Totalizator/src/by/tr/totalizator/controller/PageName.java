@@ -12,6 +12,7 @@ public final class PageName {
 	public static final String USER_PAGE_GENERAL = "/WEB-INF/jsp/user_welcome_page.jsp";
 	public static final String USER_PAGE_TOTO = "/WEB-INF/jsp/user_toto_menu.jsp";
 	public static final String USER_PAGE_EDIT_PROFILE = "/WEB-INF/jsp/user_edit_profile.jsp";
+	public static final String USER_PAGE_MAKE_BET = "/WEB-INF/jsp/user_make_bet.jsp";
 	
 	public static final String ADMIN_PAGE_GENERAL = "/WEB-INF/jsp/admin_welcome_page.jsp";
 	public static final String ADMIN_FORM_MATCHES_MENU_PAGE = "/WEB-INF/jsp/admin_form_matches_menu.jsp";

@@ -14,6 +14,9 @@ public class LocalizeCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		if (request.getSession(false) == null) {
+			return LOCALHOST;
+		}
 		request.getSession(false).setAttribute(LOCAL, request.getParameter(LANG));
 
 		if (request.getSession(false).getAttribute(CURRENT_URL) != null) {
@@ -21,6 +24,7 @@ public class LocalizeCommand implements Command {
 		} else {
 			return LOCALHOST;
 		}
+
 	}
 
 }

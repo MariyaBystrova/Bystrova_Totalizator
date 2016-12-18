@@ -31,6 +31,7 @@ public class RegisterUserCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		
 		String page;
 
 		ServiceFactory sf = ServiceFactory.getInstance();

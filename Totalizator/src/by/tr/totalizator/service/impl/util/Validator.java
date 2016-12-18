@@ -9,6 +9,7 @@ import by.tr.totalizator.bean.MatchBean;
 import by.tr.totalizator.bean.UserBean;
 
 public final class Validator {
+	private final static String NUMBER_PATTERN = "[1-9][0-9]+";
 	private final static String LOGIN_PATTERN = "\\w+";
 	private final static String NAME_PATTERN = "[a-zA-Z]+";
 	private final static String EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z0-9-]+\\.[a-z]{2,}";
@@ -29,7 +30,7 @@ public final class Validator {
 	}
 
 	public static boolean registrationValidator(UserBean user) {
-		
+
 		if (!Arrays.equals(user.getPassword(), user.getRepPassword()) || (user.getPassword().length < 1)) {
 			return false;
 		}
@@ -56,7 +57,39 @@ public final class Validator {
 		if (user.getRole().isEmpty()) {
 			return false;
 		}
+		return true;
+	}
 
+	public static boolean userPersonalInfoValidator(UserBean user) {
+		if (user.getFirstName().isEmpty() || !matcher(NAME_PATTERN, user.getFirstName())) {
+			return false;
+		}
+		if (user.getLastName().isEmpty() || !matcher(NAME_PATTERN, user.getLastName())) {
+			return false;
+		}
+		if (user.getSex().isEmpty()) {
+			return false;
+		}
+		if (user.getEmail().isEmpty() || !matcher(EMAIL_PATTERN, user.getEmail())) {
+			return false;
+		}
+		if (user.getCountry().isEmpty() || !matcher(NAME_PATTERN, user.getCountry())) {
+			return false;
+		}
+		if (!matcher(NUMBER_PATTERN, user.getId())) {
+			return false;
+		}
+		return true;
+	}
+
+	public static boolean userAccountInfoValidator(byte[] password, byte[] rpassword, int id) {
+		if (!Arrays.equals(password, rpassword) || (password.length < 1)) {
+			return false;
+		}
+
+		if (id <= 0) {
+			return false;
+		}
 		return true;
 	}
 
@@ -103,20 +136,30 @@ public final class Validator {
 	}
 
 	///////////////////
-	
-	
+
 	// не дописано
-	public static boolean validateParams(Map<String, String[]> params) {
-		if (params.size() <= 15) {
+	public static boolean validateBet(Map<String, String> params, int amount, String creditCardNumber, int userId, String couponId) {
+		if (params.size() < 15) {
 			return false;
 		}
 		for (int i = 0; i < params.size(); i++) {
-			String[] lineParams = params.get("result" + new Integer(i + 1).toString());
-			for (int j = 0; j < lineParams.length; j++) {
-				if (!matcher("[12X]{1}", lineParams[j])) {
-					return false;
-				}
+			String param = params.get("result" + new Integer(i + 1).toString());
+
+			if (!matcher("[12X]{1}", param)) {
+				return false;
 			}
+		}
+		if(amount<=0){
+			return false;
+		}
+		if(!matcher("[0-9]{16}", creditCardNumber)){
+			return false;
+		}
+		if(userId<=0){
+			return false;
+		}
+		if(!matcher("[1-9][0-9]*",couponId)){
+			return false;
 		}
 		return true;
 	}

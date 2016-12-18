@@ -49,6 +49,7 @@ li a:hover {
 }
 
 .input-submit {
+	margin: none;
 	border: none;
 	width: 100%;
 	text-align: left;

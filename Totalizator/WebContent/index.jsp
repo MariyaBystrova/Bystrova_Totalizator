@@ -26,6 +26,7 @@
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto"
 	rel="stylesheet">
+
 </head>
 <body>
 	
@@ -58,36 +59,7 @@
 	</aside>
 
 	<aside class="sidebar-right">
-		<h2>Новости футбола:</h2>
-		<article>
-			<h3>
-				<a
-					href="http://www.sport-express.ru/football/rfpl/reviews/dubl-propusk-v-sbornuyu-tura-1063201/">ДУБЛЬ
-					– ПРОПУСК В СБОРНУЮ ТУРА</a>
-			</h3>
-			<p>"СЭ" представляет свой вариант 11 лучших футболистов 13-го
-				тура.</p>
-			<time datetime="2016-11-07">2016-11-07 11:15</time>
-		</article>
-		<article>
-			<h3>
-				<a
-					href="http://www.sport-express.ru/football/rusteam/reviews/davno-takogo-ne-bylo-sbornaya-bez-cska-1063197/">ДАВНО
-					ТАКОГО НЕ БЫЛО. СБОРНАЯ - БЕЗ ЦСКА</a>
-			</h3>
-			<p>В воскресенье поздно вечером в составе сборной России
-				произошли значительные изменения.</p>
-			<time datetime="2016-11-07">2016-11-07 11:00</time>
-		</article>
-		<article>
-			<h3>
-				<a
-					href="http://www.sport-express.ru/football/rfpl/reviews/bezumie-v-krasnodare-shest-golov-travma-vratarya-i-dva-pryamyh-udaleniya-1063072/?utm_source=materials&utm_medium=link&utm_campaign=plista">БЕЗУМИЕ
-					В КРАСНОДАРЕ</a>
-			</h3>
-			<p>Шесть голов, травма вратаря и два прямых удаления...</p>
-			<time datetime="2016-11-06">2016-11-06 21:45</time>
-		</article>
+		<%@ include file="aside.jsp" %>
 	</aside>
 
 	<div class="content main">

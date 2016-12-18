@@ -16,6 +16,10 @@ public class GoToFormCouponCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response){
+		if (request.getSession(false) == null) {
+			return PageName.INDEX_PAGE;
+		}
+		
 		request.getSession(false).setAttribute(CURRENT_URL, URL);
 
 		String page;
