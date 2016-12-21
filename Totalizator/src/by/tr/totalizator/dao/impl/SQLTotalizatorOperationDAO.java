@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.tr.totalizator.dao.TotalizatorOperationDAO;
 import by.tr.totalizator.dao.connectionpool.ConnectionPool;
 import by.tr.totalizator.dao.connectionpool.exception.ConnectionPoolException;
@@ -17,14 +20,13 @@ import by.tr.totalizator.entity.Coupon;
 import by.tr.totalizator.entity.Match;
 
 public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
-	private final static String SELECT_MATCHES_WHERE_CUPONID = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date` FROM `match` AS m WHERE m.`cupon_id`=?;";
-	private final static String SELECT_CURRENT_COUPON_MATCHES = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date` FROM `match` AS m JOIN `cupon` AS c ON c.`cupon_id`=m.`cupon_id`WHERE c.`start_date`<= NOW() AND  c.`status_id` = 1 ORDER BY m.`match_id`;";
+	private final static Logger logger = LogManager.getLogger(SQLTotalizatorOperationDAO.class.getName());
+	
+	
+	private final static String SELECT_MATCHES_WHERE_CUPONID = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date`, m.`real_result`, m.`status_id` FROM `match` AS m WHERE m.`cupon_id`=?;";
+	//private final static String SELECT_CURRENT_COUPON_MATCHES = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date` FROM `match` AS m JOIN `cupon` AS c ON c.`cupon_id`=m.`cupon_id`WHERE c.`start_date`<= NOW() AND  c.`status_id` = 1 ORDER BY m.`match_id`;";
 
-	// private final static String SELECT_CURRENT_COUPON_MATCHES = "SELECT
-	// m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`,
-	// m.`start_date`, m.`end_date` FROM `match` AS m JOIN `cupon` AS c ON
-	// c.`cupon_id`=m.`cupon_id`WHERE c.`start_date`<= NOW() AND c.`end_date`>
-	// NOW() AND c.`status_id` = 1;";
+	private final static String SELECT_CURRENT_COUPON_MATCHES = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date`, m.`real_result`, m.`status_id` FROM `match` AS m JOIN `cupon` AS c ON c.`cupon_id`=m.`cupon_id`WHERE c.`start_date`<= NOW() AND c.`end_date`> NOW() AND c.`status_id` = 1;";
 
 	private final static String SELECT_MIN_BET_AMOUNT_BY_COUPONID = "SELECT `min_bet_amount` FROM `cupon` WHERE `cupon_id`=?;";
 	private final static String SELECT_FREE_VALID_COUPONS = "SELECT c.`cupon_id`,c.`start_date`,c.`end_date`, c.`min_bet_amount`, c.`cupon_pull`, c.`jackpot`, s.`status_name` FROM `cupon` AS c JOIN `status` AS s ON c.`status_id`=s.`status_id` WHERE c.`start_date`> NOW() AND c.`status_id` = 6;";
@@ -34,9 +36,10 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 	private final static String INSERT_INTO_BET = "INSERT INTO `bet` (`user_id`,`cupon_id`,`bet_amount`,`transaction_date`,`creditcard_number`,`win_match_count`,`win_bet_amount`) VALUES(?,?,?,NOW(),?,NULL,NULL);";
 	private final static String LAST_INSERTED_ID = "SELECT LAST_INSERT_ID();";
 	private final static String INSERT_INTO_USER_BET_DETAIL = "INSERT INTO `user_bet_detail`(`bet_id`,`match_id`,`result`,`win_flag`) VALUES (?,?,?,NULL);";
-
-	private final static String RESULT = "result";
+	private final static String SELECT_NOT_CLOSED_COUPONS = "SELECT c.`cupon_id`,c.`start_date`,c.`end_date`, c.`min_bet_amount`, c.`cupon_pull`, c.`jackpot`, s.`status_name` FROM `cupon` AS c JOIN `status` AS s ON c.`status_id`=s.`status_id` WHERE c.`status_id` in (1,6);";
 	
+	private final static String RESULT = "result";
+
 	@Override
 	public List<Match> getCuponMatches(int cuponId) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -54,6 +57,9 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 			while (rs.next()) {
 				Match match = new Match(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5),
 						rs.getTimestamp(6), rs.getTimestamp(7));
+				match.setResult(rs.getString(8));
+				match.setStatus(rs.getString(9));
+				
 				list.add(match);
 			}
 
@@ -83,6 +89,9 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 			while (rs.next()) {
 				Match match = new Match(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5),
 						rs.getTimestamp(6), rs.getTimestamp(7));
+				match.setResult(rs.getString(8));
+				match.setStatus(rs.getString(9));
+				
 				list.add(match);
 			}
 		} catch (SQLException e) {
@@ -250,29 +259,14 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 			ps.setInt(3, amount);
 			ps.setString(4, creditCardNumber);
 			ps.executeUpdate();
-			try {
-				ps.close();
-			} catch (SQLException e) {
-				throw new DAOException("Database access error.", e);
-			}
-			
+			ps.close();
 
-			
 			s = con.createStatement();
 			rs = s.executeQuery(LAST_INSERTED_ID);
 			rs.next();
 			int betId = rs.getInt(1);
-			try {
-				s.close();
-			} catch (SQLException e) {
-				throw new DAOException("Database access error.", e);
-			}
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				throw new DAOException("Database access error.", e);
-			}
-			
+			s.close();
+			rs.close();
 
 			s = con.createStatement();
 			rs = s.executeQuery(SELECT_CURRENT_COUPON_MATCHES);
@@ -280,18 +274,10 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 			while (rs.next()) {
 				matchId.add(rs.getInt(1));
 			}
-			try {
-				s.close();
-			} catch (SQLException e) {
-				throw new DAOException("Database access error.", e);
-			}
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				throw new DAOException("Database access error.", e);
-			}
-			
+			s.close();
+			rs.close();
 
+			
 			for (int i = 0; i < matchId.size(); i++) {
 				ps = con.prepareStatement(INSERT_INTO_USER_BET_DETAIL);
 				ps.setInt(1, betId);
@@ -299,21 +285,68 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 				ps.setString(3, res.get(RESULT + new Integer(i + 1).toString()));
 				ps.executeUpdate();
 			}
+
 			con.commit();
-		} catch (SQLException e) {
+		} catch (SQLException| ConnectionPoolException e) {
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				throw new DAOException("Database rollback error.", e);
+				throw new DAOException("Database rollback error.", e1);
 			}
+			throw new DAOException("Database access error.", e);
+		} finally {
+			if(rs!=null){
+				try {
+					s.close();
+				} catch (SQLException e) {
+					logger.error(e);
+				}
+			}
+			if(ps!=null){
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					logger.error(e);
+				}
+			}
+			if(s!=null){
+				try {
+					s.close();
+				} catch (SQLException e) {
+					logger.error(e);
+				}
+			}
+			connectionPool.closeConnection(con);
+		}
+		return false;
+	}
+
+	@Override
+	public List<Coupon> getCurrentCoupons() throws DAOException {
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		java.sql.Connection con = null;
+		Statement s = null;
+		ResultSet rs = null;
+		List<Coupon> list = new ArrayList<>();
+		try {
+			con = connectionPool.takeConnection();
+			s = con.createStatement();
+			rs = s.executeQuery(SELECT_NOT_CLOSED_COUPONS);
+
+			while (rs.next()) {
+				Coupon coupon = new Coupon(rs.getInt(1), rs.getTimestamp(2), rs.getTimestamp(3), rs.getInt(4),
+						rs.getInt(5), rs.getInt(6), rs.getString(7));
+				list.add(coupon);
+			}
+
+		} catch (SQLException e) {
 			throw new DAOException("Database access error.", e);
 		} catch (ConnectionPoolException e) {
 			throw new DAOException("Connection pool error.", e);
 		} finally {
-
-			connectionPool.closeConnection(con, ps);
+			connectionPool.closeConnection(con, s, rs);
 		}
-		return false;
+		return list;
 	}
 
 }

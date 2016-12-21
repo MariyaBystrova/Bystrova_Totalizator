@@ -18,6 +18,7 @@ public final class PageName {
 	public static final String ADMIN_FORM_MATCHES_MENU_PAGE = "/WEB-INF/jsp/admin_form_matches_menu.jsp";
 	public static final String ADMIN_FROM_COUPON_MENU_PAGE = "/WEB-INF/jsp/admin_form_coupon_menu.jsp";
 	public static final String ADMIN_MAKE_MATCH_MENU_PAGE = "/WEB-INF/jsp/admin_make_match_menu.jsp";
+	public static final String ADMIN_EDIT_CURRENT_COUPON = "/WEB-INF/jsp/admin_edit_current_coupon_menu.jsp";
 	
 	public static final String REGISTRATION_COMPLETED_PAGE = "/WEB-INF/jsp/registration_completed_page.jsp";
 	public static final String REGISTRATION_FAILED_PAGE = "/WEB-INF/jsp/registration_failed_page.jsp";

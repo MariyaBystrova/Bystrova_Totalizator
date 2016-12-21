@@ -17,4 +17,5 @@ public interface TotalizatorOperationDAO {
 	boolean registerMatch(Match match) throws DAOException;
 	boolean editMatch(Match match) throws DAOException;
 	boolean registerBet(Map<String, String> res, int amount, String creditCardNumber, int userId, int couponId) throws DAOException;
+	List<Coupon> getCurrentCoupons() throws DAOException;
 }

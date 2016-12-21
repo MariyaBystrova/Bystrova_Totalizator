@@ -8,6 +8,7 @@ body {
 .main {
 	width: 70%;
 	margin-left: 25%;
+	margin-right: 5px;
 	position: absolute;
 	padding: 1px 16px;
 	height: 1000px;
@@ -20,8 +21,10 @@ ul {
 	padding-top: 30px;
 	width: 20%;
 	background-color: #F8F8F8;
-	position: fixed;
-	height: 100%;
+	position: absolute;
+	display: block;
+	height: 1000px;
+	/* height: 100%; */
 	overflow: auto;
 }
 
@@ -66,4 +69,8 @@ li a:hover {
 .mytable {
 	width: 60%;
 	font-size: 12px;
+}
+
+.min-width {
+	min-width: 150px;
 }

@@ -17,4 +17,5 @@ public interface TotalizatorService {
 	boolean registerBet(RegisterBetBean bean) throws ServiceException;
 	boolean registerMatch(MatchBean match) throws ServiceException;
 	boolean editMatch(MatchBean match) throws ServiceException;
+	List<Coupon> getCurrentCoupons() throws ServiceException;
 }

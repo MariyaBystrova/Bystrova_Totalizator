@@ -42,6 +42,8 @@
 					value="${form_coupon}" /></a></li>
 		<li><a href="?command=admin-go-to-form-matches"><c:out
 					value="${form_matches_to_coupon}" /></a></li>
+		<li><a href="?command=admin-go-to-edit-current-coupon"><c:out
+					value="Edit coupon" /></a></li>
 		<li><hr /></li>
 		<li><form action="Controller" method="post">
 				<input type="hidden" name="command" value="logout"><input

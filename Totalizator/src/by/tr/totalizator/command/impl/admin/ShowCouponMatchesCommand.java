@@ -29,6 +29,9 @@ public class ShowCouponMatchesCommand implements Command {
 	private final static String COUPON_ID = "coupon-id";
 	private final static String COUPON = "coupon";
 	private final static String ADMIN = "admin";
+	private final static String PAGE = "page";
+	private final static String PAGE_FORM_MATCHES = "admin-form-matches";
+	private final static String PAGE_EDIT_CURRENT_COUPON = "admin-edit-current-coupon";
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -36,7 +39,9 @@ public class ShowCouponMatchesCommand implements Command {
 			return PageName.INDEX_PAGE;
 		}
 		
-		request.getSession(false).setAttribute(CURRENT_URL, URL + request.getParameter(COUPON_ID) + AMP + COUPON + EQUALS + request.getParameter(COUPON_ID));
+		request.getSession(false).setAttribute(CURRENT_URL, URL + request.getParameter(COUPON_ID) 
+												+ AMP + PAGE + EQUALS +  request.getParameter(PAGE) 
+												+ AMP + COUPON + EQUALS + request.getParameter(COUPON_ID));
 
 		int couponId = 0;
 		String page = null;
@@ -62,7 +67,11 @@ public class ShowCouponMatchesCommand implements Command {
 				page = PageName.ERROR_PAGE;
 			}
 			
-			page = PageName.ADMIN_FORM_MATCHES_MENU_PAGE;
+			switch(request.getParameter(PAGE)){
+			case PAGE_FORM_MATCHES: {page = PageName.ADMIN_FORM_MATCHES_MENU_PAGE; break;}
+			case PAGE_EDIT_CURRENT_COUPON: {page = PageName.ADMIN_EDIT_CURRENT_COUPON; break;}
+			}
+			
 		} else {
 			page = PageName.INDEX_PAGE;
 		}

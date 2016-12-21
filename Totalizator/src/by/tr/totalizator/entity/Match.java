@@ -13,6 +13,8 @@ public class Match implements Serializable {
 	private String teamTwo;
 	private Timestamp startDate;
 	private Timestamp endDate;
+	private String status;
+	private String result;
 
 	public Match() {
 	}
@@ -40,21 +42,23 @@ public class Match implements Serializable {
 	@Override
 	public String toString() {
 		return "Match [id=" + id + ", name=" + name + ", couponId=" + couponId + ", teamOne=" + teamOne + ", teamTwo="
-				+ teamTwo + ", startDate=" + startDate + ", endDate=" + endDate + "]";
+				+ teamTwo + ", startDate=" + startDate + ", endDate=" + endDate + ", status=" + status + ", result=" + result + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + couponId;
-		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
-		result = prime * result + ((teamOne == null) ? 0 : teamOne.hashCode());
-		result = prime * result + ((teamTwo == null) ? 0 : teamTwo.hashCode());
-		return result;
+		int res = 1;
+		res = prime * res + couponId;
+		res = prime * res + ((endDate == null) ? 0 : endDate.hashCode());
+		res = prime * res + id;
+		res = prime * res + ((name == null) ? 0 : name.hashCode());
+		res = prime * res + ((startDate == null) ? 0 : startDate.hashCode());
+		res = prime * res + ((teamOne == null) ? 0 : teamOne.hashCode());
+		res = prime * res + ((teamTwo == null) ? 0 : teamTwo.hashCode());
+		res = prime * res + ((status == null) ? 0 : status.hashCode());
+		res = prime * res + ((result == null) ? 0 : result.hashCode());
+		return res;
 	}
 
 	@Override
@@ -107,6 +111,20 @@ public class Match implements Serializable {
 				return false;
 			}
 		} else if (!teamTwo.equals(other.teamTwo)) {
+			return false;
+		}
+		if (status == null) {
+			if (other.status != null) {
+				return false;
+			}
+		} else if (!status.equals(other.status)) {
+			return false;
+		}
+		if (result == null) {
+			if (other.result != null) {
+				return false;
+			}
+		} else if (!result.equals(other.result)) {
 			return false;
 		}
 		return true;
@@ -168,6 +186,24 @@ public class Match implements Serializable {
 		this.endDate = endDate;
 	}
 
-	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 }

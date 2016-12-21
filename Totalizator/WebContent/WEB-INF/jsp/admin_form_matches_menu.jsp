@@ -54,6 +54,8 @@
 					value="${form_coupon}" /></a></li>
 		<li class="active"><a href="?command=admin-go-to-form-matches"><c:out
 					value="${form_matches_to_coupon}" /></a></li>
+		<li><a href="?command=admin-go-to-edit-current-coupon"><c:out
+					value="Edit coupon" /></a></li>
 		<li><hr /></li>
 		<li><form action="Controller" method="post">
 				<input type="hidden" name="command" value="logout"><input
@@ -79,6 +81,7 @@
 			<c:if test="${not empty sessionScope.coupons }">
 				<form action="Controller" method="get">
 					<input type="hidden" name="command" value="show-coupon-matches" />
+					<input type="hidden" name="page" value="admin-form-matches" />
 					<div>
 						<div>
 							<label for="coupon"><c:out value="${step_one_choose_coupon}"></c:out>:</label>

@@ -56,8 +56,9 @@
 					value="${form_coupon}" /></a></li>
 		<li><a href="?command=admin-go-to-form-matches"><c:out
 					value="${form_matches_to_coupon}" /></a></li>
-		<li class="active"><a href="?command=admin-go-edit-current-coupon"><c:out
-					value="${form_matches_to_coupon}" /></a></li>
+		<li class="active"><a
+			href="?command=admin-go-to-edit-current-coupon"><c:out
+					value="Edit coupon" /></a></li>
 		<li><hr /></li>
 		<li><form action="Controller" method="post">
 				<input type="hidden" name="command" value="logout"><input
@@ -78,11 +79,12 @@
 			</form>
 		</li>
 	</ul>
-	<%-- <div class="main">
+	<div class="main">
 		<div>
 			<c:if test="${not empty sessionScope.coupons }">
 				<form action="Controller" method="get">
 					<input type="hidden" name="command" value="show-coupon-matches" />
+					<input type="hidden" name="page" value="admin-edit-current-coupon" />
 					<div>
 						<div>
 							<label for="coupon"><c:out
@@ -97,6 +99,7 @@
 					</div>
 
 					<div>
+
 						<input type="submit" value="${show_matches}"
 							class="btn btn-default">
 					</div>
@@ -129,20 +132,20 @@
 					</div>
 					<div>
 						<label for="matches"><c:out
-								value="${step_two_fill_coupon}"></c:out>:</label>
+								value="Step 2: list"></c:out>:</label>
 					</div>
 
 					<div>
 						<jsp:useBean id="list"
 							class="by.tr.totalizator.tag.bean.JSPListBean" scope="request" />
-						<tag:table-tag-matches list="${list}" matchName="${name}"
+						<tag:table-matches-result-tag list="${list}" matchName="${name}"
 							teamOne="${team_one}" teamTwo="${team_two}"
-							startDate="${start_date}" endDate="${end_date}" />
+							startDate="${start_date}" endDate="${end_date}" result="Result" status="Status" />
 					</div>
 				</div>
 			</c:if>
 		</div>
-	</div> --%>
+	</div>
 	<script src="JS/script.js"></script>
 </body>
 </html>

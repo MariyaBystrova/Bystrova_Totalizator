@@ -194,6 +194,21 @@ public class EditTotalizator implements TotalizatorService {
 		return result;
 	}
 
+	@Override
+	public List<Coupon> getCurrentCoupons() throws ServiceException {
+		DAOFactory factory = DAOFactory.getInstance();
+		TotalizatorOperationDAO totoDAO = factory.getTotalizatorOperationDAO();
+		List<Coupon> list;
+		try {
+			list = totoDAO.getCurrentCoupons();
+		} catch (DAOException e) {
+			throw new ServiceException("Get current coupons failed.", e);
+		}
+		return list;
+	}
+
+	
+
 	private String formatDate(String date) {
 		date = date.replace('T', ' ');
 		date = date.replaceAll("%3A", ":");

@@ -104,6 +104,14 @@ public final class ConnectionPool {
 		return connection;
 	}
 
+	public void closeConnection(Connection con) {
+		try {
+			con.close();
+		} catch (SQLException e) {
+			logger.error("Connection isn't return to the pool.");
+		}
+	}
+	
 	public void closeConnection(Connection con, Statement st, ResultSet rs) {
 		try {
 			con.close();
