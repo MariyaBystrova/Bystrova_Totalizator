@@ -207,13 +207,68 @@ public class EditTotalizator implements TotalizatorService {
 		return list;
 	}
 
-	
+	@Override
+	public boolean editMatchResStatus(MatchBean match) throws ServiceException {
+		Timestamp start;
+		Timestamp end;
+
+		match.setStartDate(formatDate(match.getStartDate()));
+		match.setEndDate(formatDate(match.getEndDate()));
+
+		if (Validator.validateMatchDatesResultStatus(match)) {
+			start = Timestamp.valueOf(match.getStartDate());
+			end = Timestamp.valueOf(match.getEndDate());
+		} else {
+			throw new ServiceException("Invalid data.");
+		}
+		
+		Match matchEntity = new Match();
+		matchEntity.setStartDate(start);
+		matchEntity.setEndDate(end);
+		if(!match.getResult().equals("NULL")){
+			matchEntity.setResult(match.getResult());
+		}
+		matchEntity.setStatus(Integer.parseInt(match.getStatus()));
+		if (match.getId() != null) {
+			matchEntity.setId(Integer.parseInt(match.getId()));
+		}
+		
+		DAOFactory factory = DAOFactory.getInstance();
+		TotalizatorOperationDAO totoDAO = factory.getTotalizatorOperationDAO();
+		boolean result = false;
+		if (start.before(end)) {
+			try {
+				result = totoDAO.editMatchResult(matchEntity);
+			} catch (DAOException e) {
+				throw new ServiceException("Register match failed.", e);
+			}
+		}
+		return result;
+	}
+
 
 	private String formatDate(String date) {
 		date = date.replace('T', ' ');
 		date = date.replaceAll("%3A", ":");
 		date = date.concat(":00");
 		return date;
+	}
+
+	@Override
+	public boolean closeCoupon(String couponId) throws ServiceException {
+		boolean result = Validator.validateCouponId(couponId);
+		if (!result) {
+			throw new ServiceException("Invalid data.");
+		}
+		
+		DAOFactory factory = DAOFactory.getInstance();
+		TotalizatorOperationDAO totoDAO = factory.getTotalizatorOperationDAO();
+		try {
+			result = totoDAO.closeCoupon(Integer.parseInt(couponId));
+		} catch (DAOException e) {
+			throw new ServiceException("Close coupon failed.", e);
+		}
+		return false;
 	}
 
 }

@@ -44,6 +44,7 @@ public class TableTagMatches extends TagSupport {
 				pageContext.getOut().write("<tr>");
 				pageContext.getOut().write("<form action=\"Controller\" method=\"post\">");
 				pageContext.getOut().write("<input type=\"hidden\" name=\"command\" value=\"edit-match\" /> ");
+				pageContext.getOut().write("<input type='hidden' name='page' value='admin-form-matches' /> ");
 				pageContext.getOut().write("<input type=\"hidden\" name=\"coupon-id\" value=\""
 						+ new Integer(match.getCouponId()).toString() + "\" /> ");
 				pageContext.getOut().write("<input type=\"hidden\" name=\"match-id\" value=\""
@@ -90,6 +91,7 @@ public class TableTagMatches extends TagSupport {
 				pageContext.getOut().write(".</td>");
 				pageContext.getOut().write("<form action=\"Controller\" method=\"post\">");
 				pageContext.getOut().write("<input type=\"hidden\" name=\"command\" value=\"register-match\" /> ");
+				pageContext.getOut().write("<input type='hidden' name='page' value='admin-form-matches' /> ");
 				pageContext.getOut().write("<input type=\"hidden\" name=\"coupon-id\" value=\""
 						+ pageContext.getRequest().getParameter("coupon-id") + "\" /> ");
 				pageContext.getOut().write(

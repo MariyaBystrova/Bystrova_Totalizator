@@ -8,10 +8,12 @@ import by.tr.totalizator.command.impl.LoginCommand;
 import by.tr.totalizator.command.impl.LogoutCommand;
 import by.tr.totalizator.command.impl.UnknownCommand;
 import by.tr.totalizator.command.impl.admin.AdminGoToGeneralCommand;
+import by.tr.totalizator.command.impl.admin.CloseCouponCommand;
 import by.tr.totalizator.command.impl.admin.CreateMatchCommand;
 import by.tr.totalizator.command.impl.admin.GoToCreateMatchCommand;
 import by.tr.totalizator.command.impl.admin.GoToEditCurrentCouponCommand;
 import by.tr.totalizator.command.impl.admin.EditMatchCommand;
+import by.tr.totalizator.command.impl.admin.EditMatchResultCommand;
 import by.tr.totalizator.command.impl.admin.GoToFormCouponCommand;
 import by.tr.totalizator.command.impl.admin.GoToFormMatchesCommand;
 import by.tr.totalizator.command.impl.admin.RegisterCouponCommand;
@@ -47,8 +49,10 @@ public final class CommandProvider {
 		commands.put(CommandName.ADMIN_GO_TO_FORM_MATCHES, new GoToFormMatchesCommand());	//admin
 		commands.put(CommandName.ADMIN_GO_TO_CREATE_MATCH, new GoToCreateMatchCommand());	//admin
 		commands.put(CommandName.ADMIN_GO_TO_EDIT_CURRENT_COUPON, new GoToEditCurrentCouponCommand());	//admin
-		commands.put(CommandName.EDIT_MATCH, new EditMatchCommand());				//admin
+		commands.put(CommandName.EDIT_MATCH, new EditMatchCommand());						//admin
+		commands.put(CommandName.EDIT_MATCH_RESULT, new EditMatchResultCommand());			//admin
 		commands.put(CommandName.REGISTER_MATCH, new CreateMatchCommand());					//admin
+		commands.put(CommandName.CLOSE_COUPON, new CloseCouponCommand());					//admin
 		commands.put(CommandName.MAKE_BET, new MakeBetCommand());									//user
 		commands.put(CommandName.GO_TO_MAKE_BET, new GoToMakeBetCommand());							//user
 		commands.put(CommandName.GO_TO_EDIT_PROFILE, new GoToEditProfileCommand());					//user

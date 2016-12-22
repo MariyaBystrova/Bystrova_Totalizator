@@ -12,11 +12,11 @@ import by.tr.totalizator.entity.User;
 
 public class SQLUserOperationDAO implements UserOperationDAO {
 
-	private final static String SELECT_USER_WHERE_LOGIN_PASSWORD = "SELECT `user_id`,`first_name`, `last_name`, `sex`, `e-mail`, `country`, `city`, `address`, `login`, `role` FROM `user`  WHERE `login`=? AND `password`=?;";
+	/*private final static String SELECT_USER_WHERE_LOGIN_PASSWORD = "SELECT `user_id`,`first_name`, `last_name`, `sex`, `e-mail`, `country`, `city`, `address`, `login`, `role` FROM `user`  WHERE `login`=? AND `password`=?;";
 	private final static String INSERT_INTO_USER = "INSERT INTO `user` (`first_name`,`last_name`,`login`,`password`,`sex`,`e-mail`,`country`,`city`,`address`,`role`)VALUES (?,?,?,?,?,?,?,?,?,?);";
 	private final static String UPDATE_USER_PERSONAL_DATA = "UPDATE `user` SET `first_name` = ?,`last_name` = ?,`sex` = ?,`e-mail` = ?,`country` = ?,`city` = ?,`address` = ? WHERE `user_id` = ?;";
 	private final static String UPDATE_USER_ACCOUNT_DATA = "UPDATE `user` SET `password` = ? WHERE `user_id` = ?;";
-	
+	*/
 	@Override
 	public boolean createUser(User user, String password) throws DAOException {
 
@@ -27,7 +27,7 @@ public class SQLUserOperationDAO implements UserOperationDAO {
 		try {
 			con = connectionPool.takeConnection();
 
-			ps = con.prepareStatement(INSERT_INTO_USER);
+			ps = con.prepareStatement(StatementUser.INSERT_INTO_USER);
 			ps.setString(1, user.getFirstName());
 			ps.setString(2, user.getLastName());
 			ps.setString(3, user.getLogin());
@@ -64,7 +64,7 @@ public class SQLUserOperationDAO implements UserOperationDAO {
 		try {
 			con = connectionPool.takeConnection();
 
-			ps = con.prepareStatement(UPDATE_USER_PERSONAL_DATA);
+			ps = con.prepareStatement(StatementUser.UPDATE_USER_PERSONAL_DATA);
 			ps.setString(1, user.getFirstName());
 			ps.setString(2, user.getLastName());
 			ps.setString(3, user.getSex());
@@ -99,7 +99,7 @@ public class SQLUserOperationDAO implements UserOperationDAO {
 		try {
 			con = connectionPool.takeConnection();
 
-			ps = con.prepareStatement(UPDATE_USER_ACCOUNT_DATA);
+			ps = con.prepareStatement(StatementUser.UPDATE_USER_ACCOUNT_DATA);
 			ps.setString(1, password);
 			ps.setInt(2, id);
 			
@@ -119,7 +119,7 @@ public class SQLUserOperationDAO implements UserOperationDAO {
 
 	@Override
 	public User authentication(String login, String password) throws DAOException {
-
+		
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		java.sql.Connection con = null;
 		PreparedStatement ps = null;
@@ -128,7 +128,7 @@ public class SQLUserOperationDAO implements UserOperationDAO {
 		User user = null;
 		try {
 			con = connectionPool.takeConnection();
-			ps = con.prepareStatement(SELECT_USER_WHERE_LOGIN_PASSWORD);
+			ps = con.prepareStatement(StatementUser.SELECT_USER_WHERE_LOGIN_PASSWORD);
 			ps.setString(1, login);
 			ps.setString(2, password);
 			rs = ps.executeQuery();
@@ -137,6 +137,7 @@ public class SQLUserOperationDAO implements UserOperationDAO {
 				user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
 			}
+			
 		} catch (SQLException e) {
 			throw new DAOException("Database access error.", e);
 		} catch (ConnectionPoolException e) {

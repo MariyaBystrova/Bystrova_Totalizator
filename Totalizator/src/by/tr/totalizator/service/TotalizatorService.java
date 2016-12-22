@@ -18,4 +18,6 @@ public interface TotalizatorService {
 	boolean registerMatch(MatchBean match) throws ServiceException;
 	boolean editMatch(MatchBean match) throws ServiceException;
 	List<Coupon> getCurrentCoupons() throws ServiceException;
+	boolean editMatchResStatus(MatchBean match) throws ServiceException;
+	boolean closeCoupon(String couponId) throws ServiceException;
 }

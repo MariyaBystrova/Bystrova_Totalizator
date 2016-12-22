@@ -33,7 +33,12 @@
 	</header>
 
 	<aside class="sidebar-right">
-		<%@ include file="../../aside.jsp" %>
+		<c:if test="${sessionScope.local eq 'ru' }">
+			<jsp:include page="../../Content/aside-ru.html" />
+		</c:if>
+		<c:if test="${sessionScope.local eq 'en' or empty sessionScope.local}">
+			<jsp:include page="../../Content/aside-en.html" />
+		</c:if>
 	</aside>
 
 	<div class="content">
@@ -75,7 +80,7 @@
 	</div>
 
 	<footer class="bottom bottom_clearfix">
-		<%@include file="../../footer.jsp"%>
+		<%@include file="../../Content/footer.jsp"%>
 	</footer>
 </body>
 </html>

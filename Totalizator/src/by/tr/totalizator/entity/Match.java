@@ -13,7 +13,7 @@ public class Match implements Serializable {
 	private String teamTwo;
 	private Timestamp startDate;
 	private Timestamp endDate;
-	private String status;
+	private int status;
 	private String result;
 
 	public Match() {
@@ -56,7 +56,7 @@ public class Match implements Serializable {
 		res = prime * res + ((startDate == null) ? 0 : startDate.hashCode());
 		res = prime * res + ((teamOne == null) ? 0 : teamOne.hashCode());
 		res = prime * res + ((teamTwo == null) ? 0 : teamTwo.hashCode());
-		res = prime * res + ((status == null) ? 0 : status.hashCode());
+		res = prime * res + status;
 		res = prime * res + ((result == null) ? 0 : result.hashCode());
 		return res;
 	}
@@ -113,11 +113,7 @@ public class Match implements Serializable {
 		} else if (!teamTwo.equals(other.teamTwo)) {
 			return false;
 		}
-		if (status == null) {
-			if (other.status != null) {
-				return false;
-			}
-		} else if (!status.equals(other.status)) {
+		if (status != other.status) {
 			return false;
 		}
 		if (result == null) {
@@ -186,11 +182,11 @@ public class Match implements Serializable {
 		this.endDate = endDate;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

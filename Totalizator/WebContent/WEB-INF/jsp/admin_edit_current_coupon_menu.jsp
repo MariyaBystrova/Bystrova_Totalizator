@@ -58,7 +58,7 @@
 					value="${form_matches_to_coupon}" /></a></li>
 		<li class="active"><a
 			href="?command=admin-go-to-edit-current-coupon"><c:out
-					value="Edit coupon" /></a></li>
+					value="Edit match results" /></a></li>
 		<li><hr /></li>
 		<li><form action="Controller" method="post">
 				<input type="hidden" name="command" value="logout"><input
@@ -106,11 +106,30 @@
 				</form>
 			</c:if>
 		</div>
-
+		<div>
+			<c:if
+				test="${not empty sessionScope.resultAdd and sessionScope.resultAdd}">
+				<c:out value="Success" />
+			</c:if>
+			<c:if
+				test="${not empty sessionScope.resultAdd and not sessionScope.resultAdd}">
+				<c:out value="Failed" />
+			</c:if>
+		</div>
+		<div>
+			<c:if
+				test="${not empty sessionScope.resultEdit and sessionScope.resultEdit}">
+				<c:out value="Success" />
+			</c:if>
+			<c:if
+				test="${not empty sessionScope.resultEdit and not sessionScope.resultEdit }">
+				<c:out value="Failed" />
+			</c:if>
+		</div>
 		<div id="list-matches">
 			<c:if test="${not empty requestScope.list }">
 				<div>
-					<div>
+					<%-- <div>
 						<c:if
 							test="${not empty sessionScope.resultAdd and sessionScope.resultAdd}">
 							<c:out value="${message_match_add_success}" />
@@ -129,10 +148,9 @@
 							test="${not empty sessionScope.resultEdit and not sessionScope.resultEdit }">
 							<c:out value="${message_match_edit_failed}" />
 						</c:if>
-					</div>
+					</div> --%>
 					<div>
-						<label for="matches"><c:out
-								value="Step 2: list"></c:out>:</label>
+						<label for="matches"><c:out value="Step 2: list"></c:out>:</label>
 					</div>
 
 					<div>
@@ -140,11 +158,21 @@
 							class="by.tr.totalizator.tag.bean.JSPListBean" scope="request" />
 						<tag:table-matches-result-tag list="${list}" matchName="${name}"
 							teamOne="${team_one}" teamTwo="${team_two}"
-							startDate="${start_date}" endDate="${end_date}" result="Result" status="Status" />
+							startDate="${start_date}" endDate="${end_date}" result="Result"
+							status="Status" />
 					</div>
+				</div>
+				<div>
+					<form action="Controller" method="post">
+						<input type="hidden" name="command" value="close-coupon" /> <input
+							type="hidden" name="coupon-id" value="${requestScope.coupon-id }">
+						<input type="submit" name="close-coupon" value="Close coupon" />
+					</form>
 				</div>
 			</c:if>
 		</div>
+
+
 	</div>
 	<script src="JS/script.js"></script>
 </body>

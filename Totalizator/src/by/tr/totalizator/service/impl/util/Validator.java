@@ -9,7 +9,7 @@ import by.tr.totalizator.bean.MatchBean;
 import by.tr.totalizator.bean.UserBean;
 
 public final class Validator {
-	private final static String NUMBER_PATTERN = "[1-9][0-9]+";
+
 	private final static String LOGIN_PATTERN = "\\w+";
 	private final static String NAME_PATTERN = "[a-zA-Z]+";
 	private final static String EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z0-9-]+\\.[a-z]{2,}";
@@ -76,9 +76,6 @@ public final class Validator {
 		if (user.getCountry().isEmpty() || !matcher(NAME_PATTERN, user.getCountry())) {
 			return false;
 		}
-		if (!matcher(NUMBER_PATTERN, user.getId())) {
-			return false;
-		}
 		return true;
 	}
 
@@ -105,11 +102,17 @@ public final class Validator {
 		}
 		return true;
 	}
+	public static boolean validateCouponId(String couponId) {
+		if (!matcher("[1-9][0-9]*", couponId)) {
+			return false;
+		}
+		return true;
+	}
 
 	//// поля на pattern
 
 	public static boolean validateMatch(MatchBean match) {
-		if (match.getCouponId() != null) {
+		if (match.getCouponId() != null) { 								 //??????
 			if (Integer.parseInt(match.getCouponId()) <= 0) {
 				return false;
 			}
@@ -135,6 +138,28 @@ public final class Validator {
 		return true;
 	}
 
+	public static boolean validateMatchDatesResultStatus(MatchBean match){
+		if (match.getId() != null) {
+			if (Integer.parseInt(match.getId()) <= 0) {
+				return false;
+			}
+		}
+		if (!validateDate(match.getStartDate())) {
+			return false;
+		}
+		if (!validateDate(match.getEndDate())) {
+			return false;
+		}
+		if (match.getStatus() != null) {
+			if (Integer.parseInt(match.getStatus()) <= 0) {
+				return false;
+			}
+		}
+		if (!matcher("[12x]|(NULL)", match.getResult())){
+			return false;
+		}
+		return true;
+	}
 	///////////////////
 
 	// не дописано

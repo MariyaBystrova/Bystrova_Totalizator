@@ -12,7 +12,7 @@ public class Coupon implements Serializable {
 	private int minBetAmount;
 	private int pull;
 	private int jackpot;
-	private String status;
+	private int status;
 
 	public Coupon() {
 	}
@@ -26,7 +26,7 @@ public class Coupon implements Serializable {
 	}
 
 	public Coupon(int id, Timestamp startDate, Timestamp endDate, int minBetAmount, int pull, int jackpot,
-			String status) {
+			int status) {
 		this(startDate, endDate, minBetAmount, pull, jackpot);
 		this.id = id;
 		this.status = status;
@@ -48,7 +48,7 @@ public class Coupon implements Serializable {
 		result = prime * result + minBetAmount;
 		result = prime * result + pull;
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + status;
 		return result;
 	}
 
@@ -90,11 +90,7 @@ public class Coupon implements Serializable {
 		} else if (!startDate.equals(other.startDate)) {
 			return false;
 		}
-		if (status == null) {
-			if (other.status != null) {
-				return false;
-			}
-		} else if (!status.equals(other.status)) {
+		if (status != other.status) {
 			return false;
 		}
 		return true;
@@ -148,11 +144,11 @@ public class Coupon implements Serializable {
 		this.jackpot = jackpot;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 }

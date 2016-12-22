@@ -60,7 +60,12 @@
 	</header>
 
 	<aside class="sidebar-right">
-		<%@ include file="../../aside.jsp" %>
+		<c:if test="${sessionScope.local eq 'ru' }">
+			<jsp:include page="../../Content/aside-ru.html" />
+		</c:if>
+		<c:if test="${sessionScope.local eq 'en' or empty sessionScope.local}">
+			<jsp:include page="../../Content/aside-en.html" />
+		</c:if>
 	</aside>
 
 	<div class="content main">
@@ -69,17 +74,18 @@
 		<div class="container">
 			<c:if
 				test="${not empty sessionScope.resultAdd and sessionScope.resultAdd}">
-				<c:out value="${message_register_success}" />
+				<c:out value="Edit info success" />
 			</c:if>
 			<c:if
 				test="${not empty sessionScope.resultAdd and not sessionScope.resultAdd }">
-				<c:out value="${message_register_failed}" />
+				<c:out value="edit info failed" />
 			</c:if>
 		</div>
 		<c:if test="${requestScope.operation eq 'personal-data' }">
 			<form action="Controller" method="post" onsubmit='return validate()'
 				class="registration-form">
 				<input type="hidden" name="command" value="edit-profile" />
+				<input type="hidden" name="operation" value="personal-data" />
 				
 				<h3>
 					<c:out value="${personal_info}" />
@@ -152,9 +158,12 @@
 		
 		<c:if test="${requestScope.operation eq 'account' }">
 			<form action="Controller" method="post" class="registration-form">
+				<input type="hidden" name="command" value="edit-account" />
+				<input type="hidden" name="operation" value="account" />
+				
+				
 				<h3><c:out value="${account_settings}" /></h3>
 
-				<input type="hidden" name="command" value="edit-account" />
 				<section>
 					<label for="login"><c:out value="${login}" />:</label> <input
 						type="text" name="login" value="${user.login }" id="login"
@@ -182,7 +191,7 @@
 	</div>
 
 	<footer class="bottom bottom_clearfix">
-		<%@include file="../../footer.jsp"%>
+		<%@include file="../../Content/footer.jsp"%>
 	</footer>
 
 	<script src="JS/script.js"></script>

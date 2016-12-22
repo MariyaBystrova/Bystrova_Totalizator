@@ -13,6 +13,7 @@ public enum CommandName {
 	ADMIN_GO_TO_FORM_MATCHES(Method.GET), 
 	ADMIN_GO_TO_EDIT_CURRENT_COUPON(Method.GET),
 	EDIT_MATCH(Method.POST),
+	EDIT_MATCH_RESULT(Method.POST),
 	ADMIN_GO_TO_GENERAL(Method.GET), 
 	ADMIN_GO_TO_CREATE_MATCH(Method.GET), 
 	REGISTER_MATCH(Method.POST), 
@@ -22,6 +23,7 @@ public enum CommandName {
 	GO_TO_EDIT_PROFILE(Method.GET),
 	EDIT_PROFILE(Method.POST),
 	EDIT_ACCOUNT(Method.POST),
+	CLOSE_COUPON(Method.POST),
 	UNKNOWN_COMMAND(Method.GET);
 
 	private Method method;

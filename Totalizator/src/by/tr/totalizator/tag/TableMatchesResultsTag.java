@@ -48,6 +48,7 @@ public class TableMatchesResultsTag extends TagSupport {
 				pageContext.getOut().write("<tr>");
 				pageContext.getOut().write("<form action=\"Controller\" method=\"post\">");
 				pageContext.getOut().write("<input type=\"hidden\" name=\"command\" value=\"edit-match-result\" /> ");
+				pageContext.getOut().write("<input type='hidden' name='page' value='admin-edit-current-coupon' />");
 				pageContext.getOut().write("<input type=\"hidden\" name=\"coupon-id\" value=\""
 						+ new Integer(match.getCouponId()).toString() + "\" /> ");
 				pageContext.getOut().write("<input type=\"hidden\" name=\"match-id\" value=\""
@@ -70,16 +71,16 @@ public class TableMatchesResultsTag extends TagSupport {
 				pageContext.getOut().write("</td>");
 				
 				pageContext.getOut().write("<td>");
-				pageContext.getOut().write("<select>");
-				if(match.getStatus().equals("in progress")){
+				pageContext.getOut().write("<select name='status'>");
+				if(match.getStatus() == 2){
 					pageContext.getOut().write("<option value=\"2\" selected>in progress</option>");
 					pageContext.getOut().write("<option value=\"5\">finished</option>");
 					pageContext.getOut().write("<option value=\"4\">cancelled</option>");
-				}else if(match.getStatus().equals("finished")){
+				}else if(match.getStatus() == 5){
 					pageContext.getOut().write("<option value=\"2\">in progress</option>");
 					pageContext.getOut().write("<option value=\"5\" selected>finished</option>");
 					pageContext.getOut().write("<option value=\"4\">cancelled</option>");
-				}else if(match.getStatus().equals("cancelled")){
+				}else if(match.getStatus() == 4){
 					pageContext.getOut().write("<option value=\"2\">in progress</option>");
 					pageContext.getOut().write("<option value=\"5\">finished</option>");
 					pageContext.getOut().write("<option value=\"4\" selected>cancelled</option>");
@@ -92,7 +93,7 @@ public class TableMatchesResultsTag extends TagSupport {
 				pageContext.getOut().write("</td>");
 				
 				pageContext.getOut().write("<td>");
-				pageContext.getOut().write("<select>");
+				pageContext.getOut().write("<select name='result'>");
 				if(match.getResult() == null){
 					pageContext.getOut().write("<option value=\"NULL\" selected>-</option>");
 					pageContext.getOut().write("<option value=\"1\">1</option>");

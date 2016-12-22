@@ -48,6 +48,7 @@ public class EditUser implements UserService {
 
 	@Override
 	public User authentication(String login, byte[] password) throws ServiceException {
+		
 		User user = null;
 		if (!Validator.authenticationValidator(login, password)) {
 			throw new ServiceException("Invalid login or password.");
