@@ -8,10 +8,12 @@ import by.tr.totalizator.bean.MatchBean;
 import by.tr.totalizator.bean.RegisterBetBean;
 import by.tr.totalizator.dao.TotalizatorOperationDAO;
 import by.tr.totalizator.dao.exception.DAOException;
+import by.tr.totalizator.dao.exception.NotAllFinishedMatchesDAOException;
 import by.tr.totalizator.dao.factory.DAOFactory;
 import by.tr.totalizator.entity.Coupon;
 import by.tr.totalizator.entity.Match;
 import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.exception.NotAllFinishedMatchesServiceException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.impl.util.Validator;
 
@@ -48,16 +50,16 @@ public class EditTotalizator implements TotalizatorService {
 		}
 		return list;
 	}
-	
+
 	@Override
 	public int getMinBetAmount(int couponId) throws ServiceException {
-		if(couponId<=0){
+		if (couponId <= 0) {
 			throw new ServiceException("CouponId must be greater then 0.");
 		}
-		
+
 		DAOFactory factory = DAOFactory.getInstance();
 		TotalizatorOperationDAO totoDAO = factory.getTotalizatorOperationDAO();
-		
+
 		try {
 			return totoDAO.getMinBetAmount(couponId);
 		} catch (DAOException e) {
@@ -83,7 +85,7 @@ public class EditTotalizator implements TotalizatorService {
 	public boolean registerCoupon(String startDate, String endDate, int minBetAmount) throws ServiceException {
 		Timestamp start;
 		Timestamp end;
-		
+
 		startDate = formatDate(startDate);
 		endDate = formatDate(endDate);
 
@@ -111,15 +113,17 @@ public class EditTotalizator implements TotalizatorService {
 
 	@Override
 	public boolean registerBet(RegisterBetBean bean) throws ServiceException {
-		
-		boolean result = Validator.validateBet(bean.getMap(), bean.getAmount(), bean.getCreditCardNumber(), bean.getUserId(), bean.getCouponId());
+
+		boolean result = Validator.validateBet(bean.getMap(), bean.getAmount(), bean.getCreditCardNumber(),
+				bean.getUserId(), bean.getCouponId());
 		if (!result) {
 			throw new ServiceException("Invalid data.");
 		}
 		DAOFactory factory = DAOFactory.getInstance();
 		TotalizatorOperationDAO totoDAO = factory.getTotalizatorOperationDAO();
 		try {
-			result = totoDAO.registerBet(bean.getMap(), bean.getAmount(), bean.getCreditCardNumber(), bean.getUserId(), Integer.parseInt(bean.getCouponId()));
+			result = totoDAO.registerBet(bean.getMap(), bean.getAmount(), bean.getCreditCardNumber(), bean.getUserId(),
+					Integer.parseInt(bean.getCouponId()));
 		} catch (DAOException e) {
 			throw new ServiceException("Register bet failed.", e);
 		}
@@ -220,18 +224,18 @@ public class EditTotalizator implements TotalizatorService {
 		} else {
 			throw new ServiceException("Invalid data.");
 		}
-		
+
 		Match matchEntity = new Match();
 		matchEntity.setStartDate(start);
 		matchEntity.setEndDate(end);
-		if(!match.getResult().equals("NULL")){
+		if (!match.getResult().equals("NULL")) {
 			matchEntity.setResult(match.getResult());
 		}
 		matchEntity.setStatus(Integer.parseInt(match.getStatus()));
 		if (match.getId() != null) {
 			matchEntity.setId(Integer.parseInt(match.getId()));
 		}
-		
+
 		DAOFactory factory = DAOFactory.getInstance();
 		TotalizatorOperationDAO totoDAO = factory.getTotalizatorOperationDAO();
 		boolean result = false;
@@ -253,23 +257,25 @@ public class EditTotalizator implements TotalizatorService {
 	}
 
 	@Override
-	public boolean closeCoupon(String couponId) throws ServiceException {
+	public boolean closeCoupon(String couponId) throws NotAllFinishedMatchesServiceException, ServiceException {
 		boolean result = Validator.validateCouponId(couponId);
 		if (!result) {
 			throw new ServiceException("Invalid data.");
 		}
-		
+
 		DAOFactory factory = DAOFactory.getInstance();
 		TotalizatorOperationDAO totoDAO = factory.getTotalizatorOperationDAO();
+
 		try {
 			result = totoDAO.closeCoupon(Integer.parseInt(couponId));
+		} catch (NotAllFinishedMatchesDAOException e) {
+			throw new NotAllFinishedMatchesServiceException("Close coupon failed.", e);
 		} catch (DAOException e) {
 			throw new ServiceException("Close coupon failed.", e);
 		}
 		return result;
 	}
 
-	
 	@Override
 	public List<Coupon> getAllCoupons() throws ServiceException {
 		DAOFactory factory = DAOFactory.getInstance();
@@ -286,7 +292,7 @@ public class EditTotalizator implements TotalizatorService {
 
 	@Override
 	public Coupon getCouponById(String id) throws ServiceException {
-		if(!Validator.validateCouponId(id)){
+		if (!Validator.validateCouponId(id)) {
 			throw new ServiceException("Invalid data.");
 		}
 		DAOFactory factory = DAOFactory.getInstance();
@@ -297,20 +303,26 @@ public class EditTotalizator implements TotalizatorService {
 		} catch (DAOException e) {
 			throw new ServiceException("Get coupon failed.", e);
 		}
-		
+
 	}
 
 	@Override
 	public boolean editCouponInfo(CouponBean coupon) throws ServiceException {
 		coupon.setStartDate(formatDate(coupon.getStartDate()));
 		coupon.setEndDate(formatDate(coupon.getEndDate()));
-		
-		if(!Validator.validateCoupon(coupon)){
+
+		if (!Validator.validateCoupon(coupon)) {
 			throw new ServiceException("Invalid data.");
 		}
-		
+
 		DAOFactory factory = DAOFactory.getInstance();
 		TotalizatorOperationDAO totoDAO = factory.getTotalizatorOperationDAO();
+		
+		Timestamp start = Timestamp.valueOf(coupon.getStartDate());
+		Timestamp end = Timestamp.valueOf(coupon.getEndDate());
+		if(start.after(end)){
+			throw new ServiceException("Invalid dates: start date is after end date");
+		}
 		try {
 			Coupon couponEntity = new Coupon();
 			couponEntity.setId(Integer.parseInt(coupon.getId()));
@@ -318,9 +330,9 @@ public class EditTotalizator implements TotalizatorService {
 			couponEntity.setJackpot(Integer.parseInt(coupon.getJackpot()));
 			couponEntity.setMinBetAmount(Integer.parseInt(coupon.getMinBetAmount()));
 			couponEntity.setStatus(Integer.parseInt(coupon.getStatus()));
-			couponEntity.setStartDate(Timestamp.valueOf(coupon.getStartDate()));
-			couponEntity.setEndDate(Timestamp.valueOf(coupon.getEndDate()));
-			
+			couponEntity.setStartDate(start);
+			couponEntity.setEndDate(end);
+
 			boolean result = totoDAO.editCouponInfo(couponEntity);
 			return result;
 		} catch (DAOException e) {

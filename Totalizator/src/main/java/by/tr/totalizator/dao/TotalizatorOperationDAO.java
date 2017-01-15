@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import by.tr.totalizator.dao.exception.DAOException;
+import by.tr.totalizator.dao.exception.NotAllFinishedMatchesDAOException;
 import by.tr.totalizator.entity.Coupon;
 import by.tr.totalizator.entity.Match;
 
@@ -19,7 +20,7 @@ public interface TotalizatorOperationDAO {
 	boolean registerBet(Map<String, String> res, int amount, String creditCardNumber, int userId, int couponId) throws DAOException;
 	List<Coupon> getCurrentCoupons() throws DAOException;
 	boolean editMatchResult(Match match) throws DAOException;
-	boolean closeCoupon(int couponId) throws DAOException;
+	boolean closeCoupon(int couponId) throws NotAllFinishedMatchesDAOException, DAOException;
 	List<Coupon> getAllCoupons() throws DAOException; 
 	Coupon getCouponById(int id) throws DAOException;
 	boolean editCouponInfo(Coupon coupon) throws DAOException;

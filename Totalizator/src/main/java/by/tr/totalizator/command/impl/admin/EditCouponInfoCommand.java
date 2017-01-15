@@ -27,7 +27,7 @@ public class EditCouponInfoCommand implements Command {
 	private final static String INDEX_URL = "index.jsp";
 	private final static String USER = "user";
 	private final static String ADMIN = "admin";
-	private final static String RESULT = "resultAdd";
+	private final static String RESULT = "resultEdit";
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -51,10 +51,10 @@ public class EditCouponInfoCommand implements Command {
 												);
 				boolean result = totoService.editCouponInfo(coupon);
 				
-				//request.getSession(false).setAttribute(RESULT, result);
+				request.getSession(false).setAttribute(RESULT, result);
 			} catch (ServiceException e) {
 				logger.error(e);
-				//request.getSession(false).setAttribute(RESULT, false);
+				request.getSession(false).setAttribute(RESULT, false);
 			}
 			page = URL+request.getParameter(COUPON_ID);
 		} else {

@@ -57,9 +57,12 @@ public class MakeBetCommand implements Command {
 				RegisterBetBean bean = new RegisterBetBean(map, amount, creditCard, user.getId(), request.getParameter(COUPON_ID));
 				
 				boolean result = totoService.registerBet(bean);
+				
+				request.getSession(false).setAttribute(RESULT_ADD, result);
 
 			} catch (ServiceException e) {
 				logger.error(e);
+				request.getSession(false).setAttribute(RESULT_ADD, false);
 			}
 			page = URL;
 		} else {

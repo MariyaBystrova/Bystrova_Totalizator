@@ -17,6 +17,7 @@ import by.tr.totalizator.dao.TotalizatorOperationDAO;
 import by.tr.totalizator.dao.connectionpool.ConnectionPool;
 import by.tr.totalizator.dao.connectionpool.exception.ConnectionPoolException;
 import by.tr.totalizator.dao.exception.DAOException;
+import by.tr.totalizator.dao.exception.NotAllFinishedMatchesDAOException;
 import by.tr.totalizator.entity.Coupon;
 import by.tr.totalizator.entity.Match;
 
@@ -361,7 +362,7 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 	}
 
 	@Override
-	public boolean closeCoupon(int couponId) throws DAOException {
+	public boolean closeCoupon(int couponId) throws NotAllFinishedMatchesDAOException,DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		java.sql.Connection con = null;
 
@@ -369,7 +370,15 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 			con = connectionPool.takeConnection();
 			CallableStatement cs = con.prepareCall(StatementTotalizator.CLOSE_COUPON_PROCEDURE);
 			cs.setInt(1, couponId);
+			cs.registerOutParameter(2, java.sql.Types.INTEGER);
 			cs.execute();
+			int result = cs.getInt(2);
+			if(result == -1){
+				return false;
+			}
+			if(result == -2){
+				throw new NotAllFinishedMatchesDAOException("Not all matches has finished yet.");
+			}
 		} catch (SQLException e) {
 			throw new DAOException("Database access error.", e);
 		} catch (ConnectionPoolException e) {

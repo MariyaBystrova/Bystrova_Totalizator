@@ -19,6 +19,9 @@
 <fmt:message bundle="${loc}" key="local.make_bet" var="make_bet" />
 <fmt:message bundle="${loc}" key="local.amount" var="amount" />
 <fmt:message bundle="${loc}" key="local.enter_amount" var="enter_amount" />
+<fmt:message bundle="${loc}" key="local.message_coupon_add_success" var="message_success" />
+<fmt:message bundle="${loc}" key="local.message_coupon_add_failed" var="message_failed" />
+<fmt:message bundle="${loc}" key="local.wait_next_coupon" var="wait_next_coupon" />
 
 <link rel="stylesheet" type="text/css" href="CSS/style.css">
 <link href="https://fonts.googleapis.com/css?family=Pattaya"
@@ -29,7 +32,7 @@
 </head>
 <body>
 	<header>
-		<%@ include file="user_header.jsp" %>
+		<%@ include file="user_header.jsp"%>
 	</header>
 
 	<aside class="sidebar-right-news">
@@ -44,11 +47,25 @@
 	<div class="content">
 		<article class="main-toto">
 			<div>
+				<c:if
+					test="${not empty sessionScope.resultAdd and sessionScope.resultAdd}">
+					<c:out value="${message_success}" />
+				</c:if>
+				<c:if
+					test="${not empty sessionScope.resultAdd and not sessionScope.resultAdd }">
+					<c:out value="${message_failed}" />
+				</c:if>
 				<form action="Controller" method="get">
 					<input type="hidden" name="command" value="go-to-make-bet">
-					
+
 					<jsp:useBean id="list"
 						class="by.tr.totalizator.tag.bean.JSPListBean" scope="request" />
+					
+					
+					<c:if test="${empty list.list}">
+						<h2><c:out value="${wait_next_coupon}" /></h2>
+					</c:if>
+					
 					<c:if test="${not empty list.list}">
 						<div>
 							<h2>
@@ -65,15 +82,13 @@
 								<label for="amount"><c:out value="${amount}" />:</label>
 							</div>
 							<div>
-								<input type="text" name="amount" value="${requestScope.minBetAmount}" id="amount"
+								<input type="text" name="amount"
+									value="${requestScope.minBetAmount}" id="amount"
 									class="form-control" placeholder="${enter_amount}"
 									required="required" />
 							</div>
 						</div>
 						<input type="submit" value="${make_bet}" class="btn btn-default">
-					</c:if>
-					<c:if test="${empty list.list}">
-						<h2>Coupon games are playing. Wait for the next coupon.</h2>
 					</c:if>
 				</form>
 			</div>

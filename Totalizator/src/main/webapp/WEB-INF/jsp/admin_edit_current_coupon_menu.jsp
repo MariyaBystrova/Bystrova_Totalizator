@@ -22,7 +22,7 @@
 <fmt:message bundle="${loc}" key="local.form_coupon" var="form_coupon" />
 <fmt:message bundle="${loc}" key="local.edit_match_results" var="edit_match_results" />
 <fmt:message bundle="${loc}" key="local.show_all_coupons" var="show_all_coupons" />
-
+<fmt:message bundle="${loc}" key="local.close_coupon_not_all_matches_finished_fail" var="close_coupon_not_all_matches_finished_fail" />
 <fmt:message bundle="${loc}" key="local.step_one_choose_coupon"
 	var="step_one_choose_coupon" />
 <fmt:message bundle="${loc}" key="local.show_matches" var="show_matches" />
@@ -33,19 +33,18 @@
 <fmt:message bundle="${loc}" key="local.team_two" var="team_two" />
 <fmt:message bundle="${loc}" key="local.start_date" var="start_date" />
 <fmt:message bundle="${loc}" key="local.end_date" var="end_date" />
-
+<fmt:message bundle="${loc}" key="local.result" var="result" />
+<fmt:message bundle="${loc}" key="local.status" var="status" />
 <fmt:message bundle="${loc}" key="local.form_matches_to_coupon"
 	var="form_matches_to_coupon" />
-<fmt:message bundle="${loc}" key="local.message_match_add_success"
-	var="message_match_add_success" />
-<fmt:message bundle="${loc}" key="local.message_match_add_failed"
-	var="message_match_add_failed" />
-<fmt:message bundle="${loc}" key="local.message_match_edit_success"
-	var="message_match_edit_success" />
-<fmt:message bundle="${loc}" key="local.message_match_edit_failed"
-	var="message_match_edit_failed" />
+<fmt:message bundle="${loc}" key="local.edit_coupon_info_success" var="edit_coupon_info_success" />
+<fmt:message bundle="${loc}" key="local.edit_coupon_info_fail" var="edit_coupon_info_fail" />
 <fmt:message bundle="${loc}" key="local.step_two_fill_coupon" var="step_two_fill_coupon" />
 <fmt:message bundle="${loc}" key="local.close_coupon" var="close_coupon" />
+<fmt:message bundle="${loc}" key="local.close_coupon_success" var="close_coupon_success" />
+<fmt:message bundle="${loc}" key="local.close_coupon_fail" var="close_coupon_fail" />
+<fmt:message bundle="${loc}" key="local.message_match_edit_success" var="message_match_edit_success" />
+<fmt:message bundle="${loc}" key="local.message_match_edit_failed" var="message_match_edit_failed" />
 
 <link rel="stylesheet" type="text/css" href="CSS/admin-style.css">
 
@@ -114,47 +113,30 @@
 		</div>
 		<div>
 			<c:if
-				test="${not empty sessionScope.resultAdd and sessionScope.resultAdd}">
-				<c:out value="Success" />
-			</c:if>
-			<c:if
-				test="${not empty sessionScope.resultAdd and not sessionScope.resultAdd}">
-				<c:out value="Failed" />
-			</c:if>
-		</div>
-		<div>
-			<c:if
 				test="${not empty sessionScope.resultEdit and sessionScope.resultEdit}">
-				<c:out value="Success" />
+				<c:out value="${message_match_edit_success}" />
 			</c:if>
 			<c:if
 				test="${not empty sessionScope.resultEdit and not sessionScope.resultEdit }">
-				<c:out value="Failed" />
+				<c:out value="${message_match_edit_failed}" />
+			</c:if>
+			<c:if
+				test="${not empty sessionScope.resultCloseCoupon and sessionScope.resultCloseCoupon}">
+				<c:out value="${close_coupon_success}" />
+			</c:if>
+			<c:if
+				test="${not empty sessionScope.resultCloseCoupon and not sessionScope.resultCloseCoupon}">
+				<c:out value="${close_coupon_fail}" />
+			</c:if>
+			<c:if
+				test="${not empty sessionScope.resultFinishedMatches and not sessionScope.resultFinishedMatches}">
+				<c:out value="${close_coupon_not_all_matches_finished_fail}" />
 			</c:if>
 		</div>
 		<div id="list-matches">
 			<c:if test="${not empty requestScope.list }">
 				<div>
-					<%-- <div>
-						<c:if
-							test="${not empty sessionScope.resultAdd and sessionScope.resultAdd}">
-							<c:out value="${message_match_add_success}" />
-						</c:if>
-						<c:if
-							test="${not empty sessionScope.resultAdd and not sessionScope.resultAdd}">
-							<c:out value="${message_match_add_failed}" />
-						</c:if>
-					</div>
-					<div>
-						<c:if
-							test="${not empty sessionScope.resultEdit and sessionScope.resultEdit}">
-							<c:out value="${message_match_edit_success}" />
-						</c:if>
-						<c:if
-							test="${not empty sessionScope.resultEdit and not sessionScope.resultEdit }">
-							<c:out value="${message_match_edit_failed}" />
-						</c:if>
-					</div> --%>
+					
 					<div>
 						<label for="matches"><c:out value="${step_two_fill_coupon}"></c:out>:</label>
 					</div>
@@ -164,8 +146,8 @@
 							class="by.tr.totalizator.tag.bean.JSPListBean" scope="request" />
 						<tag:table-matches-result-tag list="${list}" matchName="${name}"
 							teamOne="${team_one}" teamTwo="${team_two}"
-							startDate="${start_date}" endDate="${end_date}" result="Result"
-							status="Status" />
+							startDate="${start_date}" endDate="${end_date}" result="${result}"
+							status="${status}" />
 					</div>
 				</div>
 				<div>

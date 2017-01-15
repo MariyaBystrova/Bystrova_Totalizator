@@ -7,6 +7,7 @@ import by.tr.totalizator.bean.MatchBean;
 import by.tr.totalizator.bean.RegisterBetBean;
 import by.tr.totalizator.entity.Coupon;
 import by.tr.totalizator.entity.Match;
+import by.tr.totalizator.service.exception.NotAllFinishedMatchesServiceException;
 import by.tr.totalizator.service.exception.ServiceException;
 
 public interface TotalizatorService {
@@ -20,7 +21,7 @@ public interface TotalizatorService {
 	boolean editMatch(MatchBean match) throws ServiceException;
 	List<Coupon> getCurrentCoupons() throws ServiceException;
 	boolean editMatchResStatus(MatchBean match) throws ServiceException;
-	boolean closeCoupon(String couponId) throws ServiceException;
+	boolean closeCoupon(String couponId) throws NotAllFinishedMatchesServiceException, ServiceException;
 	List<Coupon> getAllCoupons() throws ServiceException;
 	Coupon getCouponById(String id) throws ServiceException;
 	boolean editCouponInfo(CouponBean coupon) throws ServiceException;

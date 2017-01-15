@@ -18,11 +18,11 @@ public class TableAllCouponsTag extends TagSupport {
 	private String endDate;
 	private String minBetAmount;
 	private String jackpot;
+	private String pool;
 	private String status;
 
 	public int doStartTag() throws JspTagException {
 		int size = new Integer(list.getSize());
-		// max size???
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
@@ -32,19 +32,22 @@ public class TableAllCouponsTag extends TagSupport {
 			pageContext.getOut().write("<tr><th>");
 			pageContext.getOut().write("#" + "</th>");
 
-			pageContext.getOut().write("<th>" + startDate + "</th>");
-			pageContext.getOut().write("<th>" + endDate + "</th>");
-			pageContext.getOut().write("<th>" + minBetAmount + "</th>");
-			pageContext.getOut().write("<th>" + jackpot + "</th>");
-			pageContext.getOut().write("<th>" + status);
+			pageContext.getOut().write("<th class='min-width'>" + startDate + "</th>");
+			pageContext.getOut().write("<th class='min-width'>" + endDate + "</th>");
+			pageContext.getOut().write("<th class='min-width'>" + minBetAmount + "</th>");
+			pageContext.getOut().write("<th class='min-width'>" + jackpot + "</th>");
+			pageContext.getOut().write("<th class='min-width'>" + pool + "</th>");
+			pageContext.getOut().write("<th class='min-width'>" + status);
 			pageContext.getOut().write("</th></tr>");
 
 			for (int i = 0; i < size; i++) {
 				Coupon coupon = list.getCouponElement();
 				pageContext.getOut().write("<tr id='line" + i + "'>");
 				pageContext.getOut().write("<form action=\"Controller\" method=\"get\">");
-				pageContext.getOut().write("<input type=\"hidden\" name=\"command\" value=\"admin-go-to-edit-coupon-info\" /> ");
-				pageContext.getOut().write("<input type=\"hidden\" name=\"coupon-id\" value='"+coupon.getId()+"' /> ");
+				pageContext.getOut()
+						.write("<input type=\"hidden\" name=\"command\" value=\"admin-go-to-edit-coupon-info\" /> ");
+				pageContext.getOut()
+						.write("<input type=\"hidden\" name=\"coupon-id\" value='" + coupon.getId() + "' /> ");
 				pageContext.getOut().write("<td>");
 				pageContext.getOut().write(new Integer(i + 1).toString());
 				pageContext.getOut().write(".</td>");
@@ -54,6 +57,7 @@ public class TableAllCouponsTag extends TagSupport {
 						"<td id='endDate" + i + "'>" + sdf.format(coupon.getEndDate()).replace('T', ' ') + "</td>");
 				pageContext.getOut().write("<td id='minBetAmount" + i + "'>" + coupon.getMinBetAmount() + "</td>");
 				pageContext.getOut().write("<td id='jackpot" + i + "'>" + coupon.getJackpot() + "</td>");
+				pageContext.getOut().write("<td id='jackpot" + i + "'>" + coupon.getPull() + "</td>");
 				pageContext.getOut().write("<td id='status" + i + "'>" + statusNameById(coupon.getStatus()) + "</td>");
 				pageContext.getOut().write("<td>");
 				pageContext.getOut().write("<input type=\"submit\" value=\"Edit\" class=\"btn btn-default\"/>");
@@ -135,6 +139,14 @@ public class TableAllCouponsTag extends TagSupport {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getPool() {
+		return pool;
+	}
+
+	public void setPool(String pool) {
+		this.pool = pool;
 	}
 
 }

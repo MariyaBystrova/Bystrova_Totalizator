@@ -105,7 +105,6 @@ public final class Validator {
 	}
 	public static boolean validateCoupon(CouponBean coupon) {
 		if (!validateDate(coupon.getStartDate())) {
-			System.out.println(coupon.getStartDate());
 			return false;
 		}
 		if (!validateDate(coupon.getEndDate())) {

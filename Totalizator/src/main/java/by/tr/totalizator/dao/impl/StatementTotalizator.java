@@ -8,13 +8,13 @@ public final class StatementTotalizator {
 	public final static String SELECT_MATCHES_WHERE_CUPONID = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date`, m.`real_result`, m.`status_id` "
 															+ "FROM `match` AS m "
 															+ "WHERE m.`cupon_id`=?;";
-	
-	/*private final static String SELECT_CURRENT_COUPON_MATCHES = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date`
-																	FROM `match` AS m 
-																	JOIN `cupon` AS c ON c.`cupon_id`=m.`cupon_id` 
-																	WHERE c.`start_date`<= NOW() AND  c.`status_id` = 1 ORDER BY m.`match_id`;";
-	 */
-	
+	//можно ставить на прошедший купон, если статус = 1 (open)
+//	public final static String SELECT_CURRENT_COUPON_MATCHES = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date`, m.`real_result`, m.`status_id` "
+//	+ "FROM `match` AS m "
+//	+ "JOIN `cupon` AS c ON c.`cupon_id`=m.`cupon_id` "
+//	+ "WHERE c.`status_id` = 1;";
+
+	//правильна
 	public final static String SELECT_CURRENT_COUPON_MATCHES = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date`, m.`real_result`, m.`status_id` "
 															+ "FROM `match` AS m "
 															+ "JOIN `cupon` AS c ON c.`cupon_id`=m.`cupon_id` "
@@ -83,7 +83,7 @@ public final class StatementTotalizator {
 																	+"ON q.match_id=m.match_id "
 																	+"SET m.`start_date` = q.start_date, m.`end_date` = q.end_date, m.`status_id`=q.status_id, m.`real_result`=q.real_result;";
 	
-	public final static String CLOSE_COUPON_PROCEDURE = "{call results_processing_procedure (?)}"; 
+	public final static String CLOSE_COUPON_PROCEDURE = "{call results_processing_procedure (?,?)}"; 
 	
 	public final static String SELECT_ALL_FROM_COUPON = "SELECT `cupon_id`, `start_date`, `end_date`, `min_bet_amount`, `cupon_pull`, `jackpot`, `status_id` FROM `cupon`;";
 	

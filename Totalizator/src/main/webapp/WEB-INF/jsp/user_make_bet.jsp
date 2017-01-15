@@ -19,6 +19,7 @@
 <fmt:message bundle="${loc}" key="local.make_bet" var="make_bet" />
 <fmt:message bundle="${loc}" key="local.amount" var="amount" />
 <fmt:message bundle="${loc}" key="local.enter_amount" var="enter_amount" />
+<fmt:message bundle="${loc}" key="local.credit_card_number" var="credit_card_number" />
 
 <link rel="stylesheet" type="text/css" href="CSS/style.css">
 <link href="https://fonts.googleapis.com/css?family=Pattaya"
@@ -66,7 +67,7 @@
 					</div>
 					<div class="form-group">
 						<div>
-							<label for="credit-card-number">Credit card number:</label>
+							<label for="credit-card-number"><c:out value="${credit_card_number}" />:</label>
 						</div>
 						<div>
 							<input type="text" name="credit-card-number" value=""

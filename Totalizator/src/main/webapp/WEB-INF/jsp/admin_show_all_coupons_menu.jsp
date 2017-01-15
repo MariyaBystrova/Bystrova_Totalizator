@@ -20,6 +20,12 @@
 <fmt:message bundle="${loc}" key="local.log_out" var="logout" />
 <fmt:message bundle="${loc}" key="local.general" var="general" />
 <fmt:message bundle="${loc}" key="local.form_coupon" var="form_coupon" />
+<fmt:message bundle="${loc}" key="local.start_date" var="start_date" />
+<fmt:message bundle="${loc}" key="local.end_date" var="end_date" />
+<fmt:message bundle="${loc}" key="local.min_bet_amount" var="min_bet_amount" />
+<fmt:message bundle="${loc}" key="local.jackpot" var="jackpot" />
+<fmt:message bundle="${loc}" key="local.pool" var="pool" />
+<fmt:message bundle="${loc}" key="local.status" var="status" />
 <fmt:message bundle="${loc}" key="local.form_matches_to_coupon"
 	var="form_matches_to_coupon" />
 <fmt:message bundle="${loc}" key="local.edit_match_results" var="edit_match_results" />
@@ -66,9 +72,9 @@
 			<div>
 				<jsp:useBean id="couponList"
 					class="by.tr.totalizator.tag.bean.JSPListBean" scope="request" />
-				<tag:table-all-coupons-tag list="${couponList}" startDate="StartDate"
-					endDate="EndDate" minBetAmount="MinBetAmount" jackpot="Jackpot"
-					status="Status" />
+				<tag:table-all-coupons-tag list="${couponList}" startDate="${start_date}"
+					endDate="${end_date}" minBetAmount="${min_bet_amount}" jackpot="${jackpot}" pool="${pool}"
+					status="${status}" />
 			</div>
 		</c:if>
 
