@@ -10,7 +10,7 @@ import by.tr.totalizator.entity.User;
 public class GoToFormCouponCommand implements Command {
 
 	private final static String CURRENT_URL = "currentUrl";
-	private final static String URL = "http://localhost:8080/Totalizator/Controller?command=admin-go-to-form-coupon";
+	private final static String URL = "Controller?command=admin-go-to-form-coupon";
 	private final static String USER = "user";
 	private final static String ADMIN = "admin";
 

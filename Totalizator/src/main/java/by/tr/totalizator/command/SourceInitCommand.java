@@ -26,6 +26,7 @@ public class SourceInitCommand {
 			logger.info("Source was initialized.");
 		} catch (ServiceException e) {
 			logger.error(e);
+			//throw exception (-> error source init page) 
 		}
 	}
 

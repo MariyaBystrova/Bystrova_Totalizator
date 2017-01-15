@@ -21,7 +21,7 @@ public class ShowCouponMatchesCommand implements Command {
 	private final static Logger logger = LogManager.getLogger(ShowCouponMatchesCommand.class.getName());
 
 	private final static String CURRENT_URL = "currentUrl";
-	private final static String URL = "http://localhost:8080/Totalizator/Controller?command=show-coupon-matches&coupon-id=";
+	private final static String URL = "Controller?command=show-coupon-matches&coupon-id=";
 	private final static String AMP = "&";
 	private final static String EQUALS = "=";
 	private final static String LIST = "list";

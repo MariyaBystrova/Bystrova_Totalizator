@@ -22,9 +22,9 @@ public class LoginCommand implements Command {
 	private final static String ADMIN = "admin";
 	private final static String USER = "user";
 	
-	private final static String ADMIN_GO_TO_GENERAL = "http://localhost:8080/Totalizator/Controller?command=admin-go-to-general";
-	private final static String USER_GO_TO_GENERAL = "http://localhost:8080/Totalizator/Controller?command=go-to-general";
-	private final static String GO_TO_INDEX = "http://localhost:8080/Totalizator/index.jsp";
+	private final static String ADMIN_GO_TO_GENERAL = "Controller?command=admin-go-to-general";
+	private final static String USER_GO_TO_GENERAL = "Controller?command=go-to-general";
+	private final static String GO_TO_INDEX = "index.jsp";
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {

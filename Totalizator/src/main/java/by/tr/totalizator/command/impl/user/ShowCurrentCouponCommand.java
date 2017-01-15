@@ -21,7 +21,7 @@ public class ShowCurrentCouponCommand implements Command {
 	private final static Logger logger = LogManager.getLogger(ShowCurrentCouponCommand.class.getName());
 
 	private final static String CURRENT_URL = "currentUrl";
-	private final static String URL = "http://localhost:8080/Totalizator/Controller?command=show-current-coupon";
+	private final static String URL = "Controller?command=show-current-coupon";
 	private final static String LIST = "list";
 	private final static String USER = "user";
 	private final static String COUPON = "coupon";

@@ -19,8 +19,8 @@ public class EditAccountCommand implements Command {
 	private final static String PASSWORD_AGAIN = "password-again";
 
 	private final static String USER = "user";
-	private final static String GO_TO_EDIT_PROFILE_URL = "http://localhost:8080/Totalizator/Controller?command=go-to-edit-profile&operation=";
-	private final static String GO_TO_INDEX = "http://localhost:8080/Totalizator/index.jsp";
+	private final static String GO_TO_EDIT_PROFILE_URL = "Controller?command=go-to-edit-profile&operation=";
+	private final static String GO_TO_INDEX = "index.jsp";
 	private final static String RESULT = "resultAdd";
 	private final static String OPERATION = "operation";
 

@@ -19,7 +19,7 @@ public class GoToEditCouponInfoCommand implements Command {
 	private final static Logger logger = LogManager.getLogger(GoToEditCouponInfoCommand.class.getName());
 
 	private final static String CURRENT_URL = "currentUrl";
-	private final static String URL = "http://localhost:8080/Totalizator/Controller?command=admin-go-to-edit-coupon-info&coupon-id=";
+	private final static String URL = "Controller?command=admin-go-to-edit-coupon-info&coupon-id=";
 	private final static String COUPON_ID = "coupon-id";
 	private final static String COUPON = "coupon";
 	private final static String USER = "user";

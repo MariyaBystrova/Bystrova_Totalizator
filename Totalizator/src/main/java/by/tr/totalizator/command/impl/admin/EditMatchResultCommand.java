@@ -21,10 +21,10 @@ public class EditMatchResultCommand implements Command {
 	private final static String COUPON_ID = "coupon-id";
 	private final static String RESULT = "result";
 	private final static String STATUS = "status";
-	private final static String ADMIN_GO_TO_FORM_MATCHES_URL = "http://localhost:8080/Totalizator/Controller?command=show-coupon-matches&coupon-id=";
+	private final static String ADMIN_GO_TO_FORM_MATCHES_URL = "Controller?command=show-coupon-matches&coupon-id=";
 	private final static String AMP = "&";
 	private final static String EQ = "=";
-	private final static String GO_TO_INDEX = "http://localhost:8080/Totalizator/index.jsp";
+	private final static String GO_TO_INDEX = "index.jsp";
 	private final static String MATCH_ID = "match-id";
 	private final static String USER = "user";
 	private final static String ADMIN = "admin";

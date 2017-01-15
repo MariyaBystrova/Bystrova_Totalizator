@@ -9,7 +9,7 @@ import by.tr.totalizator.controller.PageName;
 public class UnknownCommand implements Command {
 
 	private final static String CURRENT_URL_ATTR = "currentUrl";
-	private final static String CURRENT_URL = "http://localhost:8080/Totalizator/Controller?command=unknown_command";
+	private final static String CURRENT_URL = "Controller?command=unknown_command";
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {

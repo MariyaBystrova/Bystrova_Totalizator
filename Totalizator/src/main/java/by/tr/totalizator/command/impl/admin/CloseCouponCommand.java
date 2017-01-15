@@ -17,8 +17,8 @@ public class CloseCouponCommand implements Command {
 
 	private final static String COUPON_ID = "coupon-id";
 	
-	private final static String URL = "http://localhost:8080/Totalizator/Controller?command=admin-go-to-edit-current-coupon&coupon-id=";
-	private final static String GO_TO_INDEX = "http://localhost:8080/Totalizator/index.jsp";
+	private final static String URL = "Controller?command=admin-go-to-edit-current-coupon&coupon-id=";
+	private final static String GO_TO_INDEX = "index.jsp";
 	private final static String USER = "user";
 	private final static String ADMIN = "admin";
 	private final static String RESULT_EDIT = "resultEdit";

@@ -26,7 +26,7 @@ public class RegisterUserCommand implements Command {
 	private final static String LOGIN = "login";
 	private final static String PASSWORD = "password";
 	private final static String PASSWORD_AGAIN = "password-again";
-	private final static String GO_TO_REGISTRATION_URL = "http://localhost:8080/Totalizator/Controller?command=go-to-registration";
+	private final static String GO_TO_REGISTRATION_URL = "Controller?command=go-to-registration";
 	private final static String RESULT = "resultAdd";
 
 	@Override

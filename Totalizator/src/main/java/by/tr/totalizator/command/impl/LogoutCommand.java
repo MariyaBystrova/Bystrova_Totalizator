@@ -8,7 +8,7 @@ import by.tr.totalizator.command.Command;
 
 public class LogoutCommand implements Command {
 
-	private final static String URL_INDEX = "http://localhost:8080/Totalizator/";
+	private final static String URL_INDEX = "index.jsp";
 	private final static String LOCAL = "local";
 
 	@Override

@@ -21,7 +21,7 @@ public class GoToFormMatchesCommand implements Command {
 	private final static Logger logger = LogManager.getLogger(GoToFormMatchesCommand.class.getName());
 
 	private final static String CURRENT_URL = "currentUrl";
-	private final static String URL = "http://localhost:8080/Totalizator/Controller?command=admin-go-to-form-matches";
+	private final static String URL = "Controller?command=admin-go-to-form-matches";
 	private final static String COUPONS = "coupons";
 	private final static String USER = "user";
 	private final static String ADMIN = "admin";

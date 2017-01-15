@@ -10,7 +10,7 @@ public class LocalizeCommand implements Command {
 	private final static String CURRENT_URL = "currentUrl";
 	private final static String LOCAL = "local";
 	private final static String LANG = "lang";
-	private final static String LOCALHOST = "http://localhost:8080/Totalizator/index.jsp";
+	private final static String LOCALHOST = "index.jsp";
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {

@@ -20,7 +20,7 @@ import by.tr.totalizator.tag.bean.JSPListBean;
 public class GoToShowAllCouponsCommand implements Command {
 	private final static Logger logger = LogManager.getLogger(GoToShowAllCouponsCommand.class.getName());
 	private final static String CURRENT_URL = "currentUrl";
-	private final static String URL = "http://localhost:8080/Totalizator/Controller?command=admin-go-to-show-all-coupons";
+	private final static String URL = "Controller?command=admin-go-to-show-all-coupons";
 	private final static String USER = "user";
 	private final static String ADMIN = "admin";
 	private final static String COUPON_LIST = "couponList";

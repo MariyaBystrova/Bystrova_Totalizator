@@ -19,8 +19,8 @@ import by.tr.totalizator.service.factory.ServiceFactory;
 public class MakeBetCommand implements Command {
 	private final static Logger logger = LogManager.getLogger(MakeBetCommand.class.getName());
 	private final static String USER = "user";
-	private final static String URL = "http://localhost:8080/Totalizator/Controller?command=show-current-coupon";
-	private final static String GO_TO_INDEX = "http://localhost:8080/Totalizator/index.jsp";
+	private final static String URL = "Controller?command=show-current-coupon";
+	private final static String GO_TO_INDEX = "index.jsp";
 	private final static String RESULT = "result";
 	private final static String AMOUNT = "amount";
 	private final static String COUPON_ID = "couponId";

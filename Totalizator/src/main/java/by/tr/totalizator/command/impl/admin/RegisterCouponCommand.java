@@ -18,8 +18,8 @@ public class RegisterCouponCommand implements Command {
 	private final static String COUPON_START_DATE = "coupon-start-date";
 	private final static String COUPON_END_DATE = "coupon-end-date";
 	private final static String COUPON_MIN_BET_AMOUNT = "coupon-min-bet-amount";
-	private final static String ADMIN_GO_TO_FORM_COUPON_URL = "http://localhost:8080/Totalizator/Controller?command=admin-go-to-form-coupon";
-	private final static String INDEX_URL = "http://localhost:8080/Totalizator";
+	private final static String ADMIN_GO_TO_FORM_COUPON_URL = "Controller?command=admin-go-to-form-coupon";
+	private final static String INDEX_URL = "index.jsp";
 	private final static String USER = "user";
 	private final static String ADMIN = "admin";
 	private final static String RESULT = "resultAdd";

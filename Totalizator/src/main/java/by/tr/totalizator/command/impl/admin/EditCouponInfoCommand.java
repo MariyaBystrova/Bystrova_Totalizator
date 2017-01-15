@@ -23,8 +23,8 @@ public class EditCouponInfoCommand implements Command {
 	private final static String JACKPOT = "coupon-jackpot";
 	private final static String STATUS = "coupon-status";
 	private final static String PULL = "coupon-pull";
-	private final static String URL = "http://localhost:8080/Totalizator/Controller?command=admin-go-to-edit-coupon-info&coupon-id=";
-	private final static String INDEX_URL = "http://localhost:8080/Totalizator";
+	private final static String URL = "Controller?command=admin-go-to-edit-coupon-info&coupon-id=";
+	private final static String INDEX_URL = "index.jsp";
 	private final static String USER = "user";
 	private final static String ADMIN = "admin";
 	private final static String RESULT = "resultAdd";

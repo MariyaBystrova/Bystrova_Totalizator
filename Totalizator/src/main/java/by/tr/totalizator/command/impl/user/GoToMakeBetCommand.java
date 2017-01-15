@@ -23,7 +23,7 @@ import by.tr.totalizator.tag.bean.JspMapBean;
 public class GoToMakeBetCommand implements Command {
 	private final static Logger logger = LogManager.getLogger(GoToMakeBetCommand.class.getName());
 	private final static String CURRENT_URL_ATTR = "currentUrl";
-	private final static String CURRENT_URL = "http://localhost:8080/Totalizator/Controller?command=go-to-make-bet";
+	private final static String CURRENT_URL = "Controller?command=go-to-make-bet";
 	private final static String USER = "user";
 	private final static String RESULT = "result";
 	private final static String AMOUNT = "amount";

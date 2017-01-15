@@ -2,10 +2,10 @@
 
 <Configuration>
 	<Appenders>
-		<!-- <file append="false" filename="logs/logs.log" name="log">
+		<file append="false" filename="/Users/mariya/Documents/Bystrova_Totalizator/Totalizator/logs/logs.log" name="log">
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n" />
-		</file> -->
-		
+		</file>
+
 		<Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n" />
 		</Console>
@@ -15,6 +15,7 @@
 
 		<Root level="info">
 			<AppenderRef ref="Console" />
+			<AppenderRef ref="log" />
 		</Root>
 	</Loggers>
 </Configuration>

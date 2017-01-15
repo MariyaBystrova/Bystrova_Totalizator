@@ -9,7 +9,7 @@ import by.tr.totalizator.entity.User;
 
 public class AdminGoToGeneralCommand implements Command {
 	private final static String CURRENT_URL_ATTR = "currentUrl";
-	private final static String CURRENT_URL = "http://localhost:8080/Totalizator/Controller?command=admin-go-to-general";
+	private final static String CURRENT_URL = "Controller?command=admin-go-to-general";
 	private final static String USER = "user";
 	private final static String ADMIN = "admin";
 
