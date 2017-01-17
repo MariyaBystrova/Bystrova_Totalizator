@@ -58,7 +58,6 @@ public class User implements Serializable {
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
@@ -111,9 +110,6 @@ public class User implements Serializable {
 				return false;
 			}
 		} else if (!firstName.equals(other.firstName)) {
-			return false;
-		}
-		if (id != other.id) {
 			return false;
 		}
 		if (lastName == null) {

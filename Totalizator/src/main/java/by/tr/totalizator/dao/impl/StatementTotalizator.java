@@ -10,9 +10,7 @@ public final class StatementTotalizator {
 															+ "WHERE m.`cupon_id`=?;";
 	//можно ставить на прошедший купон, если статус = 1 (open)
 //	public final static String SELECT_CURRENT_COUPON_MATCHES = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date`, m.`real_result`, m.`status_id` "
-//	+ "FROM `match` AS m "
-//	+ "JOIN `cupon` AS c ON c.`cupon_id`=m.`cupon_id` "
-//	+ "WHERE c.`status_id` = 1;";
+//	+ " WHERE m.`cupon_id` = 5;";
 
 	//правильна
 	public final static String SELECT_CURRENT_COUPON_MATCHES = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date`, m.`real_result`, m.`status_id` "
@@ -21,12 +19,12 @@ public final class StatementTotalizator {
 															+ "WHERE c.`start_date`<= NOW() AND c.`end_date`> NOW() AND c.`status_id` = 1;"; //ORDER BY m.`match_id`
 	
 	public final static String SELECT_MIN_BET_AMOUNT_BY_COUPONID = "SELECT `min_bet_amount` FROM `cupon` WHERE `cupon_id`=?;";
-	/*
+	
 	//не правильная для формирования купона, который уже прошел
-	public final static String SELECT_FREE_VALID_COUPONS = "SELECT c.`cupon_id`,c.`start_date`,c.`end_date`, c.`min_bet_amount`, c.`cupon_pull`, c.`jackpot`, c.`status_id` "
-															+ "FROM `cupon` AS c "
-															+ "WHERE c.`status_id` = 6;";
-	*/
+//	public final static String SELECT_FREE_VALID_COUPONS = "SELECT c.`cupon_id`,c.`start_date`,c.`end_date`, c.`min_bet_amount`, c.`cupon_pull`, c.`jackpot`, c.`status_id` "
+//															+ "FROM `cupon` AS c "
+//															+ "WHERE c.`status_id` = 6;";
+//	
 	//правильная
 	public final static String SELECT_FREE_VALID_COUPONS = "SELECT c.`cupon_id`,c.`start_date`,c.`end_date`, c.`min_bet_amount`, c.`cupon_pull`, c.`jackpot`, c.`status_id` "
 														+ "FROM `cupon` AS c "

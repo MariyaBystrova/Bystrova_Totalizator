@@ -157,25 +157,16 @@
 						<select name="coupon-status">
 							<c:if test="${coupon.status eq 1 }">
 								<option value="1" selected>open</option>
-								<option value="3">closed</option>
-								<option value="4">cancelled</option>
-								<option value="6">free</option>
-							</c:if>
-							<c:if test="${coupon.status eq 3 }">
-								<option value="1">open</option>
-								<option value="3" selected>closed</option>
 								<option value="4">cancelled</option>
 								<option value="6">free</option>
 							</c:if>
 							<c:if test="${coupon.status eq 4 }">
 								<option value="1">open</option>
-								<option value="3">closed</option>
 								<option value="4" selected>cancelled</option>
 								<option value="6">free</option>
 							</c:if>
 							<c:if test="${coupon.status eq 6 }">
 								<option value="1">open</option>
-								<option value="3">closed</option>
 								<option value="4">cancelled</option>
 								<option value="6" selected>free</option>
 							</c:if>
