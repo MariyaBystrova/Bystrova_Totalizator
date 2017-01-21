@@ -91,7 +91,7 @@
 				</c:if>
 			</div>
 
-			<jsp:useBean id="coupon" class="by.tr.totalizator.entity.Coupon"
+			<jsp:useBean id="coupon" class="by.tr.totalizator.entity.bean.Coupon"
 				scope="request" />
 
 			<form action="Controller" method="post">

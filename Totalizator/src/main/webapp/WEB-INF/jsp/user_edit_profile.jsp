@@ -69,7 +69,7 @@
 	</aside>
 
 	<div class="content main">
-		<jsp:useBean id="user" class="by.tr.totalizator.entity.User"
+		<jsp:useBean id="user" class="by.tr.totalizator.entity.bean.User"
 			scope="session" />
 		<div class="container">
 			<c:if
