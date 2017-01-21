@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import by.tr.totalizator.entity.Match;
+import by.tr.totalizator.entity.bean.Match;
 import by.tr.totalizator.tag.bean.JSPListBean;
 
 public class TableMatchesResultsTag extends TagSupport {

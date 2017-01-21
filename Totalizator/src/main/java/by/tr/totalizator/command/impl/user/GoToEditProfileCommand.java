@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.tr.totalizator.command.Command;
 import by.tr.totalizator.controller.PageName;
-import by.tr.totalizator.entity.User;
+import by.tr.totalizator.entity.bean.User;
 
 public class GoToEditProfileCommand implements Command {
 	private final static String CURRENT_URL_ATTR = "currentUrl";

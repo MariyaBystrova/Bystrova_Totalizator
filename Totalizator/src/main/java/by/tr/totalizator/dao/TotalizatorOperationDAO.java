@@ -6,8 +6,8 @@ import java.util.Map;
 
 import by.tr.totalizator.dao.exception.DAOException;
 import by.tr.totalizator.dao.exception.NotAllFinishedMatchesDAOException;
-import by.tr.totalizator.entity.Coupon;
-import by.tr.totalizator.entity.Match;
+import by.tr.totalizator.entity.bean.Coupon;
+import by.tr.totalizator.entity.bean.Match;
 
 public interface TotalizatorOperationDAO {
 	List<Match> getCuponMatches(int cuponId) throws DAOException;

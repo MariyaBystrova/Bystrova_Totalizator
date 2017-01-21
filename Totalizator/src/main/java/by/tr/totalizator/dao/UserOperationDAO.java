@@ -1,7 +1,7 @@
 package by.tr.totalizator.dao;
 
 import by.tr.totalizator.dao.exception.DAOException;
-import by.tr.totalizator.entity.User;
+import by.tr.totalizator.entity.bean.User;
 
 public interface UserOperationDAO {
 	boolean createUser(User user, String password) throws DAOException;

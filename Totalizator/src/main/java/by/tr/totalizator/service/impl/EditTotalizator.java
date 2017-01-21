@@ -3,15 +3,15 @@ package by.tr.totalizator.service.impl;
 import java.sql.Timestamp;
 import java.util.List;
 
-import by.tr.totalizator.bean.CouponBean;
-import by.tr.totalizator.bean.MatchBean;
-import by.tr.totalizator.bean.RegisterBetBean;
 import by.tr.totalizator.dao.TotalizatorOperationDAO;
 import by.tr.totalizator.dao.exception.DAOException;
 import by.tr.totalizator.dao.exception.NotAllFinishedMatchesDAOException;
 import by.tr.totalizator.dao.factory.DAOFactory;
-import by.tr.totalizator.entity.Coupon;
-import by.tr.totalizator.entity.Match;
+import by.tr.totalizator.entity.bean.Coupon;
+import by.tr.totalizator.entity.bean.Match;
+import by.tr.totalizator.entity.dto.CouponDTO;
+import by.tr.totalizator.entity.dto.MatchDTO;
+import by.tr.totalizator.entity.dto.RegisterBetDTO;
 import by.tr.totalizator.service.TotalizatorService;
 import by.tr.totalizator.service.exception.NotAllFinishedMatchesServiceException;
 import by.tr.totalizator.service.exception.ServiceException;
@@ -112,7 +112,7 @@ public class EditTotalizator implements TotalizatorService {
 	}
 
 	@Override
-	public boolean registerBet(RegisterBetBean bean) throws ServiceException {
+	public boolean registerBet(RegisterBetDTO bean) throws ServiceException {
 
 		boolean result = Validator.validateBet(bean.getMap(), bean.getAmount(), bean.getCreditCardNumber(),
 				bean.getUserId(), bean.getCouponId());
@@ -131,7 +131,7 @@ public class EditTotalizator implements TotalizatorService {
 	}
 
 	@Override
-	public boolean registerMatch(MatchBean match) throws ServiceException {
+	public boolean registerMatch(MatchDTO match) throws ServiceException {
 		Timestamp start;
 		Timestamp end;
 
@@ -165,7 +165,7 @@ public class EditTotalizator implements TotalizatorService {
 	}
 
 	@Override
-	public boolean editMatch(MatchBean match) throws ServiceException {
+	public boolean editMatch(MatchDTO match) throws ServiceException {
 		Timestamp start;
 		Timestamp end;
 
@@ -211,7 +211,7 @@ public class EditTotalizator implements TotalizatorService {
 	}
 
 	@Override
-	public boolean editMatchResStatus(MatchBean match) throws ServiceException {
+	public boolean editMatchResStatus(MatchDTO match) throws ServiceException {
 		Timestamp start;
 		Timestamp end;
 
@@ -307,7 +307,7 @@ public class EditTotalizator implements TotalizatorService {
 	}
 
 	@Override
-	public boolean editCouponInfo(CouponBean coupon) throws ServiceException {
+	public boolean editCouponInfo(CouponDTO coupon) throws ServiceException {
 		coupon.setStartDate(formatDate(coupon.getStartDate()));
 		coupon.setEndDate(formatDate(coupon.getEndDate()));
 

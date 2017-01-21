@@ -18,8 +18,8 @@ import by.tr.totalizator.dao.connectionpool.ConnectionPool;
 import by.tr.totalizator.dao.connectionpool.exception.ConnectionPoolException;
 import by.tr.totalizator.dao.exception.DAOException;
 import by.tr.totalizator.dao.exception.NotAllFinishedMatchesDAOException;
-import by.tr.totalizator.entity.Coupon;
-import by.tr.totalizator.entity.Match;
+import by.tr.totalizator.entity.bean.Coupon;
+import by.tr.totalizator.entity.bean.Match;
 
 public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 	private final static Logger logger = LogManager.getLogger(SQLTotalizatorOperationDAO.class.getName());

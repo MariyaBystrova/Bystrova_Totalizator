@@ -1,9 +1,9 @@
-package by.tr.totalizator.bean;
+package by.tr.totalizator.entity.dto;
 
 import java.io.Serializable;
 import java.util.Map;
 
-public class RegisterBetBean implements Serializable {
+public class RegisterBetDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Map<String, String> map;
@@ -12,10 +12,10 @@ public class RegisterBetBean implements Serializable {
 	private int userId;
 	private String couponId;
 
-	public RegisterBetBean() {
+	public RegisterBetDTO() {
 	}
 
-	public RegisterBetBean(Map<String, String> map, int amount, String creditCardNumber, int userId, String couponId) {
+	public RegisterBetDTO(Map<String, String> map, int amount, String creditCardNumber, int userId, String couponId) {
 		this.map = map;
 		this.amount = amount;
 		this.creditCardNumber = creditCardNumber;
@@ -46,7 +46,7 @@ public class RegisterBetBean implements Serializable {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		RegisterBetBean other = (RegisterBetBean) obj;
+		RegisterBetDTO other = (RegisterBetDTO) obj;
 		if (amount != other.amount) {
 			return false;
 		}

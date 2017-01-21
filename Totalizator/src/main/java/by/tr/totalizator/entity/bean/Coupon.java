@@ -1,4 +1,4 @@
-package by.tr.totalizator.entity;
+package by.tr.totalizator.entity.bean;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

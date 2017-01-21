@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.tr.totalizator.bean.MatchBean;
 import by.tr.totalizator.command.Command;
-import by.tr.totalizator.entity.User;
+import by.tr.totalizator.entity.bean.User;
+import by.tr.totalizator.entity.dto.MatchDTO;
 import by.tr.totalizator.service.TotalizatorService;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
@@ -44,7 +44,7 @@ public class EditMatchResultCommand implements Command {
 			TotalizatorService totoService = sf.getTotaliztorService();
 
 			try {
-				MatchBean match = new MatchBean();
+				MatchDTO match = new MatchDTO();
 				match.setId(request.getParameter(MATCH_ID));
 				match.setStartDate(request.getParameter(START_DATE));
 				match.setEndDate(request.getParameter(END_DATE));

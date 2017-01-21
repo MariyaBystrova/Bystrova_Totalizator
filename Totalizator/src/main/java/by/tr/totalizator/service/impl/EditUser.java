@@ -2,11 +2,11 @@ package by.tr.totalizator.service.impl;
 
 import java.util.Arrays;
 
-import by.tr.totalizator.bean.UserBean;
 import by.tr.totalizator.dao.UserOperationDAO;
 import by.tr.totalizator.dao.exception.DAOException;
 import by.tr.totalizator.dao.factory.DAOFactory;
-import by.tr.totalizator.entity.User;
+import by.tr.totalizator.entity.bean.User;
+import by.tr.totalizator.entity.dto.UserDTO;
 import by.tr.totalizator.service.UserService;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.impl.util.HashMd5Coder;
@@ -15,7 +15,7 @@ import by.tr.totalizator.service.impl.util.Validator;
 public class EditUser implements UserService {
 
 	@Override
-	public boolean registerUser(UserBean userBean) throws ServiceException {
+	public boolean registerUser(UserDTO userBean) throws ServiceException {
 
 		if (!Validator.registrationValidator(userBean)) {
 			throw new ServiceException("Invalid data.");
@@ -67,7 +67,7 @@ public class EditUser implements UserService {
 	}
 
 	@Override
-	public User editUserPersonalInfo(UserBean userBean) throws ServiceException {
+	public User editUserPersonalInfo(UserDTO userBean) throws ServiceException {
 		if(!Validator.userPersonalInfoValidator(userBean)){
 			throw new ServiceException("Invalid data.");
 		}

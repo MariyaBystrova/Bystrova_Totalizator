@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import by.tr.totalizator.bean.CouponBean;
-import by.tr.totalizator.bean.MatchBean;
-import by.tr.totalizator.bean.UserBean;
+import by.tr.totalizator.entity.dto.CouponDTO;
+import by.tr.totalizator.entity.dto.MatchDTO;
+import by.tr.totalizator.entity.dto.UserDTO;
 
 public final class Validator {
 
@@ -30,7 +30,7 @@ public final class Validator {
 		return true;
 	}
 
-	public static boolean registrationValidator(UserBean user) {
+	public static boolean registrationValidator(UserDTO user) {
 
 		if (!Arrays.equals(user.getPassword(), user.getRepPassword()) || (user.getPassword().length < 1)) {
 			return false;
@@ -61,7 +61,7 @@ public final class Validator {
 		return true;
 	}
 
-	public static boolean userPersonalInfoValidator(UserBean user) {
+	public static boolean userPersonalInfoValidator(UserDTO user) {
 		if (user.getFirstName().isEmpty() || !matcher(NAME_PATTERN, user.getFirstName())) {
 			return false;
 		}
@@ -103,7 +103,7 @@ public final class Validator {
 		}
 		return true;
 	}
-	public static boolean validateCoupon(CouponBean coupon) {
+	public static boolean validateCoupon(CouponDTO coupon) {
 		if (!validateDate(coupon.getStartDate())) {
 			return false;
 		}
@@ -136,7 +136,7 @@ public final class Validator {
 
 	//// поля на pattern
 
-	public static boolean validateMatch(MatchBean match) {
+	public static boolean validateMatch(MatchDTO match) {
 		if (match.getCouponId() != null) { 								 //??????
 			if (Integer.parseInt(match.getCouponId()) <= 0) {
 				return false;
@@ -163,7 +163,7 @@ public final class Validator {
 		return true;
 	}
 
-	public static boolean validateMatchDatesResultStatus(MatchBean match){
+	public static boolean validateMatchDatesResultStatus(MatchDTO match){
 		if (match.getId() != null) {
 			if (Integer.parseInt(match.getId()) <= 0) {
 				return false;

@@ -7,7 +7,7 @@ import java.util.Locale;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import by.tr.totalizator.entity.Coupon;
+import by.tr.totalizator.entity.bean.Coupon;
 import by.tr.totalizator.tag.bean.JSPListBean;
 
 public class EmptyCouponScrollTag extends TagSupport {

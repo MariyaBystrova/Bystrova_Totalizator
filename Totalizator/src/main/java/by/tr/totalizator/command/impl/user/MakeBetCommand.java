@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.tr.totalizator.bean.RegisterBetBean;
 import by.tr.totalizator.command.Command;
-import by.tr.totalizator.entity.User;
+import by.tr.totalizator.entity.bean.User;
+import by.tr.totalizator.entity.dto.RegisterBetDTO;
 import by.tr.totalizator.service.TotalizatorService;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
@@ -54,7 +54,7 @@ public class MakeBetCommand implements Command {
 				amount = Integer.parseInt(request.getParameter(AMOUNT));
 
 				String creditCard = request.getParameter(CREDIT_CARD).replace(DASH, EMPTY);
-				RegisterBetBean bean = new RegisterBetBean(map, amount, creditCard, user.getId(), request.getParameter(COUPON_ID));
+				RegisterBetDTO bean = new RegisterBetDTO(map, amount, creditCard, user.getId(), request.getParameter(COUPON_ID));
 				
 				boolean result = totoService.registerBet(bean);
 				

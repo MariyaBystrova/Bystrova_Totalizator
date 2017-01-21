@@ -10,8 +10,8 @@ import org.apache.logging.log4j.Logger;
 
 import by.tr.totalizator.command.Command;
 import by.tr.totalizator.controller.PageName;
-import by.tr.totalizator.entity.Match;
-import by.tr.totalizator.entity.User;
+import by.tr.totalizator.entity.bean.Match;
+import by.tr.totalizator.entity.bean.User;
 import by.tr.totalizator.service.TotalizatorService;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;

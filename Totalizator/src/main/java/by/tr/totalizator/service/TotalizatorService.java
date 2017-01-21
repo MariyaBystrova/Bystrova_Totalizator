@@ -2,11 +2,11 @@ package by.tr.totalizator.service;
 
 import java.util.List;
 
-import by.tr.totalizator.bean.CouponBean;
-import by.tr.totalizator.bean.MatchBean;
-import by.tr.totalizator.bean.RegisterBetBean;
-import by.tr.totalizator.entity.Coupon;
-import by.tr.totalizator.entity.Match;
+import by.tr.totalizator.entity.bean.Coupon;
+import by.tr.totalizator.entity.bean.Match;
+import by.tr.totalizator.entity.dto.CouponDTO;
+import by.tr.totalizator.entity.dto.MatchDTO;
+import by.tr.totalizator.entity.dto.RegisterBetDTO;
 import by.tr.totalizator.service.exception.NotAllFinishedMatchesServiceException;
 import by.tr.totalizator.service.exception.ServiceException;
 
@@ -16,13 +16,13 @@ public interface TotalizatorService {
 	int getMinBetAmount(int couponId) throws ServiceException;
 	List<Coupon> getEmptyValidCoupons() throws ServiceException;
 	boolean registerCoupon(String startDate, String endDate, int minBetAmount) throws ServiceException;
-	boolean registerBet(RegisterBetBean bean) throws ServiceException;
-	boolean registerMatch(MatchBean match) throws ServiceException;
-	boolean editMatch(MatchBean match) throws ServiceException;
+	boolean registerBet(RegisterBetDTO bean) throws ServiceException;
+	boolean registerMatch(MatchDTO match) throws ServiceException;
+	boolean editMatch(MatchDTO match) throws ServiceException;
 	List<Coupon> getCurrentCoupons() throws ServiceException;
-	boolean editMatchResStatus(MatchBean match) throws ServiceException;
+	boolean editMatchResStatus(MatchDTO match) throws ServiceException;
 	boolean closeCoupon(String couponId) throws NotAllFinishedMatchesServiceException, ServiceException;
 	List<Coupon> getAllCoupons() throws ServiceException;
 	Coupon getCouponById(String id) throws ServiceException;
-	boolean editCouponInfo(CouponBean coupon) throws ServiceException;
+	boolean editCouponInfo(CouponDTO coupon) throws ServiceException;
 }

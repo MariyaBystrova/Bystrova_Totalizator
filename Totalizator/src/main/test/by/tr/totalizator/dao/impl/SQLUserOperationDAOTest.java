@@ -18,7 +18,7 @@ import by.tr.totalizator.dao.UserOperationDAO;
 import by.tr.totalizator.dao.connectionpool.ConnectionPool;
 import by.tr.totalizator.dao.exception.DAOException;
 import by.tr.totalizator.dao.factory.DAOFactory;
-import by.tr.totalizator.entity.User;
+import by.tr.totalizator.entity.bean.User;
 import by.tr.totalizator.service.impl.util.HashMd5Coder;
 
 public class SQLUserOperationDAOTest {

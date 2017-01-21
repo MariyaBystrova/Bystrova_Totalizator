@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.tr.totalizator.bean.CouponBean;
 import by.tr.totalizator.command.Command;
-import by.tr.totalizator.entity.User;
+import by.tr.totalizator.entity.bean.User;
+import by.tr.totalizator.entity.dto.CouponDTO;
 import by.tr.totalizator.service.TotalizatorService;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
@@ -41,7 +41,7 @@ public class EditCouponInfoCommand implements Command {
 			ServiceFactory sf = ServiceFactory.getInstance();
 			TotalizatorService totoService = sf.getTotaliztorService();
 			try {
-				CouponBean coupon = new CouponBean(request.getParameter(COUPON_ID),
+				CouponDTO coupon = new CouponDTO(request.getParameter(COUPON_ID),
 												request.getParameter(COUPON_START_DATE), 
 												request.getParameter(COUPON_END_DATE), 
 												request.getParameter(COUPON_MIN_BET_AMOUNT),

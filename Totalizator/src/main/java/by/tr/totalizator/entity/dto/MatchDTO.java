@@ -1,8 +1,8 @@
-package by.tr.totalizator.bean;
+package by.tr.totalizator.entity.dto;
 
 import java.io.Serializable;
 
-public class MatchBean implements Serializable {
+public class MatchDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String id;
@@ -15,11 +15,11 @@ public class MatchBean implements Serializable {
 	private String status;
 	private String result;
 
-	public MatchBean() {
+	public MatchDTO() {
 
 	}
 
-	public MatchBean(String name, String teamOne, String teamTwo, String startDate, String endDate) {
+	public MatchDTO(String name, String teamOne, String teamTwo, String startDate, String endDate) {
 		this.name = name;
 		this.teamOne = teamOne;
 		this.teamTwo = teamTwo;
@@ -27,12 +27,12 @@ public class MatchBean implements Serializable {
 		this.endDate = endDate;
 	}
 	
-	public MatchBean(String name, String couponId, String teamOne, String teamTwo, String startDate, String endDate) {
+	public MatchDTO(String name, String couponId, String teamOne, String teamTwo, String startDate, String endDate) {
 		this(name, teamOne, teamTwo, startDate, endDate);
 		this.couponId = couponId;
 	}
 	
-	public MatchBean(String id, String name, String couponId, String teamOne, String teamTwo, String startDate, String endDate){
+	public MatchDTO(String id, String name, String couponId, String teamOne, String teamTwo, String startDate, String endDate){
 		this(name, couponId, teamOne, teamTwo, startDate, endDate);
 		this.id=id;
 	}
@@ -70,7 +70,7 @@ public class MatchBean implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MatchBean other = (MatchBean) obj;
+		MatchDTO other = (MatchDTO) obj;
 		if (couponId == null) {
 			if (other.couponId != null)
 				return false;

@@ -1,12 +1,16 @@
-package by.tr.totalizator.bean;
+package by.tr.totalizator.entity.bean;
 
 import java.io.Serializable;
-import java.util.Arrays;
-
-public class UserBean implements Serializable {
+/**
+ * This class represents users.
+ * 
+ * @author Mariya Bystrova
+ *
+ */
+public class User implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 
-	private String id;
+	private int id;
 	private String firstName;
 	private String lastName;
 	private String sex;
@@ -14,15 +18,23 @@ public class UserBean implements Serializable {
 	private String country;
 	private String city;
 	private String address;
-	private String role;
 	private String login;
-	private byte[] password;
-	private byte[] repPassword;
+	private String role;
 
-	public UserBean() {
+	public User() {
 	}
-	
-	public UserBean(String fName, String lName, String sex, String email, String country, String city, String address) {
+
+	/**
+	 * Creates a new User object.
+	 * @param fName first name
+	 * @param lName last name
+	 * @param sex 
+	 * @param email
+	 * @param country
+	 * @param city
+	 * @param address street, house, flat
+	 */
+	public User(String fName, String lName, String sex, String email, String country, String city, String address) {
 		this.firstName = fName;
 		this.lastName = lName;
 		this.sex = sex;
@@ -31,35 +43,66 @@ public class UserBean implements Serializable {
 		this.city = city;
 		this.address = address;
 	}
-
-	public UserBean(String fName, String lName, String sex, String email, String country, String city, String address,
-			String role) {
+	/**
+	 * Creates a new User objecct.
+	 * @param fName first name
+	 * @param lName last name
+	 * @param sex
+	 * @param email
+	 * @param country
+	 * @param city
+	 * @param address street, house, flat
+	 * @param login
+	 * @param role ("user", "admin")
+	 */
+	public User(String fName, String lName, String sex, String email, String country, String city, String address,
+			String login, String role) {
 		this(fName, lName, sex, email, country, city, address);
+		this.login = login;
 		this.role = role;
 	}
-
-	public UserBean(String fName, String lName, String sex, String email, String country, String city, String address,
-			String role, String login, byte[] password, byte[] repPassword) {
-		this(fName, lName, sex, email, country, city, address, role);
-		this.password = password;
-		this.repPassword = repPassword;
-		this.login = login;
-	}
-
-	public UserBean(String id, String fName, String lName, String sex, String email, String country, String city,
-			String address, String role) {
-		this(fName, lName, sex, email, country, city, address, role);
+	/**
+	 * 
+	 * @param id unique identifier
+	 * @param fName first name
+	 * @param lName last name
+	 * @param sex
+	 * @param email
+	 * @param country
+	 * @param city
+	 * @param address street, house, flat
+	 * @param login
+	 * @param role ("user", "admin")
+	 */
+	public User(int id, String fName, String lName, String sex, String email, String country, String city,
+			String address, String login, String role) {
+		this(fName, lName, sex, email, country, city, address, login, role);
 		this.id = id;
 	}
 	
-	
+	@Override
+	public User clone() {
+		User user = new User();
+		user.id = this.id;
+		user.firstName = this.firstName;
+		user.lastName = this.lastName;
+		user.sex = this.sex;
+		user.email = this.email;
+		user.country = this.country;
+		user.city = this.city;
+		user.address = this.address;
+		user.login = this.login;
+		user.role = this.role;
+
+		return user;
+
+	}
 
 	@Override
 	public String toString() {
-		return "UserBean [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", sex=" + sex
-				+ ", email=" + email + ", country=" + country + ", city=" + city + ", address=" + address + ", role="
-				+ role + ", login=" + login + ", password=" + Arrays.toString(password) + ", repPassword="
-				+ Arrays.toString(repPassword) + "]";
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", sex=" + sex + ", email="
+				+ email + ", country=" + country + ", city=" + city + ", address=" + address + ", login=" + login
+				+ ", role=" + role + "]";
 	}
 
 	@Override
@@ -71,11 +114,8 @@ public class UserBean implements Serializable {
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + Arrays.hashCode(password);
-		result = prime * result + Arrays.hashCode(repPassword);
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
 		return result;
@@ -92,7 +132,7 @@ public class UserBean implements Serializable {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		UserBean other = (UserBean) obj;
+		User other = (User) obj;
 		if (address == null) {
 			if (other.address != null) {
 				return false;
@@ -128,13 +168,6 @@ public class UserBean implements Serializable {
 		} else if (!firstName.equals(other.firstName)) {
 			return false;
 		}
-		if (id == null) {
-			if (other.id != null) {
-				return false;
-			}
-		} else if (!id.equals(other.id)) {
-			return false;
-		}
 		if (lastName == null) {
 			if (other.lastName != null) {
 				return false;
@@ -147,12 +180,6 @@ public class UserBean implements Serializable {
 				return false;
 			}
 		} else if (!login.equals(other.login)) {
-			return false;
-		}
-		if (!Arrays.equals(password, other.password)) {
-			return false;
-		}
-		if (!Arrays.equals(repPassword, other.repPassword)) {
 			return false;
 		}
 		if (role == null) {
@@ -172,11 +199,11 @@ public class UserBean implements Serializable {
 		return true;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -250,34 +277,6 @@ public class UserBean implements Serializable {
 
 	public void setLogin(String login) {
 		this.login = login;
-	}
-
-	public byte[] getPassword() {
-		return password;
-	}
-
-	public void setPassword(byte[] password) {
-		this.password = password;
-	}
-	
-	public void setPassword(byte b) {
-		for(int i=0; i<password.length; i++){
-			password[i]=b;
-		}
-	}
-
-	public byte[] getRepPassword() {
-		return repPassword;
-	}
-
-	public void setRepPassword(byte[] repPassword) {
-		this.repPassword = repPassword;
-	}
-	
-	public void setRepPassword(byte b) {
-		for(int i=0; i<repPassword.length; i++){
-			repPassword[i]=b;
-		}
 	}
 
 }

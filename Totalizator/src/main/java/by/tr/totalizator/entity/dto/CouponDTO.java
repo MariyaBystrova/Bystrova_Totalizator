@@ -1,8 +1,8 @@
-package by.tr.totalizator.bean;
+package by.tr.totalizator.entity.dto;
 
 import java.io.Serializable;
 
-public class CouponBean implements Serializable {
+public class CouponDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String id;
@@ -13,11 +13,11 @@ public class CouponBean implements Serializable {
 	private String pull;
 	private String status;
 
-	public CouponBean() {
+	public CouponDTO() {
 
 	}
 
-	public CouponBean(String id, String startDate, String endDate, String minBetAmount, String jackpot, String pull,
+	public CouponDTO(String id, String startDate, String endDate, String minBetAmount, String jackpot, String pull,
 			String status) {
 		this.id = id;
 		this.startDate = startDate;
@@ -58,7 +58,7 @@ public class CouponBean implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CouponBean other = (CouponBean) obj;
+		CouponDTO other = (CouponDTO) obj;
 		if (endDate == null) {
 			if (other.endDate != null)
 				return false;

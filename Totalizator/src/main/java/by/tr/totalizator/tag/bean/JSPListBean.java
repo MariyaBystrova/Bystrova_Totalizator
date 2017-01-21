@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
-import by.tr.totalizator.entity.Coupon;
-import by.tr.totalizator.entity.Match;
+import by.tr.totalizator.entity.bean.Coupon;
+import by.tr.totalizator.entity.bean.Match;
 
 public class JSPListBean implements Serializable {
 	private static final long serialVersionUID = 1L;

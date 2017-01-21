@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.tr.totalizator.bean.UserBean;
 import by.tr.totalizator.command.Command;
-import by.tr.totalizator.entity.User;
+import by.tr.totalizator.entity.bean.User;
+import by.tr.totalizator.entity.dto.UserDTO;
 import by.tr.totalizator.service.UserService;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
@@ -43,7 +43,7 @@ public class EditProfileCommand implements Command {
 			ServiceFactory sf = ServiceFactory.getInstance();
 			UserService userService = sf.getUserService();
 			try {
-				UserBean userBean = new UserBean(request.getParameter(FIRST_NAME), request.getParameter(LAST_NAME),
+				UserDTO userBean = new UserDTO(request.getParameter(FIRST_NAME), request.getParameter(LAST_NAME),
 						request.getParameter(SEX), request.getParameter(EMAIL), request.getParameter(COUNTRY),
 						request.getParameter(CITY), request.getParameter(ADDRESS));
 				userBean.setId(Integer.toString(user.getId()));
