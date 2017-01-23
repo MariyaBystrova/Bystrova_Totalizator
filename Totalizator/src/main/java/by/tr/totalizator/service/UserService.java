@@ -2,6 +2,7 @@ package by.tr.totalizator.service;
 
 import by.tr.totalizator.entity.bean.User;
 import by.tr.totalizator.entity.dto.UserDTO;
+import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 
 /**
@@ -20,12 +21,13 @@ public interface UserService {
 	 * @return a boolean value <code>true</code>, if user is created and
 	 *         <code>false</code>, if registration failed.
 	 * @throws ServiceException if some problems with data has occur. 
+	 * @throws ServiceDataException 
 	 */
-	boolean registerUser(UserDTO userBean) throws ServiceException;
+	boolean registerUser(UserDTO userBean) throws ServiceException, ServiceDataException;
 
-	User editUserPersonalInfo(UserDTO user) throws ServiceException;
+	User editUserPersonalInfo(UserDTO user) throws ServiceException, ServiceDataException;
 
-	boolean editUserAccountInfo(byte[] password, byte[] rpassword, int id) throws ServiceException;
+	boolean editUserAccountInfo(byte[] password, byte[] rpassword, int id) throws ServiceException, ServiceDataException;
 
-	User authentication(String login, byte[] password) throws ServiceException;
+	User authentication(String login, byte[] password) throws ServiceException, ServiceDataException;
 }

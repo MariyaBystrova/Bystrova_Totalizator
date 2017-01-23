@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import by.tr.totalizator.command.Command;
 import by.tr.totalizator.entity.bean.User;
 import by.tr.totalizator.service.UserService;
+import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 
@@ -68,7 +69,7 @@ public class EditAccountCommand implements Command {
 
 				request.getSession(false).setAttribute(RESULT, result);
 
-			} catch (ServiceException e) {
+			} catch (ServiceException | ServiceDataException e) {
 				logger.error(e);
 				request.getSession(false).setAttribute(RESULT, false);
 			}

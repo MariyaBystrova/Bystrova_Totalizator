@@ -8,6 +8,7 @@ import by.tr.totalizator.dao.factory.DAOFactory;
 import by.tr.totalizator.entity.bean.User;
 import by.tr.totalizator.entity.dto.UserDTO;
 import by.tr.totalizator.service.UserService;
+import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.impl.util.HashMd5Coder;
 import by.tr.totalizator.service.impl.util.Validator;
@@ -15,10 +16,10 @@ import by.tr.totalizator.service.impl.util.Validator;
 public class EditUser implements UserService {
 
 	@Override
-	public boolean registerUser(UserDTO userBean) throws ServiceException {
+	public boolean registerUser(UserDTO userBean) throws ServiceException, ServiceDataException {
 
 		if (!Validator.registrationValidator(userBean)) {
-			throw new ServiceException("Invalid data.");
+			throw new ServiceDataException("Invalid data.");
 		}
 
 		// city and address are unnecessary for fulfilling
@@ -47,11 +48,11 @@ public class EditUser implements UserService {
 	}
 
 	@Override
-	public User authentication(String login, byte[] password) throws ServiceException {
+	public User authentication(String login, byte[] password) throws ServiceException, ServiceDataException {
 		
 		User user = null;
 		if (!Validator.authenticationValidator(login, password)) {
-			throw new ServiceException("Invalid login or password.");
+			throw new ServiceDataException("Invalid login or password.");
 		}
 		String passwordHash = HashMd5Coder.hashMd5(password);
 		Arrays.fill(password, (byte) 0);
@@ -67,9 +68,9 @@ public class EditUser implements UserService {
 	}
 
 	@Override
-	public User editUserPersonalInfo(UserDTO userBean) throws ServiceException {
+	public User editUserPersonalInfo(UserDTO userBean) throws ServiceException, ServiceDataException {
 		if(!Validator.userPersonalInfoValidator(userBean)){
-			throw new ServiceException("Invalid data.");
+			throw new ServiceDataException("Invalid data.");
 		}
 		User user = null;
 
@@ -87,9 +88,9 @@ public class EditUser implements UserService {
 	}
 
 	@Override
-	public boolean editUserAccountInfo(byte[] password, byte[] rpassword, int id) throws ServiceException {
+	public boolean editUserAccountInfo(byte[] password, byte[] rpassword, int id) throws ServiceException, ServiceDataException {
 		if(!Validator.userAccountInfoValidator(password, rpassword, id)){
-			throw new ServiceException("Invalid data.");
+			throw new ServiceDataException("Invalid data.");
 		}
 		String passwordHash = HashMd5Coder.hashMd5(password);
 		for(int i=0; i<password.length; i++){

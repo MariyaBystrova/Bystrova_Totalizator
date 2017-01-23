@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import by.tr.totalizator.command.Command;
 import by.tr.totalizator.entity.bean.User;
 import by.tr.totalizator.service.UserService;
+import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 
@@ -70,7 +71,7 @@ public class LoginCommand implements Command {
 			} else {
 				url = GO_TO_INDEX;
 			}
-		} catch (ServiceException e) {
+		} catch (ServiceException | ServiceDataException e) {
 			logger.error(e);
 			url = GO_TO_INDEX;
 		}
