@@ -10,6 +10,7 @@ import by.tr.totalizator.command.Command;
 import by.tr.totalizator.entity.bean.User;
 import by.tr.totalizator.entity.dto.MatchDTO;
 import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 
@@ -78,7 +79,7 @@ public class EditMatchResultCommand implements Command {
 
 				boolean result = totoService.editMatchResStatus(match);
 				request.getSession(false).setAttribute(RESULT_EDIT, result);
-			} catch (ServiceException e) {
+			} catch (ServiceException | ServiceDataException e) {
 				logger.error(e);
 				request.getSession(false).setAttribute(RESULT_EDIT, false);
 			}

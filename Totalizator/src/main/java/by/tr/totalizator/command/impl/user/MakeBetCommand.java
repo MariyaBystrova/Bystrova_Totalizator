@@ -13,6 +13,7 @@ import by.tr.totalizator.command.Command;
 import by.tr.totalizator.entity.bean.User;
 import by.tr.totalizator.entity.dto.RegisterBetDTO;
 import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 
@@ -81,7 +82,7 @@ public class MakeBetCommand implements Command {
 				boolean result = totoService.registerBet(bean);
 
 				request.getSession(false).setAttribute(RESULT_ADD, result);
-			} catch (ServiceException e) {
+			} catch (ServiceException | ServiceDataException e) {
 				logger.error(e);
 				request.getSession(false).setAttribute(RESULT_ADD, false);
 			}

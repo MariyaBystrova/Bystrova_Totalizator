@@ -13,6 +13,7 @@ import by.tr.totalizator.controller.PageName;
 import by.tr.totalizator.entity.bean.Match;
 import by.tr.totalizator.entity.bean.User;
 import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 import by.tr.totalizator.tag.bean.JSPListBean;
@@ -81,7 +82,7 @@ public class ShowCurrentCouponCommand implements Command {
 					request.setAttribute(MIN_BET_AMOUNT, minBetAmount);
 				}
 				page = PageName.USER_PAGE_TOTO;
-			} catch (ServiceException e) {
+			} catch (ServiceException | ServiceDataException e) {
 				logger.error(e);
 				page = PageName.ERROR_PAGE;
 			}

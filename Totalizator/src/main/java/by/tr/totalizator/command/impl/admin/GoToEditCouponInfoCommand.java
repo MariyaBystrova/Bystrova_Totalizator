@@ -11,6 +11,7 @@ import by.tr.totalizator.controller.PageName;
 import by.tr.totalizator.entity.bean.Coupon;
 import by.tr.totalizator.entity.bean.User;
 import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 
@@ -70,9 +71,9 @@ public class GoToEditCouponInfoCommand implements Command {
 				request.setAttribute(COUPON, coupon);
 
 				page = PageName.ADMIN_EDIT_COUPON_INFO;
-			} catch (ServiceException e) {
+			} catch (ServiceException | ServiceDataException e) {
 				logger.error(e);
-				page = PageName.ERROR_PAGE; // why error page??????
+				page = PageName.ERROR_PAGE;
 			}
 		} else {
 			page = PageName.INDEX_PAGE;

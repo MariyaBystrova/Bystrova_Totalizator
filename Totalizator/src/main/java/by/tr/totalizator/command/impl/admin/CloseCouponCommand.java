@@ -10,6 +10,7 @@ import by.tr.totalizator.command.Command;
 import by.tr.totalizator.entity.bean.User;
 import by.tr.totalizator.service.TotalizatorService;
 import by.tr.totalizator.service.exception.NotAllFinishedMatchesServiceException;
+import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 
@@ -70,7 +71,7 @@ public class CloseCouponCommand implements Command {
 			} catch (NotAllFinishedMatchesServiceException e) {
 				logger.error(e);
 				request.getSession(false).setAttribute(RESILT_NUMBET_FINISHED_MATCHES, false);
-			} catch (ServiceException e) {
+			} catch (ServiceException | ServiceDataException e) {
 				logger.error(e);
 				request.getSession(false).setAttribute(RESULT_CLOSE_COUPON, false);
 			}

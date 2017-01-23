@@ -14,15 +14,16 @@ import by.tr.totalizator.entity.dto.MatchDTO;
 import by.tr.totalizator.entity.dto.RegisterBetDTO;
 import by.tr.totalizator.service.TotalizatorService;
 import by.tr.totalizator.service.exception.NotAllFinishedMatchesServiceException;
+import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.impl.util.Validator;
 
 public class EditTotalizator implements TotalizatorService {
 
 	@Override
-	public List<Match> getCuponMatches(int cuponId) throws ServiceException {
+	public List<Match> getCuponMatches(int cuponId) throws ServiceException, ServiceDataException {
 		if (cuponId <= 0) {
-			throw new ServiceException("Invalid data: cupon_id must be greater then 0.");
+			throw new ServiceDataException("Invalid data: cupon_id must be greater then 0.");
 		}
 
 		DAOFactory factory = DAOFactory.getInstance();
@@ -44,7 +45,7 @@ public class EditTotalizator implements TotalizatorService {
 
 		List<Match> list = null;
 		try {
-			list = totoDAO.getCurrentCoupon();
+			list = totoDAO.getCurrentCouponMatches();
 		} catch (DAOException e) {
 			throw new ServiceException("Get coupon matches failed.", e);
 		}
@@ -52,9 +53,9 @@ public class EditTotalizator implements TotalizatorService {
 	}
 
 	@Override
-	public int getMinBetAmount(int couponId) throws ServiceException {
+	public int getMinBetAmount(int couponId) throws ServiceException, ServiceDataException {
 		if (couponId <= 0) {
-			throw new ServiceException("CouponId must be greater then 0.");
+			throw new ServiceDataException("CouponId must be greater then 0.");
 		}
 
 		DAOFactory factory = DAOFactory.getInstance();
@@ -82,7 +83,7 @@ public class EditTotalizator implements TotalizatorService {
 	}
 
 	@Override
-	public boolean registerCoupon(String startDate, String endDate, int minBetAmount) throws ServiceException {
+	public boolean registerCoupon(String startDate, String endDate, int minBetAmount) throws ServiceException, ServiceDataException {
 		Timestamp start;
 		Timestamp end;
 
@@ -93,7 +94,7 @@ public class EditTotalizator implements TotalizatorService {
 			start = Timestamp.valueOf(startDate);
 			end = Timestamp.valueOf(endDate);
 		} else {
-			throw new ServiceException("Invalid data.");
+			throw new ServiceDataException("Invalid data.");
 		}
 
 		DAOFactory factory = DAOFactory.getInstance();
@@ -112,12 +113,12 @@ public class EditTotalizator implements TotalizatorService {
 	}
 
 	@Override
-	public boolean registerBet(RegisterBetDTO bean) throws ServiceException {
+	public boolean registerBet(RegisterBetDTO bean) throws ServiceException, ServiceDataException {
 
 		boolean result = Validator.validateBet(bean.getMap(), bean.getAmount(), bean.getCreditCardNumber(),
 				bean.getUserId(), bean.getCouponId());
 		if (!result) {
-			throw new ServiceException("Invalid data.");
+			throw new ServiceDataException("Invalid data.");
 		}
 		DAOFactory factory = DAOFactory.getInstance();
 		TotalizatorOperationDAO totoDAO = factory.getTotalizatorOperationDAO();
@@ -131,7 +132,7 @@ public class EditTotalizator implements TotalizatorService {
 	}
 
 	@Override
-	public boolean registerMatch(MatchDTO match) throws ServiceException {
+	public boolean registerMatch(MatchDTO match) throws ServiceException, ServiceDataException {
 		Timestamp start;
 		Timestamp end;
 
@@ -142,7 +143,7 @@ public class EditTotalizator implements TotalizatorService {
 			start = Timestamp.valueOf(match.getStartDate());
 			end = Timestamp.valueOf(match.getEndDate());
 		} else {
-			throw new ServiceException("Invalid data.");
+			throw new ServiceDataException("Invalid data.");
 		}
 
 		Match matchEntity = new Match(match.getName(), match.getTeamOne(), match.getTeamTwo(), start, end);
@@ -165,7 +166,7 @@ public class EditTotalizator implements TotalizatorService {
 	}
 
 	@Override
-	public boolean editMatch(MatchDTO match) throws ServiceException {
+	public boolean editMatch(MatchDTO match) throws ServiceException, ServiceDataException {
 		Timestamp start;
 		Timestamp end;
 
@@ -176,7 +177,7 @@ public class EditTotalizator implements TotalizatorService {
 			start = Timestamp.valueOf(match.getStartDate());
 			end = Timestamp.valueOf(match.getEndDate());
 		} else {
-			throw new ServiceException("Invalid data.");
+			throw new ServiceDataException("Invalid data.");
 		}
 
 		Match matchEntity = new Match(match.getName(), match.getTeamOne(), match.getTeamTwo(), start, end);
@@ -211,7 +212,7 @@ public class EditTotalizator implements TotalizatorService {
 	}
 
 	@Override
-	public boolean editMatchResStatus(MatchDTO match) throws ServiceException {
+	public boolean editMatchResStatus(MatchDTO match) throws ServiceException, ServiceDataException {
 		Timestamp start;
 		Timestamp end;
 
@@ -222,7 +223,7 @@ public class EditTotalizator implements TotalizatorService {
 			start = Timestamp.valueOf(match.getStartDate());
 			end = Timestamp.valueOf(match.getEndDate());
 		} else {
-			throw new ServiceException("Invalid data.");
+			throw new ServiceDataException("Invalid data.");
 		}
 
 		Match matchEntity = new Match();
@@ -249,18 +250,11 @@ public class EditTotalizator implements TotalizatorService {
 		return result;
 	}
 
-	private String formatDate(String date) {
-		date = date.replace('T', ' ');
-		date = date.replaceAll("%3A", ":");
-		date = date.concat(":00");
-		return date;
-	}
-
 	@Override
-	public boolean closeCoupon(String couponId) throws NotAllFinishedMatchesServiceException, ServiceException {
+	public boolean closeCoupon(String couponId) throws NotAllFinishedMatchesServiceException, ServiceException, ServiceDataException {
 		boolean result = Validator.validateCouponId(couponId);
 		if (!result) {
-			throw new ServiceException("Invalid data.");
+			throw new ServiceDataException("Invalid data.");
 		}
 
 		DAOFactory factory = DAOFactory.getInstance();
@@ -291,9 +285,9 @@ public class EditTotalizator implements TotalizatorService {
 	}
 
 	@Override
-	public Coupon getCouponById(String id) throws ServiceException {
+	public Coupon getCouponById(String id) throws ServiceException, ServiceDataException {
 		if (!Validator.validateCouponId(id)) {
-			throw new ServiceException("Invalid data.");
+			throw new ServiceDataException("Invalid data.");
 		}
 		DAOFactory factory = DAOFactory.getInstance();
 		TotalizatorOperationDAO totoDAO = factory.getTotalizatorOperationDAO();
@@ -307,12 +301,12 @@ public class EditTotalizator implements TotalizatorService {
 	}
 
 	@Override
-	public boolean editCouponInfo(CouponDTO coupon) throws ServiceException {
+	public boolean editCouponInfo(CouponDTO coupon) throws ServiceException, ServiceDataException {
 		coupon.setStartDate(formatDate(coupon.getStartDate()));
 		coupon.setEndDate(formatDate(coupon.getEndDate()));
 
 		if (!Validator.validateCoupon(coupon)) {
-			throw new ServiceException("Invalid data.");
+			throw new ServiceDataException("Invalid data.");
 		}
 
 		DAOFactory factory = DAOFactory.getInstance();
@@ -321,7 +315,7 @@ public class EditTotalizator implements TotalizatorService {
 		Timestamp start = Timestamp.valueOf(coupon.getStartDate());
 		Timestamp end = Timestamp.valueOf(coupon.getEndDate());
 		if(start.after(end)){
-			throw new ServiceException("Invalid dates: start date is after end date");
+			throw new ServiceDataException("Invalid dates: start date is after end date");
 		}
 		try {
 			Coupon couponEntity = new Coupon();
@@ -339,5 +333,14 @@ public class EditTotalizator implements TotalizatorService {
 			throw new ServiceException("Edit coupon failed.", e);
 		}
 	}
+	
+
+	private String formatDate(String date) {
+		date = date.replace('T', ' ');
+		date = date.replaceAll("%3A", ":");
+		date = date.concat(":00");
+		return date;
+	}
+
 
 }
