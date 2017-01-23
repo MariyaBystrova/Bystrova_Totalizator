@@ -6,8 +6,21 @@ import by.tr.totalizator.dao.factory.DAOFactory;
 import by.tr.totalizator.service.SourceInitService;
 import by.tr.totalizator.service.exception.ServiceException;
 
+/**
+ * Represents an implementation of
+ * {@link by.tr.totalizator.service.SourceInitService}.
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class SourceInit implements SourceInitService {
 
+	/**
+	 * Provides initialization the data source service.
+	 * 
+	 * @throws ServiceException
+	 *             if some problems with initialization has occur.
+	 */
 	@Override
 	public void init() throws ServiceException {
 		DAOFactory factory = DAOFactory.getInstance();
@@ -19,6 +32,9 @@ public class SourceInit implements SourceInitService {
 		}
 	}
 
+	/**
+	 * Provides destruction of the connection to the data source.
+	 */
 	@Override
 	public void destroy() {
 		DAOFactory factory = DAOFactory.getInstance();

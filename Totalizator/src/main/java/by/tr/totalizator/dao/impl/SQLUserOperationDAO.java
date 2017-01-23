@@ -117,7 +117,7 @@ public class SQLUserOperationDAO implements UserOperationDAO {
 	 * Updates the record in the database, representing the particular user,
 	 * tagged by id.
 	 * 
-	 * @param id
+	 * @param userId
 	 *            a value of user's unique identifier, representing the user to
 	 *            be changed.
 	 * @param password
@@ -129,7 +129,7 @@ public class SQLUserOperationDAO implements UserOperationDAO {
 	 *             occur.
 	 */
 	@Override
-	public boolean editUserAccountInfo(int id, String password) throws DAOException {
+	public boolean editUserAccountInfo(int userId, String password) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		java.sql.Connection con = null;
 		PreparedStatement ps = null;
@@ -139,7 +139,7 @@ public class SQLUserOperationDAO implements UserOperationDAO {
 
 			ps = con.prepareStatement(StatementUser.UPDATE_USER_ACCOUNT_DATA);
 			ps.setString(1, password);
-			ps.setInt(2, id);
+			ps.setInt(2, userId);
 
 			if (ps.executeUpdate() != 0) {
 				return true;

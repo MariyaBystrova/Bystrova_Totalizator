@@ -21,7 +21,7 @@ public interface TotalizatorOperationDAO {
 	 * Returns all matches related to a coupon represented by it's id.
 	 * 
 	 * @param cuponId
-	 *            a value for coupons unique identifier.
+	 *            a value for coupon's unique identifier.
 	 * @return a {@link java.util.List} of
 	 *         {@link by.tr.totalizator.entity.bean.Match} related to coupon id.
 	 * @throws DAOException
@@ -46,7 +46,7 @@ public interface TotalizatorOperationDAO {
 	 * id.
 	 * 
 	 * @param couponId
-	 *            a value for coupons unique identifier.
+	 *            a value for coupon's unique identifier.
 	 * @return a value of minimal money amount.
 	 * @throws DAOException
 	 *             if some problems with data source or connection pool has
