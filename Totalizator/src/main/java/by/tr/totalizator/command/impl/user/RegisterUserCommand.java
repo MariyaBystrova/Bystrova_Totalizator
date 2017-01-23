@@ -12,6 +12,11 @@ import by.tr.totalizator.service.UserService;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 
+/**
+ * Implements {@link by.tr.totalizator.command.Command} to register a new user.
+ * 
+ * @author Mariya Bystrova
+ */
 public class RegisterUserCommand implements Command {
 	private final static Logger logger = LogManager.getLogger(RegisterUserCommand.class.getName());
 
@@ -29,9 +34,23 @@ public class RegisterUserCommand implements Command {
 	private final static String GO_TO_REGISTRATION_URL = "Controller?command=go-to-registration";
 	private final static String RESULT = "resultAdd";
 
+	/**
+	 * Provides the service for registration of a new user. Checks the session
+	 * and user's privileges to do this operation.
+	 * <p>
+	 * Forms the request object with the result of editing user's account
+	 * details operation. Sets <code>resultAdd</code> session variable as
+	 * <code>true</code> in case of the correct ending of this operation and as
+	 * <code>false</code> in case of failing this operation.
+	 * </p>
+	 * 
+	 * @return an URL of command to go to the registration page.
+	 * 
+	 * @see by.tr.totalizator.command.Command
+	 */
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		String page;
 
 		ServiceFactory sf = ServiceFactory.getInstance();
@@ -44,11 +63,9 @@ public class RegisterUserCommand implements Command {
 					request.getParameter(SEX), request.getParameter(EMAIL), request.getParameter(COUNTRY),
 					request.getParameter(CITY), request.getParameter(ADDRESS), USER, request.getParameter(LOGIN),
 					password, rpassword);
-
 			boolean result = userService.registerUser(user);
 
 			request.getSession(false).setAttribute(RESULT, result);
-
 		} catch (ServiceException e) {
 			logger.error(e);
 			request.getSession(false).setAttribute(RESULT, false);

@@ -42,6 +42,8 @@
 <fmt:message bundle="${loc}" key="local.edit_profile" var="edit_profile" />
 <fmt:message bundle="${loc}" key="local.account_settings" var="account_settings" />
 <fmt:message bundle="${loc}" key="local.change_password" var="change_password" />
+<fmt:message bundle="${loc}" key="local.edit_profile_success" var="edit_profile_success" />
+<fmt:message bundle="${loc}" key="local.edit_profile_fail" var="edit_profile_fail" />
 
 <title><c:out value="${edit_profile}" /></title>
 
@@ -73,12 +75,12 @@
 			scope="session" />
 		<div class="container">
 			<c:if
-				test="${not empty sessionScope.resultAdd and sessionScope.resultAdd}">
-				<c:out value="Edit info success" />
+				test="${not empty sessionScope.resultEdit and sessionScope.resultEdit}">
+				<c:out value="${edit_profile_success}" />
 			</c:if>
 			<c:if
-				test="${not empty sessionScope.resultAdd and not sessionScope.resultAdd }">
-				<c:out value="edit info failed" />
+				test="${not empty sessionScope.resultEdit and not sessionScope.resultEdit }">
+				<c:out value="${edit_profile_fail}" />
 			</c:if>
 		</div>
 		<c:if test="${requestScope.operation eq 'personal-data' }">

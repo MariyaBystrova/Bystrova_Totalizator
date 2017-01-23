@@ -19,7 +19,7 @@ import by.tr.totalizator.tag.bean.JSPListBean;
 
 /**
  * Implements {@link by.tr.totalizator.command.Command} for a command to go to
- * the page where is shown all matches details for the specified coupon.
+ * the page where all matches details are shown for the specified coupon.
  * 
  * @author Mariya Bystrova
  */

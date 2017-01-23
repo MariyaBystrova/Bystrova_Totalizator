@@ -20,6 +20,12 @@ import by.tr.totalizator.service.factory.ServiceFactory;
 import by.tr.totalizator.tag.bean.JSPListBean;
 import by.tr.totalizator.tag.bean.JspMapBean;
 
+/**
+ * Implements {@link by.tr.totalizator.command.Command} for a command to go to
+ * the page for making a bet. Available for "user".
+ * 
+ * @author Mariya Bystrova
+ */
 public class GoToMakeBetCommand implements Command {
 	private final static Logger logger = LogManager.getLogger(GoToMakeBetCommand.class.getName());
 	private final static String CURRENT_URL_ATTR = "currentUrl";
@@ -33,12 +39,33 @@ public class GoToMakeBetCommand implements Command {
 	private final static String AMP = "&";
 	private final static String EQ = "=";
 
+	/**
+	 * Provides the service of forming the page to go to. Checks the session and
+	 * user's privileges to go to this page.
+	 * <p>
+	 * Forms the request object with the list of matches for the current coupon,
+	 * the Map of chosen results and entered money amount.
+	 * </p>
+	 * 
+	 * @return {@link by.tr.totalizator.controller.PageName.USER_PAGE_MAKE_BET},
+	 *         if the role of authorized person is "user" or
+	 *         {@link by.tr.totalizator.controller.PageName.INDEX_PAGE}, if
+	 *         either the session time has expired or an authorized user's role
+	 *         is not "user".
+	 *         <p>
+	 *         Might return
+	 *         {@link by.tr.totalizator.controller.PageName.ERROR_PAGE} in case
+	 *         of {@link by.tr.totalizator.service.exception.ServiceException}.
+	 *         </p>
+	 * 
+	 * @see by.tr.totalizator.command.Command
+	 */
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		if (request.getSession(false) == null) {
 			return PageName.INDEX_PAGE;
 		}
-		
+
 		String url = CURRENT_URL;
 		for (int i = 1; i <= 15; i++) {
 			url = url.concat(AMP + RESULT + new Integer(i).toString() + EQ
@@ -46,16 +73,14 @@ public class GoToMakeBetCommand implements Command {
 		}
 		url = url.concat(AMP + AMOUNT + EQ + request.getParameter(AMOUNT));
 		request.getSession(false).setAttribute(CURRENT_URL_ATTR, url);
-		
-		
+
 		String page;
 		User user = (User) request.getSession(false).getAttribute(USER);
 		if (user != null && user.getRole().equals(USER)) {
-			
+
 			Map<String, String> map = new HashMap<String, String>();
 			for (int i = 1; i <= 15; i++) {
-				map.put(RESULT + new Integer(i).toString(),
-						request.getParameter(RESULT + new Integer(i).toString()));
+				map.put(RESULT + new Integer(i).toString(), request.getParameter(RESULT + new Integer(i).toString()));
 			}
 
 			JspMapBean mapBean = new JspMapBean();
@@ -76,7 +101,7 @@ public class GoToMakeBetCommand implements Command {
 				logger.error(e);
 				page = PageName.ERROR_PAGE;
 			}
-			
+
 			page = PageName.USER_PAGE_MAKE_BET;
 		} else {
 			page = PageName.INDEX_PAGE;
