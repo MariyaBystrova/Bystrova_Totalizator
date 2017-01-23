@@ -2,6 +2,12 @@ package by.tr.totalizator.entity.dto;
 
 import java.io.Serializable;
 
+/**
+ * Represents Data Transfer Object (DTO) for coupon.
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class CouponDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 

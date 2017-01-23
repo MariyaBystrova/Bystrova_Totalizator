@@ -1,8 +1,9 @@
 package by.tr.totalizator.entity.bean;
 
 import java.io.Serializable;
+
 /**
- * This class represents users.
+ * Represents users.
  * 
  * @author Mariya Bystrova
  *
@@ -26,13 +27,21 @@ public class User implements Serializable, Cloneable {
 
 	/**
 	 * Creates a new User object.
-	 * @param fName first name
-	 * @param lName last name
-	 * @param sex 
+	 * 
+	 * @param fName
+	 *            first name
+	 * @param lName
+	 *            last name
+	 * @param sex
+	 *            gender
 	 * @param email
+	 *            an email address
 	 * @param country
+	 *            country
 	 * @param city
-	 * @param address street, house, flat
+	 *            city
+	 * @param address
+	 *            street, house, flat
 	 */
 	public User(String fName, String lName, String sex, String email, String country, String city, String address) {
 		this.firstName = fName;
@@ -43,17 +52,28 @@ public class User implements Serializable, Cloneable {
 		this.city = city;
 		this.address = address;
 	}
+
 	/**
-	 * Creates a new User objecct.
-	 * @param fName first name
-	 * @param lName last name
+	 * Creates a new User object.
+	 * 
+	 * @param fName
+	 *            first name
+	 * @param lName
+	 *            last name
 	 * @param sex
+	 *            gender
 	 * @param email
+	 *            an email address
 	 * @param country
+	 *            country
 	 * @param city
-	 * @param address street, house, flat
+	 *            city
+	 * @param address
+	 *            street, house, flat
 	 * @param login
-	 * @param role ("user", "admin")
+	 *            a login to authorize the system
+	 * @param role
+	 *            a role in the system ("user", "admin")
 	 */
 	public User(String fName, String lName, String sex, String email, String country, String city, String address,
 			String login, String role) {
@@ -61,25 +81,37 @@ public class User implements Serializable, Cloneable {
 		this.login = login;
 		this.role = role;
 	}
+
 	/**
+	 * Creates a new User object.
 	 * 
-	 * @param id unique identifier
-	 * @param fName first name
-	 * @param lName last name
+	 * @param id
+	 *            unique identifier
+	 * @param fName
+	 *            first name
+	 * @param lName
+	 *            last name
 	 * @param sex
+	 *            gender
 	 * @param email
+	 *            email address
 	 * @param country
+	 *            country
 	 * @param city
-	 * @param address street, house, flat
+	 *            city
+	 * @param address
+	 *            street, house, flat
 	 * @param login
-	 * @param role ("user", "admin")
+	 *            a login to authorize the system
+	 * @param role
+	 *            a role in the system ("user", "admin")
 	 */
 	public User(int id, String fName, String lName, String sex, String email, String country, String city,
 			String address, String login, String role) {
 		this(fName, lName, sex, email, country, city, address, login, role);
 		this.id = id;
 	}
-	
+
 	@Override
 	public User clone() {
 		User user = new User();

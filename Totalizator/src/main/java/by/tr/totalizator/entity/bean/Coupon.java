@@ -4,20 +4,46 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
+/**
+ * Represents coupons.
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class Coupon implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private int id;
 	private Timestamp startDate;
 	private Timestamp endDate;
 	private int minBetAmount;
 	private int pull;
 	private int jackpot;
+	/**
+	 * Available values: 1 - open - process of gathering bets; 3 - closed - all
+	 * games results are set and people has there results; 4 - cancelled - 5 or
+	 * more matches cancelled; 6 - free - in a forming process.
+	 * 
+	 */
 	private int status;
 
 	public Coupon() {
 	}
 
+	/**
+	 * Creates a new Coupon object.
+	 * 
+	 * @param startDate
+	 *            coupon's start date and time
+	 * @param endDate
+	 *            coupon's planning end date and time
+	 * @param minBetAmount
+	 *            coupon's minimal bet money amount
+	 * @param pull
+	 *            coupon's pool
+	 * @param jackpot
+	 *            coupon's jackPot
+	 */
 	public Coupon(Timestamp startDate, Timestamp endDate, int minBetAmount, int pull, int jackpot) {
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -26,8 +52,25 @@ public class Coupon implements Serializable {
 		this.jackpot = jackpot;
 	}
 
-	public Coupon(int id, Timestamp startDate, Timestamp endDate, int minBetAmount, int pull, int jackpot,
-			int status) {
+	/**
+	 * 
+	 * @param id
+	 *            coupon's unique identifier
+	 * @param startDate
+	 *            coupon's start date and time
+	 * @param endDate
+	 *            coupon's planning end date and time
+	 * @param minBetAmount
+	 *            coupon's minimal bet money amount
+	 * @param pull
+	 *            coupon's pool
+	 * @param jackpot
+	 *            coupon's jackPot
+	 * @param status
+	 *            coupon's status
+	 * @see {@link by.tr.totalizator.entity.bean.Coupon.status}
+	 */
+	public Coupon(int id, Timestamp startDate, Timestamp endDate, int minBetAmount, int pull, int jackpot, int status) {
 		this(startDate, endDate, minBetAmount, pull, jackpot);
 		this.id = id;
 		this.status = status;
@@ -97,16 +140,26 @@ public class Coupon implements Serializable {
 		return true;
 	}
 
-	public String getStartDateString(){
+	/**
+	 * Returns start date and time in "yyyy-MM-dd'T'HH:mm" format.
+	 * 
+	 * @return start date and time in "yyyy-MM-dd'T'HH:mm" format.
+	 */
+	public String getStartDateString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		return sdf.format(startDate);
 	}
-	
-	public String getEndDateString(){
+
+	/**
+	 * Returns end date and time in "yyyy-MM-dd'T'HH:mm" format.
+	 * 
+	 * @return end date and time in "yyyy-MM-dd'T'HH:mm" format.
+	 */
+	public String getEndDateString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		return sdf.format(endDate);
 	}
-	
+
 	public int getId() {
 		return id;
 	}

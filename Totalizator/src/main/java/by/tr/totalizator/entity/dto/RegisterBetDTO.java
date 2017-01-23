@@ -3,6 +3,12 @@ package by.tr.totalizator.entity.dto;
 import java.io.Serializable;
 import java.util.Map;
 
+/**
+ * Represents Data Transfer Object (DTO) for bet registration.
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class RegisterBetDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 

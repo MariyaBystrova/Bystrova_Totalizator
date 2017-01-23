@@ -2,6 +2,12 @@ package by.tr.totalizator.entity.dto;
 
 import java.io.Serializable;
 
+/**
+ * Represents Data Transfer Object (DTO) for match.
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class MatchDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

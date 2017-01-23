@@ -3,6 +3,12 @@ package by.tr.totalizator.entity.dto;
 import java.io.Serializable;
 import java.util.Arrays;
 
+/**
+ * Represents Data Transfer Object (DTO) for user.
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class UserDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 

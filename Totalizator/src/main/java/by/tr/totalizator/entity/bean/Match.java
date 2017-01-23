@@ -3,9 +3,15 @@ package by.tr.totalizator.entity.bean;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+/**
+ * Represents matches.
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class Match implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private int id;
 	private String name;
 	private int couponId;
@@ -13,12 +19,34 @@ public class Match implements Serializable {
 	private String teamTwo;
 	private Timestamp startDate;
 	private Timestamp endDate;
+	/**
+	 * Available values: 2 - in progress - match did not finish; 4 - cancelled -
+	 * match is cancelled; 5 - finished - match is finished and has the result.
+	 */
 	private int status;
+	/**
+	 * Available values: "1" - first team win; "2" = second team win or "x" -
+	 * draw.
+	 */
 	private String result;
 
 	public Match() {
 	}
-	
+
+	/**
+	 * Creates a new Match object.
+	 * 
+	 * @param name
+	 *            match's name
+	 * @param teamOne
+	 *            first team name
+	 * @param teamTwo
+	 *            second team name
+	 * @param startDate
+	 *            match's start date and time
+	 * @param endDate
+	 *            planning match's end date and time
+	 */
 	public Match(String name, String teamOne, String teamTwo, Timestamp startDate, Timestamp endDate) {
 		this.name = name;
 		this.teamOne = teamOne;
@@ -27,22 +55,56 @@ public class Match implements Serializable {
 		this.endDate = endDate;
 	}
 
+	/**
+	 * Creates a new Match object.
+	 * 
+	 * @param name
+	 *            match's name
+	 * @param couponId
+	 *            a value of the unique identifier of the coupon
+	 * @param teamOne
+	 *            first team name
+	 * @param teamTwo
+	 *            second team name
+	 * @param startDate
+	 *            match's start date and time
+	 * @param endDate
+	 *            planning match's end date and time
+	 */
 	public Match(String name, int couponId, String teamOne, String teamTwo, Timestamp startDate, Timestamp endDate) {
 		this(name, teamOne, teamTwo, startDate, endDate);
 		this.couponId = couponId;
 	}
 
-	public Match(int id, String name, int couponId, String teamOne, String teamTwo, Timestamp startDate, Timestamp endDate) {
+	/**
+	 * Creates a new Match object.
+	 * 
+	 * @param id
+	 *            match's unique identifier
+	 * @param name
+	 *            match's name
+	 * @param couponId
+	 *            a value of the unique identifier of the coupon
+	 * @param teamOne
+	 *            first team name
+	 * @param teamTwo
+	 *            second team name
+	 * @param startDate
+	 *            match's start date and time
+	 * @param endDate
+	 *            planning match's end date and time
+	 */
+	public Match(int id, String name, int couponId, String teamOne, String teamTwo, Timestamp startDate,
+			Timestamp endDate) {
 		this(name, couponId, teamOne, teamTwo, startDate, endDate);
 		this.id = id;
 	}
-	
-	
 
 	@Override
 	public String toString() {
 		return "Match [id=" + id + ", name=" + name + ", couponId=" + couponId + ", teamOne=" + teamOne + ", teamTwo="
-				+ teamTwo + ", startDate=" + startDate + ", endDate=" + endDate + ", status=" + status + ", result=" + result + "]";
+				+ teamTwo + ", startDate=" + startDate + ", endDate=" + endDate + ", status=" + status + ", result="
+				+ result + "]";
 	}
 
 	@Override
