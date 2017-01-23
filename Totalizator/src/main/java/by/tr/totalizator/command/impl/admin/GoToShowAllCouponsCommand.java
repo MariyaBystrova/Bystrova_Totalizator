@@ -17,6 +17,12 @@ import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 import by.tr.totalizator.tag.bean.JSPListBean;
 
+/**
+ * Implements {@link by.tr.totalizator.command.Command} for a command to go to
+ * the page with the list of all coupons.
+ * 
+ * @author Mariya Bystrova
+ */
 public class GoToShowAllCouponsCommand implements Command {
 	private final static Logger logger = LogManager.getLogger(GoToShowAllCouponsCommand.class.getName());
 	private final static String CURRENT_URL = "currentUrl";
@@ -25,17 +31,36 @@ public class GoToShowAllCouponsCommand implements Command {
 	private final static String ADMIN = "admin";
 	private final static String COUPON_LIST = "couponList";
 
+	/**
+	 * Provides the service of forming the page with all coupons to go to.
+	 * Checks the session and user's privileges to go to this page. Forms the
+	 * request object with all coupons list.
+	 * 
+	 * @return {@link by.tr.totalizator.controller.PageName.ADMIN_SHOW_ALL_COUPONS_PAGE},
+	 *         if the role of authorized person is "admin" and the correct
+	 *         ending of getting the coupons list or
+	 *         {@link by.tr.totalizator.controller.PageName.INDEX_PAGE}, if
+	 *         either the session time has expired or an authorized user's role
+	 *         is not "admin".
+	 *         <p>
+	 * 		Might return
+	 *         {@link by.tr.totalizator.controller.PageName.ERROR_PAGE} in case
+	 *         of {@link by.tr.totalizator.service.exception.ServiceException}.
+	 *         </p>
+	 * 
+	 * @see by.tr.totalizator.command.Command
+	 */
 	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response){
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		if (request.getSession(false) == null) {
 			return PageName.INDEX_PAGE;
 		}
-		
+
 		request.getSession(false).setAttribute(CURRENT_URL, URL);
 
 		String page;
 		User user = (User) request.getSession(false).getAttribute(USER);
-		if (user != null && user.getRole().equals(ADMIN)) { 
+		if (user != null && user.getRole().equals(ADMIN)) {
 			ServiceFactory factory = ServiceFactory.getInstance();
 			TotalizatorService totoService = factory.getTotaliztorService();
 
@@ -43,7 +68,7 @@ public class GoToShowAllCouponsCommand implements Command {
 				List<Coupon> list = totoService.getAllCoupons();
 				JSPListBean jsp = new JSPListBean(list);
 				request.setAttribute(COUPON_LIST, jsp);
-				
+
 				page = PageName.ADMIN_SHOW_ALL_COUPONS_PAGE;
 			} catch (ServiceException e) {
 				logger.error(e);

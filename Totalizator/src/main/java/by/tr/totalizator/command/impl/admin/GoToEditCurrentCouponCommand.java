@@ -17,6 +17,13 @@ import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 import by.tr.totalizator.tag.bean.JSPListBean;
 
+/**
+ * Implements {@link by.tr.totalizator.command.Command} for a command to go to
+ * edit coupons with status "open" or "free". Forms the request object with the
+ * list of possible coupons.
+ * 
+ * @author Mariya Bystrova
+ */
 public class GoToEditCurrentCouponCommand implements Command {
 	private final static Logger logger = LogManager.getLogger(GoToEditCurrentCouponCommand.class.getName());
 
@@ -26,7 +33,25 @@ public class GoToEditCurrentCouponCommand implements Command {
 	private final static String USER = "user";
 	private final static String ADMIN = "admin";
 
-	//get all coupons with status = open(1) or free(6)
+	/**
+	 * Provides the service of forming the page to go to. Checks the session and
+	 * user's privileges to go to this page. Forms the request object with the
+	 * specific coupons list (coupons with status "open"(1) or "free"(6)).
+	 * 
+	 * @return {@link by.tr.totalizator.controller.PageName.ADMIN_EDIT_CURRENT_COUPON},
+	 *         if the role of authorized person is "admin" and the correct
+	 *         ending of getting the coupons list or
+	 *         {@link by.tr.totalizator.controller.PageName.INDEX_PAGE}, if
+	 *         either the session time has expired or an authorized user's role
+	 *         is not "admin".
+	 *         <p>
+	 * 		Might return
+	 *         {@link by.tr.totalizator.controller.PageName.ERROR_PAGE} in case
+	 *         of {@link by.tr.totalizator.service.exception.ServiceException}.
+	 *         </p>
+	 * 
+	 * @see by.tr.totalizator.command.Command
+	 */
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		if (request.getSession(false) == null) {
@@ -46,7 +71,7 @@ public class GoToEditCurrentCouponCommand implements Command {
 				List<Coupon> list = totoService.getCurrentCoupons();
 				JSPListBean jsp = new JSPListBean(list);
 				request.setAttribute(COUPONS, jsp);
-				
+
 				page = PageName.ADMIN_EDIT_CURRENT_COUPON;
 			} catch (ServiceException e) {
 				logger.error(e);

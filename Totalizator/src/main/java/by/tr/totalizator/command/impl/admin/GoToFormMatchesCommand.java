@@ -17,6 +17,14 @@ import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 import by.tr.totalizator.tag.bean.JSPListBean;
 
+/**
+ * Implements {@link by.tr.totalizator.command.Command} for a command to go to
+ * choose coupon to fulfill or edit matches to it. Forms the request object with
+ * the list of possible coupons. This list forms among coupons with status
+ * "free"(6) and start date of which is not after the current time.
+ * 
+ * @author Mariya Bystrova
+ */
 public class GoToFormMatchesCommand implements Command {
 	private final static Logger logger = LogManager.getLogger(GoToFormMatchesCommand.class.getName());
 
@@ -26,16 +34,36 @@ public class GoToFormMatchesCommand implements Command {
 	private final static String USER = "user";
 	private final static String ADMIN = "admin";
 
+	/**
+	 * Provides the service of forming the page to go to. Checks the session and
+	 * user's privileges to go to this page. Forms the request object with the
+	 * specific coupons list (coupons with status "free"(6) and start date is
+	 * not after the current time).
+	 * 
+	 * @return {@link by.tr.totalizator.controller.PageName.ADMIN_FORM_MATCHES_MENU_PAGE},
+	 *         if the role of authorized person is "admin" and the correct
+	 *         ending of getting the coupons list or
+	 *         {@link by.tr.totalizator.controller.PageName.INDEX_PAGE}, if
+	 *         either the session time has expired or an authorized user's role
+	 *         is not "admin".
+	 *         <p>
+	 *         Might return
+	 *         {@link by.tr.totalizator.controller.PageName.ERROR_PAGE} in case
+	 *         of {@link by.tr.totalizator.service.exception.ServiceException}.
+	 *         </p>
+	 * 
+	 * @see by.tr.totalizator.command.Command
+	 */
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		if (request.getSession(false) == null) {
 			return PageName.INDEX_PAGE;
 		}
-		
+
 		request.getSession(false).setAttribute(CURRENT_URL, URL);
 		String page = null;
-		
+
 		User user = (User) request.getSession(false).getAttribute(USER);
 		if (user != null && user.getRole().equals(ADMIN)) {
 
@@ -45,7 +73,6 @@ public class GoToFormMatchesCommand implements Command {
 			try {
 				List<Coupon> list = totoService.getEmptyValidCoupons();
 				JSPListBean jsp = new JSPListBean(list);
-//				request.getSession(false).setAttribute(COUPONS, jsp);
 				request.setAttribute(COUPONS, jsp);
 				page = PageName.ADMIN_FORM_MATCHES_MENU_PAGE;
 			} catch (ServiceException e) {

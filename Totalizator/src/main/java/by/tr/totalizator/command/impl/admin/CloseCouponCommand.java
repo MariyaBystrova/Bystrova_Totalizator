@@ -13,11 +13,15 @@ import by.tr.totalizator.service.exception.NotAllFinishedMatchesServiceException
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 
+/**
+ * Implements {@link by.tr.totalizator.command.Command} to close the chosen
+ * coupon. Available for admin.
+ * 
+ * @author Mariya Bystrova
+ */
 public class CloseCouponCommand implements Command {
 	private final static Logger logger = LogManager.getLogger(CloseCouponCommand.class.getName());
-
 	private final static String COUPON_ID = "coupon-id";
-
 	private final static String URL = "Controller?command=admin-go-to-edit-current-coupon&coupon-id=";
 	private final static String GO_TO_INDEX = "index.jsp";
 	private final static String USER = "user";
@@ -25,6 +29,27 @@ public class CloseCouponCommand implements Command {
 	private final static String RESULT_CLOSE_COUPON = "resultCloseCoupon";
 	private final static String RESILT_NUMBET_FINISHED_MATCHES = "resultFinishedMatches";
 
+	/**
+	 * Provides the closing coupon service that is available for admin. Checks
+	 * the session and user's privileges to do this operation.
+	 * <p>
+	 * Forms the request object with the result of closing coupon operation.
+	 * Sets <code>resultCloseCoupon</code> session variable as <code>true</code>
+	 * in case of the correct ending of this operation and as <code>false</code>
+	 * in case of failing this operation.
+	 * </p>
+	 * <p>
+	 * Sets <code>resultFinishedMatches</code> session variable as
+	 * <code>false</code> if not all matches in this coupon has the results.
+	 * </p>
+	 * 
+	 * @return an URL of command to go to the page for editing coupons with
+	 *         status "open" or "free", if the role of authorized person is
+	 *         "admin", or an index.jsp page, if the session time has expired or
+	 *         the authorized user's role is not "admin".
+	 * 
+	 * @see by.tr.totalizator.command.Command
+	 */
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		if (request.getSession(false) == null) {

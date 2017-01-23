@@ -17,6 +17,12 @@ import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 import by.tr.totalizator.tag.bean.JSPListBean;
 
+/**
+ * Implements {@link by.tr.totalizator.command.Command} for a command to go to
+ * the page where is shown all matches details for the specified coupon.
+ * 
+ * @author Mariya Bystrova
+ */
 public class ShowCouponMatchesCommand implements Command {
 	private final static Logger logger = LogManager.getLogger(ShowCouponMatchesCommand.class.getName());
 
@@ -33,15 +39,45 @@ public class ShowCouponMatchesCommand implements Command {
 	private final static String PAGE_FORM_MATCHES = "admin-form-matches";
 	private final static String PAGE_EDIT_CURRENT_COUPON = "admin-edit-current-coupon";
 
+	/**
+	 * Provides the service of forming the page to go to. Checks the session and
+	 * user's privileges to go to this page. Forms the request object with the
+	 * specific coupon's matches.
+	 * <p>
+	 * The page might be either
+	 * {@link by.tr.totalizator.controller.PageName.ADMIN_FORM_MATCHES_MENU_PAGE}
+	 * or
+	 * {@link by.tr.totalizator.controller.PageName.ADMIN_EDIT_CURRENT_COUPON}
+	 * </p>
+	 * 
+	 * @return one of the following pages
+	 *         ({@link by.tr.totalizator.controller.PageName.ADMIN_FORM_MATCHES_MENU_PAGE}
+	 *         or
+	 *         {@link by.tr.totalizator.controller.PageName.ADMIN_EDIT_CURRENT_COUPON}),
+	 *         if the role of authorized person is "admin" and the correct
+	 *         ending of getting coupon's matches. The page is choosing by the
+	 *         <code>page</code> request variable.
+	 *         <p>
+	 *         Returns {@link by.tr.totalizator.controller.PageName.INDEX_PAGE},
+	 *         if either the session time has expired or an authorized user's
+	 *         role is not "admin".
+	 *         </p>
+	 *         <p>
+	 *         Might return
+	 *         {@link by.tr.totalizator.controller.PageName.ERROR_PAGE} in case
+	 *         of {@link by.tr.totalizator.service.exception.ServiceException}.
+	 *         </p>
+	 * 
+	 * @see by.tr.totalizator.command.Command
+	 */
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		if (request.getSession(false) == null) {
 			return PageName.INDEX_PAGE;
 		}
-		
-		request.getSession(false).setAttribute(CURRENT_URL, URL + request.getParameter(COUPON_ID) 
-												+ AMP + PAGE + EQUALS +  request.getParameter(PAGE) 
-												+ AMP + COUPON + EQUALS + request.getParameter(COUPON_ID));
+
+		request.getSession(false).setAttribute(CURRENT_URL, URL + request.getParameter(COUPON_ID) + AMP + PAGE + EQUALS
+				+ request.getParameter(PAGE) + AMP + COUPON + EQUALS + request.getParameter(COUPON_ID));
 
 		int couponId = 0;
 		String page = null;
@@ -59,19 +95,24 @@ public class ShowCouponMatchesCommand implements Command {
 				if (list != null) {
 					JSPListBean jsp = new JSPListBean(list);
 					request.setAttribute(LIST, jsp);
-					
 					request.setAttribute(COUPON, couponId);
 				}
 			} catch (ServiceException e) {
 				logger.error(e);
 				page = PageName.ERROR_PAGE;
 			}
-			
-			switch(request.getParameter(PAGE)){
-			case PAGE_FORM_MATCHES: {page = PageName.ADMIN_FORM_MATCHES_MENU_PAGE; break;}
-			case PAGE_EDIT_CURRENT_COUPON: {page = PageName.ADMIN_EDIT_CURRENT_COUPON; break;}
+
+			switch (request.getParameter(PAGE)) {
+			case PAGE_FORM_MATCHES: {
+				page = PageName.ADMIN_FORM_MATCHES_MENU_PAGE;
+				break;
 			}
-			
+			case PAGE_EDIT_CURRENT_COUPON: {
+				page = PageName.ADMIN_EDIT_CURRENT_COUPON;
+				break;
+			}
+			}
+
 		} else {
 			page = PageName.INDEX_PAGE;
 		}
