@@ -42,14 +42,14 @@ public class ShowCurrentCouponCommand implements Command {
 	 * coupon's unique identifier and minimal bet money amount.
 	 * </p>
 	 * 
-	 * @return {@link by.tr.totalizator.controller.PageName.USER_PAGE_TOTO}, if
+	 * @return {@link by.tr.totalizator.controller.PageName#USER_PAGE_TOTO}, if
 	 *         the role of authorized person is "user" or
-	 *         {@link by.tr.totalizator.controller.PageName.INDEX_PAGE}, if
+	 *         {@link by.tr.totalizator.controller.PageName#INDEX_PAGE}, if
 	 *         either the session time has expired or an authorized user's role
 	 *         is not "user".
 	 *         <p>
 	 *         Might return
-	 *         {@link by.tr.totalizator.controller.PageName.ERROR_PAGE} in case
+	 *         {@link by.tr.totalizator.controller.PageName#ERROR_PAGE} in case
 	 *         of {@link by.tr.totalizator.service.exception.ServiceException}.
 	 *         </p>
 	 * 

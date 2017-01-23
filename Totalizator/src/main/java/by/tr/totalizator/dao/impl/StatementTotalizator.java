@@ -1,5 +1,12 @@
 package by.tr.totalizator.dao.impl;
 
+/**
+ * Represents options of queries to the database working with 
+ * totalizator's system.
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public final class StatementTotalizator {
 
 	private StatementTotalizator(){

@@ -47,14 +47,14 @@ public class GoToMakeBetCommand implements Command {
 	 * the Map of chosen results and entered money amount.
 	 * </p>
 	 * 
-	 * @return {@link by.tr.totalizator.controller.PageName.USER_PAGE_MAKE_BET},
+	 * @return {@link by.tr.totalizator.controller.PageName#USER_PAGE_MAKE_BET},
 	 *         if the role of authorized person is "user" or
-	 *         {@link by.tr.totalizator.controller.PageName.INDEX_PAGE}, if
+	 *         {@link by.tr.totalizator.controller.PageName#INDEX_PAGE}, if
 	 *         either the session time has expired or an authorized user's role
 	 *         is not "user".
 	 *         <p>
 	 *         Might return
-	 *         {@link by.tr.totalizator.controller.PageName.ERROR_PAGE} in case
+	 *         {@link by.tr.totalizator.controller.PageName#ERROR_PAGE} in case
 	 *         of {@link by.tr.totalizator.service.exception.ServiceException}.
 	 *         </p>
 	 * 

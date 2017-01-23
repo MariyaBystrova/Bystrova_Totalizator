@@ -7,13 +7,19 @@ import by.tr.totalizator.service.SourceInitService;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 
+/**
+ * Represents the command which provides the source initialization, done by singleton.
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class SourceInitCommand {
 	private final static Logger logger = LogManager.getLogger(SourceInitCommand.class.getName());
 	private static final SourceInitCommand instance = new SourceInitCommand();
-	
-	private SourceInitCommand(){
+
+	private SourceInitCommand() {
 	}
-	
+
 	public static SourceInitCommand getInstance() {
 		return instance;
 	}
@@ -26,7 +32,7 @@ public class SourceInitCommand {
 			logger.info("Source was initialized.");
 		} catch (ServiceException e) {
 			logger.error(e);
-			//throw exception (-> error source init page) 
+			// throw exception (-> error source init page)
 		}
 	}
 

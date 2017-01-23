@@ -19,7 +19,7 @@ public class GoToRegistrationCommand implements Command {
 	/**
 	 * Returns a registration page.
 	 * 
-	 * @return {@link by.tr.totalizator.controller.PageName.REGISTRATION_PAGE}.
+	 * @return {@link by.tr.totalizator.controller.PageName#REGISTRATION_PAGE}.
 	 * 
 	 * @see by.tr.totalizator.command.Command
 	 */

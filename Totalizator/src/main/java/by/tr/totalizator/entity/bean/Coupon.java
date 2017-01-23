@@ -68,7 +68,6 @@ public class Coupon implements Serializable {
 	 *            coupon's jackPot
 	 * @param status
 	 *            coupon's status
-	 * @see {@link by.tr.totalizator.entity.bean.Coupon.status}
 	 */
 	public Coupon(int id, Timestamp startDate, Timestamp endDate, int minBetAmount, int pull, int jackpot, int status) {
 		this(startDate, endDate, minBetAmount, pull, jackpot);

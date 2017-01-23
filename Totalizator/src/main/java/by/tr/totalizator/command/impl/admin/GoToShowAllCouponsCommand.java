@@ -36,15 +36,15 @@ public class GoToShowAllCouponsCommand implements Command {
 	 * Checks the session and user's privileges to go to this page. Forms the
 	 * request object with all coupons list.
 	 * 
-	 * @return {@link by.tr.totalizator.controller.PageName.ADMIN_SHOW_ALL_COUPONS_PAGE},
+	 * @return {@link by.tr.totalizator.controller.PageName#ADMIN_SHOW_ALL_COUPONS_PAGE},
 	 *         if the role of authorized person is "admin" and the correct
 	 *         ending of getting the coupons list or
-	 *         {@link by.tr.totalizator.controller.PageName.INDEX_PAGE}, if
+	 *         {@link by.tr.totalizator.controller.PageName#INDEX_PAGE}, if
 	 *         either the session time has expired or an authorized user's role
 	 *         is not "admin".
 	 *         <p>
 	 * 		Might return
-	 *         {@link by.tr.totalizator.controller.PageName.ERROR_PAGE} in case
+	 *         {@link by.tr.totalizator.controller.PageName#ERROR_PAGE} in case
 	 *         of {@link by.tr.totalizator.service.exception.ServiceException}.
 	 *         </p>
 	 * 

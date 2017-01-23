@@ -10,8 +10,27 @@ import by.tr.totalizator.dao.connectionpool.exception.ConnectionPoolException;
 import by.tr.totalizator.dao.exception.DAOException;
 import by.tr.totalizator.entity.bean.User;
 
+/**
+ * Represents an implementation of {@link by.tr.totalizator.dao.UserOperationDAO
+ * with a proper realization of all methods for the database.
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class SQLUserOperationDAO implements UserOperationDAO {
-
+	/**
+	 * Inserts a new record, representing a new user, into the database.
+	 * 
+	 * @param user
+	 *            a value of user object to be created.
+	 * @param password
+	 *            a hash value of password.
+	 * @return a boolean value <code>true</code>, if user is created and
+	 *         <code>false</code>, if registration failed.
+	 * @throws DAOException
+	 *             if some problems with database or connection pool has
+	 *             occur.
+	 */
 	@Override
 	public boolean createUser(User user, String password) throws DAOException {
 
@@ -38,7 +57,6 @@ public class SQLUserOperationDAO implements UserOperationDAO {
 			} else {
 				return false;
 			}
-
 		} catch (SQLException e) {
 			throw new DAOException("Database access error.", e);
 		} catch (ConnectionPoolException e) {
@@ -49,6 +67,16 @@ public class SQLUserOperationDAO implements UserOperationDAO {
 
 	}
 
+	/**
+	 * Updates the record in the database, representing the particular user.
+	 * 
+	 * @param user
+	 *            a value of user object to be changed.
+	 * @return an updated {@link by.tr.totalizator.entity.bean.User} object.
+	 * @throws DAOException
+	 *             if some problems with database or connection pool has
+	 *             occur.
+	 */
 	@Override
 	public User editUserPersonalInfo(User user) throws DAOException {
 
@@ -85,6 +113,21 @@ public class SQLUserOperationDAO implements UserOperationDAO {
 
 	}
 
+	/**
+	 * Updates the record in the database, representing the particular user,
+	 * tagged by id.
+	 * 
+	 * @param id
+	 *            a value of user's unique identifier, representing the user to
+	 *            be changed.
+	 * @param password
+	 *            a hash value of password to change.
+	 * @return a boolean value <code>true</code> in case of successful edit and
+	 *         <code>false</code> otherwise.
+	 * @throws DAOException
+	 *             if some problems with database or connection pool has
+	 *             occur.
+	 */
 	@Override
 	public boolean editUserAccountInfo(int id, String password) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -112,6 +155,19 @@ public class SQLUserOperationDAO implements UserOperationDAO {
 		}
 	}
 
+	/**
+	 * Checks the presence of tandem "user-password" in the database.
+	 * 
+	 * @param login
+	 *            a value of login.
+	 * @param password
+	 *            a value of password.
+	 * @return a {@link by.tr.totalizator.entity.bean.User} object representing
+	 *         the entered login and password in the system.
+	 * @throws DAOException
+	 *             if some problems with database or connection pool has
+	 *             occur.
+	 */
 	@Override
 	public User authentication(String login, String password) throws DAOException {
 

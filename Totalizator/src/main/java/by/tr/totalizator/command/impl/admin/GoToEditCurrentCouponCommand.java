@@ -38,15 +38,15 @@ public class GoToEditCurrentCouponCommand implements Command {
 	 * user's privileges to go to this page. Forms the request object with the
 	 * specific coupons list (coupons with status "open"(1) or "free"(6)).
 	 * 
-	 * @return {@link by.tr.totalizator.controller.PageName.ADMIN_EDIT_CURRENT_COUPON},
+	 * @return {@link by.tr.totalizator.controller.PageName#ADMIN_EDIT_CURRENT_COUPON},
 	 *         if the role of authorized person is "admin" and the correct
 	 *         ending of getting the coupons list or
-	 *         {@link by.tr.totalizator.controller.PageName.INDEX_PAGE}, if
+	 *         {@link by.tr.totalizator.controller.PageName#INDEX_PAGE}, if
 	 *         either the session time has expired or an authorized user's role
 	 *         is not "admin".
 	 *         <p>
 	 * 		Might return
-	 *         {@link by.tr.totalizator.controller.PageName.ERROR_PAGE} in case
+	 *         {@link by.tr.totalizator.controller.PageName#ERROR_PAGE} in case
 	 *         of {@link by.tr.totalizator.service.exception.ServiceException}.
 	 *         </p>
 	 * 

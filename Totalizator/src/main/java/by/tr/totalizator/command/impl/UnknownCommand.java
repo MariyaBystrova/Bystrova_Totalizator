@@ -18,7 +18,7 @@ public class UnknownCommand implements Command {
 	/**
 	 * Returns the ERROR page.
 	 * 
-	 * @return {@link by.tr.totalizator.controller.PageName.ERROR_PAGE}.
+	 * @return {@link by.tr.totalizator.controller.PageName#ERROR_PAGE}.
 	 * 
 	 * @see by.tr.totalizator.command.Command
 	 */

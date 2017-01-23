@@ -45,26 +45,26 @@ public class ShowCouponMatchesCommand implements Command {
 	 * specific coupon's matches.
 	 * <p>
 	 * The page might be either
-	 * {@link by.tr.totalizator.controller.PageName.ADMIN_FORM_MATCHES_MENU_PAGE}
+	 * {@link by.tr.totalizator.controller.PageName#ADMIN_FORM_MATCHES_MENU_PAGE}
 	 * or
-	 * {@link by.tr.totalizator.controller.PageName.ADMIN_EDIT_CURRENT_COUPON}
+	 * {@link by.tr.totalizator.controller.PageName#ADMIN_EDIT_CURRENT_COUPON}
 	 * </p>
 	 * 
 	 * @return one of the following pages
-	 *         ({@link by.tr.totalizator.controller.PageName.ADMIN_FORM_MATCHES_MENU_PAGE}
+	 *         ({@link by.tr.totalizator.controller.PageName#ADMIN_FORM_MATCHES_MENU_PAGE}
 	 *         or
-	 *         {@link by.tr.totalizator.controller.PageName.ADMIN_EDIT_CURRENT_COUPON}),
+	 *         {@link by.tr.totalizator.controller.PageName#ADMIN_EDIT_CURRENT_COUPON}),
 	 *         if the role of authorized person is "admin" and the correct
 	 *         ending of getting coupon's matches. The page is choosing by the
 	 *         <code>page</code> request variable.
 	 *         <p>
-	 *         Returns {@link by.tr.totalizator.controller.PageName.INDEX_PAGE},
+	 *         Returns {@link by.tr.totalizator.controller.PageName#INDEX_PAGE},
 	 *         if either the session time has expired or an authorized user's
 	 *         role is not "admin".
 	 *         </p>
 	 *         <p>
 	 *         Might return
-	 *         {@link by.tr.totalizator.controller.PageName.ERROR_PAGE} in case
+	 *         {@link by.tr.totalizator.controller.PageName#ERROR_PAGE} in case
 	 *         of {@link by.tr.totalizator.service.exception.ServiceException}.
 	 *         </p>
 	 * 

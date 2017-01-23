@@ -23,9 +23,9 @@ public class AdminGoToGeneralCommand implements Command {
 	 * Provides the service of forming the page to go to. Checks the session and
 	 * user's privileges to go to this page.
 	 * 
-	 * @return {@link by.tr.totalizator.controller.PageName.ADMIN_PAGE_GENERAL},
+	 * @return {@link by.tr.totalizator.controller.PageName#ADMIN_PAGE_GENERAL},
 	 *         if the role of authorized person is "admin" or
-	 *         {@link by.tr.totalizator.controller.PageName.INDEX_PAGE}, if
+	 *         {@link by.tr.totalizator.controller.PageName#INDEX_PAGE}, if
 	 *         either the session time has expired or an authorized user's role
 	 *         is not "admin".
 	 * 

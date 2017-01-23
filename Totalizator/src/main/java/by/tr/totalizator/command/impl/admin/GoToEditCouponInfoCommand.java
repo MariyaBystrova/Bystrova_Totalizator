@@ -35,15 +35,15 @@ public class GoToEditCouponInfoCommand implements Command {
 	 * user's privileges to go to this page. Forms the request object with the
 	 * specific coupon.
 	 * 
-	 * @return {@link by.tr.totalizator.controller.PageName.ADMIN_EDIT_COUPON_INFO},
+	 * @return {@link by.tr.totalizator.controller.PageName#ADMIN_EDIT_COUPON_INFO},
 	 *         if the role of authorized person is "admin" and the correct
 	 *         ending of getting coupon or
-	 *         {@link by.tr.totalizator.controller.PageName.INDEX_PAGE}, if
+	 *         {@link by.tr.totalizator.controller.PageName#INDEX_PAGE}, if
 	 *         either the session time has expired or an authorized user's role
 	 *         is not "admin".
 	 *         <p>
 	 * 		Might return
-	 *         {@link by.tr.totalizator.controller.PageName.ERROR_PAGE} in case
+	 *         {@link by.tr.totalizator.controller.PageName#ERROR_PAGE} in case
 	 *         of {@link by.tr.totalizator.service.exception.ServiceException}.
 	 *         </p>
 	 * 

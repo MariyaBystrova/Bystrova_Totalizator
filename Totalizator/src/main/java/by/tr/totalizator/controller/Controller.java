@@ -11,6 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import by.tr.totalizator.command.Command;
 import by.tr.totalizator.command.CommandProvider;
 
+/**
+ * This class represents a controller for web application. Overrides doGet and
+ * doPost methods for HTTP request.
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public final class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -21,6 +28,17 @@ public final class Controller extends HttpServlet {
 		super();
 	}
 
+	/**
+	 * Called by the server to allow a servlet(Controller) to handle a GET
+	 * request.
+	 * <p>
+	 * GET request executes the specified command, after which it forwards to
+	 * the page.
+	 * </p>
+	 * 
+	 * @see {@link javax.servlet.http.HttpServlet}
+	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -40,6 +58,17 @@ public final class Controller extends HttpServlet {
 
 	}
 
+	/**
+	 * Called by the server to allow a servlet(Controller) to handle a POST
+	 * request.
+	 * <p>
+	 * POST request executes the specified command, after which it sends
+	 * redirect to the client.
+	 * </p>
+	 * 
+	 * @see {@link javax.servlet.http.HttpServlet}
+	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		String page = null;

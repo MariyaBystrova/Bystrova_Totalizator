@@ -7,12 +7,18 @@ import by.tr.totalizator.dao.impl.SQLInit;
 import by.tr.totalizator.dao.impl.SQLTotalizatorOperationDAO;
 import by.tr.totalizator.dao.impl.SQLUserOperationDAO;
 
+/**
+ * Represents DAO layer factory designed by Factory pattern, based on Singleton,
+ * which provides an abstraction.
+ * 
+ * @author mariya
+ *
+ */
 public class DAOFactory {
 	private static final DAOFactory INSTANCE = new DAOFactory();
 
 	private TotalizatorOperationDAO totalizatorOperationDAO = new SQLTotalizatorOperationDAO();
 	private UserOperationDAO userOperationDAO = new SQLUserOperationDAO();
-	
 	private SourceInitDAO sourceInitDAO = new SQLInit();
 
 	private DAOFactory() {
@@ -30,8 +36,8 @@ public class DAOFactory {
 		return userOperationDAO;
 	}
 
-	public SourceInitDAO getSourceInitDAO(){
+	public SourceInitDAO getSourceInitDAO() {
 		return sourceInitDAO;
 	}
-	
+
 }

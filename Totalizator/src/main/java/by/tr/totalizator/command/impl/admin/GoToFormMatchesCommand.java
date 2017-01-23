@@ -40,15 +40,15 @@ public class GoToFormMatchesCommand implements Command {
 	 * specific coupons list (coupons with status "free"(6) and start date is
 	 * not after the current time).
 	 * 
-	 * @return {@link by.tr.totalizator.controller.PageName.ADMIN_FORM_MATCHES_MENU_PAGE},
+	 * @return {@link by.tr.totalizator.controller.PageName#ADMIN_FORM_MATCHES_MENU_PAGE},
 	 *         if the role of authorized person is "admin" and the correct
 	 *         ending of getting the coupons list or
-	 *         {@link by.tr.totalizator.controller.PageName.INDEX_PAGE}, if
+	 *         {@link by.tr.totalizator.controller.PageName#INDEX_PAGE}, if
 	 *         either the session time has expired or an authorized user's role
 	 *         is not "admin".
 	 *         <p>
 	 *         Might return
-	 *         {@link by.tr.totalizator.controller.PageName.ERROR_PAGE} in case
+	 *         {@link by.tr.totalizator.controller.PageName#ERROR_PAGE} in case
 	 *         of {@link by.tr.totalizator.service.exception.ServiceException}.
 	 *         </p>
 	 * 
