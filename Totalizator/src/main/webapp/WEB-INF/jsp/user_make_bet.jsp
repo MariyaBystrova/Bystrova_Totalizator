@@ -19,7 +19,10 @@
 <fmt:message bundle="${loc}" key="local.make_bet" var="make_bet" />
 <fmt:message bundle="${loc}" key="local.amount" var="amount" />
 <fmt:message bundle="${loc}" key="local.enter_amount" var="enter_amount" />
-<fmt:message bundle="${loc}" key="local.credit_card_number" var="credit_card_number" />
+<fmt:message bundle="${loc}" key="local.credit_card_number"
+	var="credit_card_number" />
+<fmt:message bundle="${loc}" key="local.match" var="match" />
+<fmt:message bundle="${loc}" key="local.result" var="result" />
 
 <link rel="stylesheet" type="text/css" href="CSS/style.css">
 <link href="https://fonts.googleapis.com/css?family=Pattaya"
@@ -30,7 +33,7 @@
 </head>
 <body>
 	<header>
-		<%@ include file="user_header.jsp" %>
+		<%@ include file="user_header.jsp"%>
 	</header>
 
 	<aside class="sidebar-right-news">
@@ -47,31 +50,33 @@
 			<div>
 				<form action="Controller" method="post">
 					<input type="hidden" name="command" value="make-bet">
-				
+
 					<jsp:useBean id="map" class="by.tr.totalizator.tag.bean.JspMapBean"
 						scope="request" />
 					<jsp:useBean id="list"
 						class="by.tr.totalizator.tag.bean.JSPListBean" scope="request" />
-				
-					<tag:bet-choices list="${list}" map="${map}" result="result"
-						team="team"></tag:bet-choices>
+
+					<tag:bet-choices list="${list}" map="${map}" result="${result}"
+						teams="${match}"></tag:bet-choices>
 					<div class="form-group">
 						<div>
 							<label for="amount"><c:out value="${amount}" />:</label>
 						</div>
 						<div>
 							<input type="text" name="amount" value="${requestScope.amount }"
-								id="amount" class="form-control" disabled/>
-							<input type="hidden" name="amount" value="${requestScope.amount}"/>
+								id="amount" class="form-control" disabled /> <input
+								type="hidden" name="amount" value="${requestScope.amount}" />
 						</div>
 					</div>
 					<div class="form-group">
 						<div>
-							<label for="credit-card-number"><c:out value="${credit_card_number}" />:</label>
+							<label for="credit-card-number"><c:out
+									value="${credit_card_number}" />:</label>
 						</div>
 						<div>
 							<input type="text" name="credit-card-number" value=""
-								id="credit-card-number" class="form-control" placeholder="xxxx-xxxx-xxxx-xxxx" required/>
+								id="credit-card-number" class="form-control"
+								placeholder="xxxx-xxxx-xxxx-xxxx" required />
 						</div>
 					</div>
 					<input type="submit" value="${make_bet}" class="btn btn-default">

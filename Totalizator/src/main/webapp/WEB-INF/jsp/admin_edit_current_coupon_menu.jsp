@@ -20,9 +20,13 @@
 <fmt:message bundle="${loc}" key="local.log_out" var="logout" />
 <fmt:message bundle="${loc}" key="local.general" var="general" />
 <fmt:message bundle="${loc}" key="local.form_coupon" var="form_coupon" />
-<fmt:message bundle="${loc}" key="local.edit_match_results" var="edit_match_results" />
-<fmt:message bundle="${loc}" key="local.show_all_coupons" var="show_all_coupons" />
-<fmt:message bundle="${loc}" key="local.close_coupon_not_all_matches_finished_fail" var="close_coupon_not_all_matches_finished_fail" />
+<fmt:message bundle="${loc}" key="local.edit_match_results"
+	var="edit_match_results" />
+<fmt:message bundle="${loc}" key="local.show_all_coupons"
+	var="show_all_coupons" />
+<fmt:message bundle="${loc}"
+	key="local.close_coupon_not_all_matches_finished_fail"
+	var="close_coupon_not_all_matches_finished_fail" />
 <fmt:message bundle="${loc}" key="local.step_one_choose_coupon"
 	var="step_one_choose_coupon" />
 <fmt:message bundle="${loc}" key="local.show_matches" var="show_matches" />
@@ -37,14 +41,21 @@
 <fmt:message bundle="${loc}" key="local.status" var="status" />
 <fmt:message bundle="${loc}" key="local.form_matches_to_coupon"
 	var="form_matches_to_coupon" />
-<fmt:message bundle="${loc}" key="local.edit_coupon_info_success" var="edit_coupon_info_success" />
-<fmt:message bundle="${loc}" key="local.edit_coupon_info_fail" var="edit_coupon_info_fail" />
-<fmt:message bundle="${loc}" key="local.step_two_fill_coupon" var="step_two_fill_coupon" />
+<fmt:message bundle="${loc}" key="local.edit_coupon_info_success"
+	var="edit_coupon_info_success" />
+<fmt:message bundle="${loc}" key="local.edit_coupon_info_fail"
+	var="edit_coupon_info_fail" />
+<fmt:message bundle="${loc}" key="local.step_two_fill_coupon"
+	var="step_two_fill_coupon" />
 <fmt:message bundle="${loc}" key="local.close_coupon" var="close_coupon" />
-<fmt:message bundle="${loc}" key="local.close_coupon_success" var="close_coupon_success" />
-<fmt:message bundle="${loc}" key="local.close_coupon_fail" var="close_coupon_fail" />
-<fmt:message bundle="${loc}" key="local.message_match_edit_success" var="message_match_edit_success" />
-<fmt:message bundle="${loc}" key="local.message_match_edit_failed" var="message_match_edit_failed" />
+<fmt:message bundle="${loc}" key="local.close_coupon_success"
+	var="close_coupon_success" />
+<fmt:message bundle="${loc}" key="local.close_coupon_fail"
+	var="close_coupon_fail" />
+<fmt:message bundle="${loc}" key="local.message_match_edit_success"
+	var="message_match_edit_success" />
+<fmt:message bundle="${loc}" key="local.message_match_edit_failed"
+	var="message_match_edit_failed" />
 
 <link rel="stylesheet" type="text/css" href="CSS/admin-style.css">
 
@@ -62,8 +73,8 @@
 			href="?command=admin-go-to-edit-current-coupon"><c:out
 					value="${edit_match_results}" /></a></li>
 		<li><a href="?command=admin-go-to-show-all-coupons"><c:out
-					value="${show_all_coupons}"  /></a></li>
-					
+					value="${show_all_coupons}" /></a></li>
+
 		<li><hr /></li>
 		<li><form action="Controller" method="post">
 				<input type="hidden" name="command" value="logout"><input
@@ -98,8 +109,8 @@
 						<div>
 							<jsp:useBean id="coupons"
 								class="by.tr.totalizator.tag.bean.JSPListBean" scope="request" />
-							<tag:empty-coupon-scroll-tag list="${coupons}"
-								active="${requestScope.coupon }" />
+							<tag:coupon-dropdown-tag list="${coupons}"
+								activeCouponId="${requestScope.coupon}" />
 						</div>
 					</div>
 
@@ -136,9 +147,10 @@
 		<div id="list-matches">
 			<c:if test="${not empty requestScope.list }">
 				<div>
-					
+
 					<div>
-						<label for="matches"><c:out value="${step_two_fill_coupon}"></c:out>:</label>
+						<label for="matches"><c:out
+								value="${step_two_fill_coupon}"></c:out>:</label>
 					</div>
 
 					<div>
@@ -146,8 +158,8 @@
 							class="by.tr.totalizator.tag.bean.JSPListBean" scope="request" />
 						<tag:table-matches-result-tag list="${list}" matchName="${name}"
 							teamOne="${team_one}" teamTwo="${team_two}"
-							startDate="${start_date}" endDate="${end_date}" result="${result}"
-							status="${status}" />
+							startDate="${start_date}" endDate="${end_date}"
+							result="${result}" status="${status}" />
 					</div>
 				</div>
 				<div>

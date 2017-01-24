@@ -43,8 +43,8 @@
 	</tag>
 	
 	<tag>
-		<name>empty-coupon-scroll-tag</name>
-		<tag-class>by.tr.totalizator.tag.EmptyCouponScrollTag</tag-class>
+		<name>coupon-dropdown-tag</name>
+		<tag-class>by.tr.totalizator.tag.CouponDropdownTag</tag-class>
 		<body-contenet>empty</body-contenet>
 		<attribute>
 			<name>list</name>
@@ -52,7 +52,7 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>active</name>
+			<name>activeCouponId</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -73,7 +73,7 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>team</name>
+			<name>teams</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

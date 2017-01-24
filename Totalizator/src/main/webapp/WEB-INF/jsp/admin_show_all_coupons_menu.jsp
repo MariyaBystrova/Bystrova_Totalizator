@@ -22,14 +22,17 @@
 <fmt:message bundle="${loc}" key="local.form_coupon" var="form_coupon" />
 <fmt:message bundle="${loc}" key="local.start_date" var="start_date" />
 <fmt:message bundle="${loc}" key="local.end_date" var="end_date" />
-<fmt:message bundle="${loc}" key="local.min_bet_amount" var="min_bet_amount" />
+<fmt:message bundle="${loc}" key="local.min_bet_amount"
+	var="min_bet_amount" />
 <fmt:message bundle="${loc}" key="local.jackpot" var="jackpot" />
 <fmt:message bundle="${loc}" key="local.pool" var="pool" />
 <fmt:message bundle="${loc}" key="local.status" var="status" />
 <fmt:message bundle="${loc}" key="local.form_matches_to_coupon"
 	var="form_matches_to_coupon" />
-<fmt:message bundle="${loc}" key="local.edit_match_results" var="edit_match_results" />
-<fmt:message bundle="${loc}" key="local.show_all_coupons" var="show_all_coupons" />
+<fmt:message bundle="${loc}" key="local.edit_match_results"
+	var="edit_match_results" />
+<fmt:message bundle="${loc}" key="local.show_all_coupons"
+	var="show_all_coupons" />
 
 <title>All coupons</title>
 </head>
@@ -42,10 +45,11 @@
 		<li><a href="?command=admin-go-to-form-matches"><c:out
 					value="${form_matches_to_coupon}" /></a></li>
 		<li><a href="?command=admin-go-to-edit-current-coupon"><c:out
-					value="${edit_match_results}"  /></a></li>
-		<li class="active"><a href="?command=admin-go-to-show-all-coupons"><c:out
+					value="${edit_match_results}" /></a></li>
+		<li class="active"><a
+			href="?command=admin-go-to-show-all-coupons"><c:out
 					value="${show_all_coupons}" /></a></li>
-		
+
 		<li><hr /></li>
 		<li><form action="Controller" method="post">
 				<input type="hidden" name="command" value="logout"><input
@@ -72,9 +76,10 @@
 			<div>
 				<jsp:useBean id="couponList"
 					class="by.tr.totalizator.tag.bean.JSPListBean" scope="request" />
-				<tag:table-all-coupons-tag list="${couponList}" startDate="${start_date}"
-					endDate="${end_date}" minBetAmount="${min_bet_amount}" jackpot="${jackpot}" pool="${pool}"
-					status="${status}" />
+				<tag:table-all-coupons-tag list="${couponList}"
+					startDate="${start_date}" endDate="${end_date}"
+					minBetAmount="${min_bet_amount}" jackpot="${jackpot}"
+					pool="${pool}" status="${status}" />
 			</div>
 		</c:if>
 

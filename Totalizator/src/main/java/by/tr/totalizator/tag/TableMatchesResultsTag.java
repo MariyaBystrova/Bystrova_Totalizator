@@ -9,17 +9,102 @@ import javax.servlet.jsp.tagext.TagSupport;
 import by.tr.totalizator.entity.bean.Match;
 import by.tr.totalizator.tag.bean.JSPListBean;
 
+/**
+ * Represents a tag without body which draws a table to edit result, dates and
+ * status of the particular match of the specified coupon.
+ * <p>
+ * Draws all matches that are matching to the specified coupon and a button to
+ * edit them.
+ * </p>
+ * 
+ * <p>
+ * Columns:
+ * </p>
+ * <p>
+ * 1. Numeric sequence number (1, 2, 3, ... , 15). The number of matches in the
+ * coupon must be equals to 15.
+ * </p>
+ * <p>
+ * 2. Name of the particular match.
+ * </p>
+ * <p>
+ * 3. Official name of team one.
+ * </p>
+ * <p>
+ * 4. Official name of team two.
+ * </p>
+ * <p>
+ * 5. Start date and time of the particular match.
+ * </p>
+ * <p>
+ * 6. End date and time of the particular match.
+ * </p>
+ * <p>
+ * 7. A gaming status of the match. Available values: 2 - in progress - match
+ * did not finish; 4 - cancelled - match is cancelled; 5 - finished - match is
+ * finished and has the result.
+ * </p>
+ * <p>
+ * 8. The result of the match. Available values: "1" - first team win; "2" =
+ * second team win or "x" - draw and "-" - no result.
+ * </p>
+ * 
+ * <p>
+ * Editing capabilities:
+ * </p>
+ * <p>
+ * The concrete result ("1", "x", "2") might be set only after the end of the
+ * game and together with status "finished"(5)
+ * </p>
+ * <p>
+ * The status "cancelled"(4) might be set before the end of the game but only
+ * with the result "-".
+ * </p>
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class TableMatchesResultsTag extends TagSupport {
 	private static final long serialVersionUID = 1L;
-
+	/**
+	 * A variable referencing UseBean component representing a list.
+	 */
 	private JSPListBean list;
-
+	/**
+	 * Name of the particular match.
+	 */
 	private String matchName;
+	/**
+	 * Official name of team one.
+	 */
 	private String teamOne;
+	/**
+	 * Official name of team two.
+	 */
 	private String teamTwo;
+	/**
+	 * Start date and time of the particular match.
+	 */
 	private String startDate;
+	/**
+	 * End date and time of the particular match.
+	 */
 	private String endDate;
+	/**
+	 * A gaming status of the match.
+	 * <p>
+	 * Available values: 2 - in progress - match did not finish; 4 - cancelled -
+	 * match is cancelled; 5 - finished - match is finished and has the result.
+	 * </p>
+	 */
 	private String status;
+	/**
+	 * The result of the match.
+	 * <p>
+	 * Available values: "1" - first team win; "2" = second team win or "x" -
+	 * draw and "-" - no result.
+	 * </p>
+	 */
 	private String result;
 
 	public int doStartTag() throws JspTagException {
@@ -27,7 +112,7 @@ public class TableMatchesResultsTag extends TagSupport {
 		int fullSize = 15;
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-		
+
 		try {
 			pageContext.getOut()
 					.write("<table class=\"mytable table table-striped table-bordered table-hover table-condensed\">");
@@ -62,54 +147,54 @@ public class TableMatchesResultsTag extends TagSupport {
 				pageContext.getOut().write("<td>");
 				pageContext.getOut()
 						.write("<input type=\"datetime-local\" name=\"match-start-date\" placeholder=\"yyyy-mm-dd hh:mm\" value=\""
-								+sdf.format(match.getStartDate()) + "\"required=\"required\" />");
+								+ sdf.format(match.getStartDate()) + "\"required=\"required\" />");
 				pageContext.getOut().write("</td>");
 				pageContext.getOut().write("<td>");
 				pageContext.getOut()
 						.write("<input type=\"datetime-local\" name=\"match-end-date\" placeholder=\"yyyy-mm-dd hh:mm\" value=\""
 								+ sdf.format(match.getEndDate()) + "\"required=\"required\" />");
 				pageContext.getOut().write("</td>");
-				
+
 				pageContext.getOut().write("<td>");
 				pageContext.getOut().write("<select name='status'>");
-				if(match.getStatus() == 2){
+				if (match.getStatus() == 2) {
 					pageContext.getOut().write("<option value=\"2\" selected>in progress</option>");
 					pageContext.getOut().write("<option value=\"5\">finished</option>");
 					pageContext.getOut().write("<option value=\"4\">cancelled</option>");
-				}else if(match.getStatus() == 5){
+				} else if (match.getStatus() == 5) {
 					pageContext.getOut().write("<option value=\"2\">in progress</option>");
 					pageContext.getOut().write("<option value=\"5\" selected>finished</option>");
 					pageContext.getOut().write("<option value=\"4\">cancelled</option>");
-				}else if(match.getStatus() == 4){
+				} else if (match.getStatus() == 4) {
 					pageContext.getOut().write("<option value=\"2\">in progress</option>");
 					pageContext.getOut().write("<option value=\"5\">finished</option>");
 					pageContext.getOut().write("<option value=\"4\" selected>cancelled</option>");
-				}else {
+				} else {
 					pageContext.getOut().write("<option value=\"2\">in progress</option>");
 					pageContext.getOut().write("<option value=\"5\">finished</option>");
 					pageContext.getOut().write("<option value=\"4\">cancelled</option>");
 				}
 				pageContext.getOut().write("<select>");
 				pageContext.getOut().write("</td>");
-				
+
 				pageContext.getOut().write("<td>");
 				pageContext.getOut().write("<select name='result'>");
-				if(match.getResult() == null){
+				if (match.getResult() == null) {
 					pageContext.getOut().write("<option value=\"NULL\" selected>-</option>");
 					pageContext.getOut().write("<option value=\"1\">1</option>");
 					pageContext.getOut().write("<option value=\"x\">x</option>");
 					pageContext.getOut().write("<option value=\"2\">2</option>");
-				}else if(match.getResult().equals("1")){
+				} else if (match.getResult().equals("1")) {
 					pageContext.getOut().write("<option value=\"NULL\">-</option>");
 					pageContext.getOut().write("<option value=\"1\" selected>1</option>");
 					pageContext.getOut().write("<option value=\"x\">x</option>");
 					pageContext.getOut().write("<option value=\"2\">2</option>");
-				}else if(match.getResult().equals("x")){
+				} else if (match.getResult().equals("x")) {
 					pageContext.getOut().write("<option value=\"NULL\">-</option>");
 					pageContext.getOut().write("<option value=\"1\">1</option>");
 					pageContext.getOut().write("<option value=\"x\" selected>x</option>");
 					pageContext.getOut().write("<option value=\"2\">2</option>");
-				}else  if(match.getResult().equals("2")){
+				} else if (match.getResult().equals("2")) {
 					pageContext.getOut().write("<option value=\"NULL\">-</option>");
 					pageContext.getOut().write("<option value=\"1\">1</option>");
 					pageContext.getOut().write("<option value=\"x\">x</option>");
@@ -117,11 +202,11 @@ public class TableMatchesResultsTag extends TagSupport {
 				}
 				pageContext.getOut().write("<select>");
 				pageContext.getOut().write("</td>");
-				
+
 				pageContext.getOut().write("<td>");
 				pageContext.getOut().write("<input type=\"submit\" value=\"Edit\" class=\"btn btn-default\" />");
 				pageContext.getOut().write("</td>");
-				
+
 				pageContext.getOut().write("</form>");
 				pageContext.getOut().write("</tr>");
 
@@ -194,7 +279,7 @@ public class TableMatchesResultsTag extends TagSupport {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	
+
 	public String getStatus() {
 		return status;
 	}

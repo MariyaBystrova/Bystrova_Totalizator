@@ -9,15 +9,66 @@ import javax.servlet.jsp.tagext.TagSupport;
 import by.tr.totalizator.entity.bean.Match;
 import by.tr.totalizator.tag.bean.JSPListBean;
 
+/**
+ * Represents a tag without body which draws a table for fulfilling and editing
+ * 15 matches for the specified coupon.
+ * <p>
+ * Draws all matches that are already in database and a button to edit them and
+ * then fields to fill with a button to add for the rest matches, so the total
+ * number of rows is 15.
+ * </p>
+ * 
+ * <p>
+ * Columns:
+ * </p>
+ * <p>
+ * 1. Numeric sequence number (1, 2, 3, ... , 15). The number of matches in the
+ * coupon must be equals to 15.
+ * </p>
+ * <p>
+ * 2. Name of the particular match.
+ * </p>
+ * <p>
+ * 3. Official name of team one.
+ * </p>
+ * <p>
+ * 4. Official name of team two.
+ * </p>
+ * <p>
+ * 5. Start date and time of the particular match.
+ * </p>
+ * <p>
+ * 6. Approximate end date and time of the particular match.
+ * </p>
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class TableTagMatches extends TagSupport {
 	private static final long serialVersionUID = 1L;
-
+	/**
+	 * A variable referencing UseBean component representing a list.
+	 */
 	private JSPListBean list;
-
+	/**
+	 * Name of the particular match.
+	 */
 	private String matchName;
+	/**
+	 * Official name of team one.
+	 */
 	private String teamOne;
+	/**
+	 * Official name of team two.
+	 */
 	private String teamTwo;
+	/**
+	 * Start date and time of the particular match.
+	 */
 	private String startDate;
+	/**
+	 * Approximate end date and time of the particular match.
+	 */
 	private String endDate;
 
 	public int doStartTag() throws JspTagException {
@@ -25,7 +76,7 @@ public class TableTagMatches extends TagSupport {
 		int fullSize = 15;
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-		
+
 		try {
 			pageContext.getOut()
 					.write("<table class=\"mytable table table-striped table-bordered table-hover table-condensed\">");
@@ -67,7 +118,7 @@ public class TableTagMatches extends TagSupport {
 				pageContext.getOut().write("<td>");
 				pageContext.getOut()
 						.write("<input type=\"datetime-local\" name=\"match-start-date\" placeholder=\"yyyy-mm-dd hh:mm\" value=\""
-								+sdf.format(match.getStartDate()) + "\"required=\"required\" />");
+								+ sdf.format(match.getStartDate()) + "\"required=\"required\" />");
 				pageContext.getOut().write("</td>");
 				pageContext.getOut().write("<td>");
 				pageContext.getOut()

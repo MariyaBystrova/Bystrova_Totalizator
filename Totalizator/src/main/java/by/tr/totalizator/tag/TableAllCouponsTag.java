@@ -9,16 +9,81 @@ import javax.servlet.jsp.tagext.TagSupport;
 import by.tr.totalizator.entity.bean.Coupon;
 import by.tr.totalizator.tag.bean.JSPListBean;
 
+/**
+ * Represents a tag without body which is draws a table with all existing
+ * coupons in the system.
+ * <p>
+ * Draws all coupons and a button to edit them.
+ * </p>
+ * 
+ * <p>
+ * Columns:
+ * </p>
+ * <p>
+ * 1. Numeric sequence number (1, 2, 3, ... , 15). The number of matches in the
+ * coupon must be equals to 15.
+ * </p>
+ * <p>
+ * 2. Start date and time of the particular coupon.
+ * </p>
+ * <p>
+ * 3. End date and time of the particular coupon.
+ * </p>
+ * <p>
+ * 4. A value of minimal bet amount for the particular coupon.
+ * </p>
+ * <p>
+ * 5. A value of coupon's jackPot.
+ * </p>
+ * <p>
+ * 6. A value of coupon's pool. The pool is a money amount of all bets for the
+ * coupon.
+ * </p>
+ * <p>
+ * 7. A gaming status of the particular coupon. Available values: 1 - open -
+ * process of gathering bets; 3 - closed - all games results are set and people
+ * has there results; 4 - cancelled - 5 or more matches cancelled; 6 - free - in
+ * a forming process.
+ * </p>
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class TableAllCouponsTag extends TagSupport {
 	private static final long serialVersionUID = 1L;
-
+	/**
+	 * A variable referencing UseBean component representing a list.
+	 */
 	private JSPListBean list;
-
+	/**
+	 * Start date and time of the particular coupon.
+	 */
 	private String startDate;
+	/**
+	 * End date and time of the particular coupon.
+	 */
 	private String endDate;
+	/**
+	 * A value of minimal bet amount for the particular coupon.
+	 */
 	private String minBetAmount;
+	/**
+	 * A value of coupon's jackPot.
+	 */
 	private String jackpot;
+	/**
+	 * A value of coupon's pool. The pool is a money amount of all bets for the
+	 * coupon.
+	 */
 	private String pool;
+	/**
+	 * A gaming status of the particular coupon.
+	 * <p>
+	 * Available values: 1 - open - process of gathering bets; 3 - closed - all
+	 * games results are set and people has there results; 4 - cancelled - 5 or
+	 * more matches cancelled; 6 - free - in a forming process.
+	 * </p>
+	 */
 	private String status;
 
 	public int doStartTag() throws JspTagException {

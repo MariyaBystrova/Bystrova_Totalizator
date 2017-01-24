@@ -9,12 +9,47 @@ import by.tr.totalizator.entity.bean.Match;
 import by.tr.totalizator.tag.bean.JSPListBean;
 import by.tr.totalizator.tag.bean.JspMapBean;
 
+/**
+ * Represents a tag without body which draws a table of bet's chosen results in
+ * the page of confirmation.
+ * 
+ * <p>
+ * Columns:
+ * </p>
+ * <p>
+ * 1. Numeric sequence number (1, 2, 3, ... , 15). The number of matches in the
+ * coupon must be equals to 15.
+ * </p>
+ * <p>
+ * 2. Start date and time of the particular match.
+ * </p>
+ * <p>
+ * 3. Teams (written in the way: team one - team two).
+ * </p>
+ * <p>
+ * 4. The chosen result.
+ * </p>
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class BetChoices extends TagSupport {
 	private static final long serialVersionUID = 1L;
-
+	/**
+	 * A variable referencing UseBean component representing a map.
+	 */
 	private JspMapBean map;
+	/**
+	 * A variable referencing UseBean component representing a list.
+	 */
 	private JSPListBean list;
-	private String team;
+	/**
+	 * Teams (written in the way: team one - team two).
+	 */
+	private String teams;
+	/**
+	 * The chosen result.
+	 */
 	private String result;
 
 	public int doStartTag() throws JspTagException {
@@ -25,7 +60,7 @@ public class BetChoices extends TagSupport {
 					.write("<table class=\"table table-striped table-bordered table-hover table-condensed\">");
 			pageContext.getOut().write("<tr><th>");
 			pageContext.getOut().write("#</th>");
-			pageContext.getOut().write("<th>" + team + "</th>");
+			pageContext.getOut().write("<th>" + teams + "</th>");
 			pageContext.getOut().write("<th>" + result);
 			pageContext.getOut().write("</th></tr>");
 			for (int i = 0; i < size; i++) {
@@ -49,9 +84,6 @@ public class BetChoices extends TagSupport {
 				}
 				pageContext.getOut().write("<input type=\"hidden\" name=\"result" + new Integer(i + 1).toString()
 						+ "\" value=\"" + map.getElement("result" + new Integer(i + 1).toString()) + "\"");
-//				pageContext.getOut().write("<input type=\"hidden\" name=\"match" + new Integer(i + 1).toString()
-//						+ "\" value=\"" + match.getId() + "\"");
-//				System.out.println("match: "+match.getId());
 				pageContext.getOut().write("</td>");
 				pageContext.getOut().write("</tr>");
 			}
@@ -78,12 +110,12 @@ public class BetChoices extends TagSupport {
 		this.map = map;
 	}
 
-	public String getTeam() {
-		return team;
+	public String getTeams() {
+		return teams;
 	}
 
-	public void setTeam(String team) {
-		this.team = team;
+	public void setTeams(String teams) {
+		this.teams = teams;
 	}
 
 	public String getResult() {

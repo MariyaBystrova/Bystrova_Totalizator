@@ -10,12 +10,25 @@ import javax.servlet.jsp.tagext.TagSupport;
 import by.tr.totalizator.entity.bean.Coupon;
 import by.tr.totalizator.tag.bean.JSPListBean;
 
-public class EmptyCouponScrollTag extends TagSupport {
+/**
+ * Represents a tag without body which draws a dropDown with coupon's dates from
+ * the UseBean list.
+ * 
+ * 
+ * @author Mariya Bystrova
+ *
+ */
+public class CouponDropdownTag extends TagSupport {
 
 	private static final long serialVersionUID = 1L;
-
+	/**
+	 * A variable referencing UseBean component representing a list for coupons.
+	 */
 	private JSPListBean list;
-	private String active;
+	/**
+	 * A value of coupon id, if it is selected.
+	 */
+	private String activeCouponId;
 
 	public int doStartTag() throws JspTagException {
 		int size = new Integer(list.getSize());
@@ -26,7 +39,7 @@ public class EmptyCouponScrollTag extends TagSupport {
 				pageContext.getOut().write(
 						"<select name=\"coupon-id\" id=\"coupon\" class=\"form-control\"  onchange=\"return visibility()\">");
 				Coupon coupon = list.getCouponElement();
-				if (!active.isEmpty() && Integer.parseInt(active) == coupon.getId()) {
+				if (!activeCouponId.isEmpty() && Integer.parseInt(activeCouponId) == coupon.getId()) {
 					pageContext.getOut()
 							.write("<option value=\"" + coupon.getId() + "\" selected>"
 									+ med.format(coupon.getStartDate()).toString() + " - "
@@ -39,7 +52,7 @@ public class EmptyCouponScrollTag extends TagSupport {
 				}
 				for (int i = 1; i < size; i++) {
 					coupon = list.getCouponElement();
-					if (!active.isEmpty() && Integer.parseInt(active) == coupon.getId()) {
+					if (!activeCouponId.isEmpty() && Integer.parseInt(activeCouponId) == coupon.getId()) {
 						pageContext.getOut()
 								.write("<option value=\"" + coupon.getId() + "\" selected>"
 										+ med.format(coupon.getStartDate()).toString() + " - "
@@ -71,12 +84,12 @@ public class EmptyCouponScrollTag extends TagSupport {
 		this.list = list;
 	}
 
-	public String getActive() {
-		return active;
+	public String getActiveCouponId() {
+		return activeCouponId;
 	}
 
-	public void setActive(String active) {
-		this.active = active;
+	public void setActiveCouponId(String activeCouponId) {
+		this.activeCouponId = activeCouponId;
 	}
 
 }
