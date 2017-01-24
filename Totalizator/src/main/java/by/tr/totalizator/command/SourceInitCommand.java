@@ -8,7 +8,8 @@ import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 
 /**
- * Represents the command which provides the source initialization, done by singleton.
+ * Represents the command which provides the source initialization, done by
+ * singleton.
  * 
  * @author Mariya Bystrova
  *
@@ -23,7 +24,10 @@ public class SourceInitCommand {
 	public static SourceInitCommand getInstance() {
 		return instance;
 	}
-	
+
+	/**
+	 * Initializes the data source.
+	 */
 	public void init() {
 		ServiceFactory factory = ServiceFactory.getInstance();
 		SourceInitService sourceInit = factory.getSourceInitService();
@@ -36,6 +40,9 @@ public class SourceInitCommand {
 		}
 	}
 
+	/**
+	 * Provides destruction of the connection to the data source.
+	 */
 	public void destroy() {
 		ServiceFactory factory = ServiceFactory.getInstance();
 		SourceInitService sourceInit = factory.getSourceInitService();

@@ -6,6 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import by.tr.totalizator.command.CommandName;
 
+/**
+ * Represents a class which receives notification events about requests coming
+ * into and going out of scope of a web application.
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class MessageListener implements ServletRequestListener {
 	private final static String COMMAND = "command";
 	private final static String METHOD = "GET";
@@ -17,6 +24,16 @@ public class MessageListener implements ServletRequestListener {
 	public MessageListener() {
 	}
 
+	/**
+	 * Receives notification that a ServletRequest is about to go out of scope
+	 * of the web application.
+	 * <p>
+	 * If the request's method is GET, it checks the session object for the
+	 * presence of one of the following attributes: "resultAdd", "resultEdit",
+	 * "resultFinishedMatches" or "resultCloseCoupon". It removes all matching
+	 * attributes from the session scope.
+	 * </p>
+	 */
 	public void requestDestroyed(ServletRequestEvent arg0) {
 		HttpServletRequest request = (HttpServletRequest) arg0.getServletRequest();
 		String requestMethod = CommandName.getMethod(request.getParameter(COMMAND));

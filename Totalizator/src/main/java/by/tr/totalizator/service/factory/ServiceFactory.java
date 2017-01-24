@@ -7,6 +7,13 @@ import by.tr.totalizator.service.impl.EditTotalizator;
 import by.tr.totalizator.service.impl.EditUser;
 import by.tr.totalizator.service.impl.SourceInit;
 
+/**
+ * Represents service layer factory designed by Factory pattern, based on Singleton,
+ * which provides an abstraction.
+ * 
+ * @author mariya
+ *
+ */
 public class ServiceFactory {
 	private static final ServiceFactory instance = new ServiceFactory();
 

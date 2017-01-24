@@ -1,8 +1,8 @@
 package by.tr.totalizator.dao.exception;
 
 /**
- * Thrown when an exceptional arithmetic condition has occurred. For example,
- * problems with data source or connection pool has occur
+ * Thrown when an exceptional situation with data source has occurred. For
+ * example, problems with data source or connection pool has occur.
  * 
  * @author Mariya Bystrova
  *

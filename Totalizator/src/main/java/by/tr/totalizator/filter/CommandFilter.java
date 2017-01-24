@@ -16,6 +16,20 @@ import org.apache.logging.log4j.Logger;
 import by.tr.totalizator.command.CommandName;
 import by.tr.totalizator.controller.PageName;
 
+/**
+ * Represents a filter to process the request before it is passed to the servlet
+ * and to check matching the command and available handling method.
+ * <p>
+ * Blocks the further going of the request-response objects in case of
+ * mismatching of comand's actual method and the method declared in the system.
+ * </p>
+ * <p>
+ * In case of mismatching request forwards to the ERROR page.
+ * </p>
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class CommandFilter implements Filter {
 	private final static Logger logger = LogManager.getLogger(CommandFilter.class.getName());
 	private final static String COMMAND = "command";
@@ -26,6 +40,18 @@ public class CommandFilter implements Filter {
 	public void destroy() {
 	}
 
+	/**
+	 * Performs pre-processing of the request before it is passed to the
+	 * servlet.
+	 * <p>
+	 * Blocks the further going of the request-response objects in case of
+	 * mismatching of comand's actual method and the method declared in the
+	 * system.
+	 * </p>
+	 * <p>
+	 * In case of mismatching request forwards to the ERROR page.
+	 * </p>
+	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 

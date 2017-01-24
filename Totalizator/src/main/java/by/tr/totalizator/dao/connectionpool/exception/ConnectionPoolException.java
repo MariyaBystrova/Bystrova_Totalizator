@@ -1,5 +1,12 @@
 package by.tr.totalizator.dao.connectionpool.exception;
 
+/**
+ * Thrown when an exceptional situation with connection pool has occurred. For
+ * example, problems with getting connection has occur.
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public class ConnectionPoolException extends Exception {
 	private static final long serialVersionUID = 1L;
 
