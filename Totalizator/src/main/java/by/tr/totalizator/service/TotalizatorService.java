@@ -200,7 +200,7 @@ public interface TotalizatorService {
 	 * @throws ServiceDataException
 	 *             if a problem with invalid data has occur.
 	 */
-	boolean editMatchResStatus(MatchDTO match) throws ServiceException, ServiceDataException;
+	boolean editMatchResStatus(MatchDTO matchDTO) throws ServiceException, ServiceDataException;
 
 	/**
 	 * Provides the correct calculation of winnings.

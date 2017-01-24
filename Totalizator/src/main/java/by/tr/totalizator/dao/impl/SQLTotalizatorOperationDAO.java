@@ -340,7 +340,7 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 	 *             occur.
 	 */
 	@Override
-	public boolean registerBet(Map<String, String> res, int amount, String creditCardNumber, int userId, int couponId)
+	public boolean registerBet(Map<String, String> resultMap, int amount, String creditCardNumber, int userId, int couponId)
 			throws DAOException {
 
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -381,7 +381,7 @@ public class SQLTotalizatorOperationDAO implements TotalizatorOperationDAO {
 				ps = con.prepareStatement(StatementTotalizator.INSERT_INTO_USER_BET_DETAIL);
 				ps.setInt(1, betId);
 				ps.setInt(2, matchId.get(i));
-				ps.setString(3, res.get(RESULT + new Integer(i + 1).toString()));
+				ps.setString(3, resultMap.get(RESULT + new Integer(i + 1).toString()));
 				ps.executeUpdate();
 			}
 

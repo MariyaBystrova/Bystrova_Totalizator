@@ -11,7 +11,7 @@ import by.tr.totalizator.dao.exception.DAOException;
 import by.tr.totalizator.entity.bean.User;
 
 /**
- * Represents an implementation of {@link by.tr.totalizator.dao.UserOperationDAO
+ * Represents an implementation of {@link by.tr.totalizator.dao.UserOperationDAO}
  * with a proper realization of all methods for the database.
  * 
  * @author Mariya Bystrova

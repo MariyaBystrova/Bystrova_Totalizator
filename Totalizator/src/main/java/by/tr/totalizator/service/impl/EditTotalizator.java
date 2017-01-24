@@ -381,16 +381,16 @@ public class EditTotalizator implements TotalizatorService {
 	 *             if a problem with invalid data has occur.
 	 */
 	@Override
-	public boolean editMatchResStatus(MatchDTO match) throws ServiceException, ServiceDataException {
+	public boolean editMatchResStatus(MatchDTO matchDTO) throws ServiceException, ServiceDataException {
 		Timestamp start;
 		Timestamp end;
 
-		match.setStartDate(formatDate(match.getStartDate()));
-		match.setEndDate(formatDate(match.getEndDate()));
+		matchDTO.setStartDate(formatDate(matchDTO.getStartDate()));
+		matchDTO.setEndDate(formatDate(matchDTO.getEndDate()));
 
-		if (Validator.validateMatchDatesResultStatus(match)) {
-			start = Timestamp.valueOf(match.getStartDate());
-			end = Timestamp.valueOf(match.getEndDate());
+		if (Validator.validateMatchDatesResultStatus(matchDTO)) {
+			start = Timestamp.valueOf(matchDTO.getStartDate());
+			end = Timestamp.valueOf(matchDTO.getEndDate());
 		} else {
 			throw new ServiceDataException("Invalid data.");
 		}
@@ -398,12 +398,12 @@ public class EditTotalizator implements TotalizatorService {
 		Match matchEntity = new Match();
 		matchEntity.setStartDate(start);
 		matchEntity.setEndDate(end);
-		if (!match.getResult().equals("NULL")) {
-			matchEntity.setResult(match.getResult());
+		if (!matchDTO.getResult().equals("NULL")) {
+			matchEntity.setResult(matchDTO.getResult());
 		}
-		matchEntity.setStatus(Integer.parseInt(match.getStatus()));
-		if (match.getId() != null) {
-			matchEntity.setId(Integer.parseInt(match.getId()));
+		matchEntity.setStatus(Integer.parseInt(matchDTO.getStatus()));
+		if (matchDTO.getId() != null) {
+			matchEntity.setId(Integer.parseInt(matchDTO.getId()));
 		}
 
 		DAOFactory factory = DAOFactory.getInstance();
