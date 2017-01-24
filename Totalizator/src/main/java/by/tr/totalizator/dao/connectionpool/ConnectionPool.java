@@ -1,4 +1,5 @@
 package by.tr.totalizator.dao.connectionpool;
+
 import java.sql.Array;
 import java.sql.Blob;
 import java.sql.CallableStatement;
@@ -28,19 +29,56 @@ import org.apache.logging.log4j.Logger;
 
 import by.tr.totalizator.dao.connectionpool.exception.ConnectionPoolException;
 
-
+/**
+ * Represents a thread-safe connection pool with an insure capacity 5 which
+ * might be increased to the determined number. Store the open connections to
+ * have an ability .
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public final class ConnectionPool {
 	private final static Logger logger = LogManager.getLogger(ConnectionPool.class.getName());
-	private BlockingQueue<Connection> connectionQueue;
-	private BlockingQueue<Connection> givenAwayConQueue;
+	/**
+	 * A thread-safe queue which contains a range of available connections.
+	 */
+	private BlockingQueue<Connection> availableConnectionQueue;
+	/**
+	 * A thread-safe queue which contains a range of busy(given away)
+	 * connections.
+	 */
+	private BlockingQueue<Connection> givenAwayConnectionQueue;
+	/**
+	 * Driver's name for database connectivity.
+	 */
 	private String driverName;
+	/**
+	 * A database url of the form <code>jdbc:subprotocol:subname</code>.
+	 */
 	private String url;
+	/**
+	 * The database user on whose behalf the connection is being made.
+	 */
 	private String user;
+	/**
+	 * The user's password.
+	 */
 	private String password;
+	/**
+	 * Pool's capacity.
+	 */
 	private int poolSize;
+	/**
+	 * An instance of ConnectionPool object.
+	 */
 	private static ConnectionPool instance;
-	
 
+	/**
+	 * Creates an object of the ConnectionPool configured according to the
+	 * {@link by.tr.totalizator.dao.connectionpool.DBResourceManager}. In case
+	 * of {@link java.lang.NumberFormatException} while parsing a String value
+	 * as an Integer, sets <code>poolSize</code> as 5.
+	 */
 	private ConnectionPool() {
 		DBResourceManager dbResourseManager = DBResourceManager.getInstance();
 		this.driverName = dbResourseManager.getValue(DBParameter.DB_DRIVER);
@@ -53,51 +91,94 @@ public final class ConnectionPool {
 			poolSize = 5;
 		}
 	}
-	
-	public final static ConnectionPool getInstance(){
-		if(null == instance){
+
+	/**
+	 * Returns an instance of the ConnectionPool.
+	 * 
+	 * @return an instance of the ConnectionPool.
+	 */
+	public final static ConnectionPool getInstance() {
+		if (null == instance) {
 			instance = new ConnectionPool();
 		}
 		return instance;
-		
+
 	}
 
+	/**
+	 * Initializes the connection pool's fields.
+	 * <p>
+	 * Loads the driver to the memory.
+	 * </p>
+	 * <p>
+	 * Creates an object of the {@link java.sql.Connection} and wraps it into
+	 * the
+	 * {@link by.tr.totalizator.dao.connectionpool.ConnectionPool.PooledConnection}.
+	 * Sets all available connections into the
+	 * <code>availableConnectionQueue</code>.
+	 * </p>
+	 * 
+	 * @throws ConnectionPoolException
+	 *             if a database access error occurs or the url is null.
+	 */
 	public void initPoolData() throws ConnectionPoolException {
 		Locale.setDefault(Locale.ENGLISH);
 		try {
-			Class.forName(driverName);														//loading driver to memory
-			givenAwayConQueue = new ArrayBlockingQueue<Connection>(poolSize);
-			connectionQueue = new ArrayBlockingQueue<Connection>(poolSize);
+			Class.forName(driverName);
+			givenAwayConnectionQueue = new ArrayBlockingQueue<Connection>(poolSize);
+			availableConnectionQueue = new ArrayBlockingQueue<Connection>(poolSize);
 			for (int i = 0; i < poolSize; i++) {
 				Connection connection = DriverManager.getConnection(url, user, password);
-				PooledConnection pooledConnection = new PooledConnection(connection);		//wrapping to written class
-				connectionQueue.add(pooledConnection);
+				PooledConnection pooledConnection = new PooledConnection(connection);
+				availableConnectionQueue.add(pooledConnection);
 			}
 		} catch (SQLException e) {
-			throw new ConnectionPoolException("SQLException in ConnectionPool", e);			
+			throw new ConnectionPoolException("SQLException in ConnectionPool", e);
 		} catch (ClassNotFoundException e) {
 			throw new ConnectionPoolException("Can't find database driver class", e);
 		}
 	}
 
+	/**
+	 * Disposes the pool's connection queue.
+	 */
 	public void dispose() {
 		clearConnectionQueue();
 	}
 
+	/**
+	 * Closes and removes all connections from both queues.
+	 */
 	private void clearConnectionQueue() {
 		try {
-			closeConnectionsQueue(givenAwayConQueue);
-			closeConnectionsQueue(connectionQueue);
+			closeConnectionsQueue(givenAwayConnectionQueue);
+			closeConnectionsQueue(availableConnectionQueue);
 		} catch (SQLException e) {
-			logger.error("Error closing the connection.", e);			
+			logger.error("Error closing the connection.", e);
 		}
 	}
 
+	/**
+	 * Returns an available connection.
+	 * <p>
+	 * Removes the connection from available connection's queue and inserts into
+	 * the given away connection's queue.
+	 * </p>
+	 * <p>
+	 * A thread-safe queues are waiting if necessary until an element becomes
+	 * available.
+	 * </p>
+	 * 
+	 * @return
+	 * @throws ConnectionPoolException
+	 *             if {@link java.util.concurrent.BlockingQueue} is interrupted
+	 *             while waiting.
+	 */
 	public Connection takeConnection() throws ConnectionPoolException {
 		Connection connection = null;
 		try {
-			connection = connectionQueue.take();
-			givenAwayConQueue.add(connection);
+			connection = availableConnectionQueue.take();
+			givenAwayConnectionQueue.add(connection);
 		} catch (InterruptedException e) {
 			throw new ConnectionPoolException("Error connecting to the data source.", e);
 		}
@@ -111,7 +192,7 @@ public final class ConnectionPool {
 			logger.error("Connection isn't return to the pool.");
 		}
 	}
-	
+
 	public void closeConnection(Connection con, Statement st, ResultSet rs) {
 		try {
 			con.close();
@@ -129,7 +210,7 @@ public final class ConnectionPool {
 			logger.error("Statement isn't closed.");
 		}
 	}
-	
+
 	public void closeConnection(Connection con, PreparedStatement pst, ResultSet rs) {
 		try {
 			con.close();
@@ -173,7 +254,15 @@ public final class ConnectionPool {
 			logger.error("PreparedStatement isn't closed.");
 		}
 	}
-	
+
+	/**
+	 * Truly closes and removes all connections, in the specified queue.
+	 * 
+	 * @param queue
+	 *            a value of BlockingQueue containing connections to be closed.
+	 * @throws SQLException
+	 *             if a database access error occurs.
+	 */
 	private void closeConnectionsQueue(BlockingQueue<Connection> queue) throws SQLException {
 		Connection connection;
 		while ((connection = queue.poll()) != null) {
@@ -184,34 +273,67 @@ public final class ConnectionPool {
 		}
 	}
 
-	
-	
-	
-	
-////////////	
-	
-	
-	
-	
-	
-	
+	/**
+	 * Represents an inner class which implements the
+	 * {@link java.sql.Connection} and changes the behavior of close method.
+	 * 
+	 * The method close() removes the connection from given away connection's
+	 * queue and returns the connection to the connection pool's queue for the
+	 * available connections.
+	 * 
+	 * Adds the method for truly closing the connection
+	 * (@{by.tr.totalizator.dao.connectionpool.ConnectionPool.PooledConnection#reallyClose}).
+	 * 
+	 * @author Mariya Bustrova
+	 *
+	 */
 	private class PooledConnection implements Connection {
 		private Connection connection;
 
+		/**
+		 * Creates an object of PooledConnection, which wraps
+		 * {@link java.sql.Connection}. Sets this connection's auto-commit mode
+		 * to the active state.
+		 * 
+		 * @param c
+		 *            a value of the {@link java.sql.Connection}.
+		 * @throws SQLException
+		 *             if a database access error occurs.
+		 */
 		public PooledConnection(Connection c) throws SQLException {
 			this.connection = c;
 			this.connection.setAutoCommit(true);
 		}
 
+		/**
+		 * Truly closes the connection, not passes it to the active connection's
+		 * queue.
+		 * 
+		 * @throws SQLException
+		 *             if a database access error occurs.
+		 */
 		public void reallyClose() throws SQLException {
 			connection.close();
 		}
 
-		@Override
-		public void clearWarnings() throws SQLException {
-			connection.clearWarnings();
-		}
-
+		/**
+		 * Overriding version of this method which releases the connection
+		 * without closing it.
+		 * <p>
+		 * Removes the connection from given away connection's queue and returns
+		 * the connection to the connection pool's queue for the available
+		 * connections
+		 * </p>
+		 * <p>
+		 * Puts this connection in read-only mode.
+		 * </p>
+		 * 
+		 * @throws SQLException
+		 *             if this method is called on a closed connection or this
+		 *             method is called during a transaction or if the problems
+		 *             with removing or inserting the connection to the
+		 *             appropriate queue.
+		 */
 		@Override
 		public void close() throws SQLException {
 			if (connection.isClosed()) {
@@ -220,12 +342,17 @@ public final class ConnectionPool {
 			if (connection.isReadOnly()) {
 				connection.setReadOnly(false);
 			}
-			if (!givenAwayConQueue.remove(this)) {
+			if (!givenAwayConnectionQueue.remove(this)) {
 				throw new SQLException("Error deleting connection from the given away connections pool.");
 			}
-			if (!connectionQueue.offer(this)) {
+			if (!availableConnectionQueue.offer(this)) {
 				throw new SQLException("Error allocating connection in the pool.");
 			}
+		}
+
+		@Override
+		public void clearWarnings() throws SQLException {
+			connection.clearWarnings();
 		}
 
 		@Override

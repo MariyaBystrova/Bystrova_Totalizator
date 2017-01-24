@@ -18,7 +18,7 @@
 		<url-pattern>/Controller</url-pattern>
 	</servlet-mapping>
 	<listener>
-		<listener-class>by.tr.totalizator.listener.ConnectionPoolListener</listener-class>
+		<listener-class>by.tr.totalizator.listener.SourceInitListener</listener-class>
 	</listener>
 	<listener>
 		<listener-class>by.tr.totalizator.listener.MessageListener</listener-class>

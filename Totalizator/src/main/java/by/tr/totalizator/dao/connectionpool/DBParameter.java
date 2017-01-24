@@ -1,5 +1,11 @@
 package by.tr.totalizator.dao.connectionpool;
 
+/**
+ * A range of keys for database configurations bundle file.
+ * 
+ * @author Mariya Bystrova
+ *
+ */
 public final class DBParameter {
 	public static final String DB_DRIVER = "db.driver";
 	public static final String DB_URL = "db.url";

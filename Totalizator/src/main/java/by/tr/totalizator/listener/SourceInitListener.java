@@ -11,9 +11,9 @@ import by.tr.totalizator.command.SourceInitCommand;
  * @author Mariya Bystrova
  *
  */
-public class ConnectionPoolListener implements ServletContextListener {
+public class SourceInitListener implements ServletContextListener {
 
-	public ConnectionPoolListener() {
+	public SourceInitListener() {
 	}
 
 	/**
