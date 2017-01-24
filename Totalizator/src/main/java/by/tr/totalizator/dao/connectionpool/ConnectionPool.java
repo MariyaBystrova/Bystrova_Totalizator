@@ -169,7 +169,7 @@ public final class ConnectionPool {
 	 * available.
 	 * </p>
 	 * 
-	 * @return
+	 * @return an available connection.
 	 * @throws ConnectionPoolException
 	 *             if {@link java.util.concurrent.BlockingQueue} is interrupted
 	 *             while waiting.

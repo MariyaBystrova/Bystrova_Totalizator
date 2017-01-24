@@ -383,11 +383,11 @@ public final class Validator {
 	/**
 	 * Validates input parameters according to the following rules:
 	 * <p>
-	 * 1. A number of elements in the <code>params<code> must be equals or
+	 * 1. A number of elements in the <code>params</code> must be equals or
 	 * greater then 15.
 	 * </p>
 	 * <p>
-	 * 2. A key values in the Map <code>params<code> must have values "1", "2"
+	 * 2. A key values in the Map <code>params</code> must have values "1", "2"
 	 * or "x".
 	 * </p>
 	 * <p>
@@ -401,15 +401,15 @@ public final class Validator {
 	 * 0.
 	 * </p>
 	 * 
-	 * &#64;param params
+	 * @param params
 	 *            a Map representing bet's results to be validated.
-	 * &#64;param amount
+	 * @param amount
 	 *            a money amount to be validated.
-	 * &#64;param creditCardNumber
+	 * @param creditCardNumber
 	 *            a credit card number to be validated.
-	 * &#64;param userId
+	 * @param userId
 	 *            a value of user's unique identifier to be validated.
-	 * &#64;param couponId
+	 * @param couponId
 	 *            a value of coupon's unique identifier to be validated.
 	 * @return <code>true</code>, if validation passes, and <code>false</code>
 	 *         otherwise.
