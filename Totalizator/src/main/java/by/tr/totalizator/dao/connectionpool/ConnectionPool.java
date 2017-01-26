@@ -9,7 +9,6 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.NClob;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
@@ -185,73 +184,17 @@ public final class ConnectionPool {
 		return connection;
 	}
 
+	/**
+	 * Returns the connection to the available connection's queue.
+	 * 
+	 * @param con
+	 *            the connection to be returned.
+	 */
 	public void closeConnection(Connection con) {
 		try {
 			con.close();
 		} catch (SQLException e) {
 			logger.error("Connection isn't return to the pool.");
-		}
-	}
-
-	public void closeConnection(Connection con, Statement st, ResultSet rs) {
-		try {
-			con.close();
-		} catch (SQLException e) {
-			logger.error("Connection isn't return to the pool.");
-		}
-		try {
-			rs.close();
-		} catch (SQLException e) {
-			logger.error("ResultSet isn't closed.");
-		}
-		try {
-			st.close();
-		} catch (SQLException e) {
-			logger.error("Statement isn't closed.");
-		}
-	}
-
-	public void closeConnection(Connection con, PreparedStatement pst, ResultSet rs) {
-		try {
-			con.close();
-		} catch (SQLException e) {
-			logger.error("Connection isn't return to the pool.");
-		}
-		try {
-			rs.close();
-		} catch (SQLException e) {
-			logger.error("ResultSet isn't closed.");
-		}
-		try {
-			pst.close();
-		} catch (SQLException e) {
-			logger.error("PreparedStatement isn't closed.");
-		}
-	}
-
-	public void closeConnection(Connection con, Statement st) {
-		try {
-			con.close();
-		} catch (SQLException e) {
-			logger.error("Connection isn't return to the pool.");
-		}
-		try {
-			st.close();
-		} catch (SQLException e) {
-			logger.error("Statement isn't closed.");
-		}
-	}
-
-	public void closeConnection(Connection con, PreparedStatement pst) {
-		try {
-			con.close();
-		} catch (SQLException e) {
-			logger.error("Connection isn't return to the pool.");
-		}
-		try {
-			pst.close();
-		} catch (SQLException e) {
-			logger.error("PreparedStatement isn't closed.");
 		}
 	}
 

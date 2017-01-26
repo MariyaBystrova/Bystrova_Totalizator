@@ -11,6 +11,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import by.tr.totalizator.command.SourceInitCommand;
@@ -21,6 +22,7 @@ import by.tr.totalizator.dao.factory.DAOFactory;
 import by.tr.totalizator.entity.bean.User;
 import by.tr.totalizator.service.impl.util.HashMd5Coder;
 
+@Ignore
 public class SQLUserOperationDAOTest {
 
 	private static java.sql.Connection con = null;

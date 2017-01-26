@@ -30,8 +30,8 @@ public interface UserService {
 	 * @param userDTO
 	 *            a DTO value of {@link by.tr.totalizator.entity.dto.UserDTO}
 	 *            object to be created.
-	 * @return a boolean value <code>true</code>, if user is created and
-	 *         <code>false</code>, if registration failed.
+	 * @return a boolean value {@code true}, if user is created and
+	 *         {@code false}, if registration failed.
 	 * @throws ServiceException
 	 *             if a problem with data source or connection pool has occur.
 	 * @throws ServiceDataException
@@ -84,8 +84,8 @@ public interface UserService {
 	 * @param userId
 	 *            a value of user's unique identifier, representing the user to
 	 *            be changed.
-	 * @return a boolean value <code>true</code> in case of successful edit and
-	 *         <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful edit and
+	 *         {@code false} otherwise.
 	 * @throws ServiceException
 	 *             if a problem with data source or connection pool has occur.
 	 * @throws ServiceDataException

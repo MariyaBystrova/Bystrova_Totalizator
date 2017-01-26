@@ -99,8 +99,8 @@ public interface TotalizatorService {
 	 *            a string value for coupon's end date.
 	 * @param minBetAmount
 	 *            a value for coupon's minimal bet money amount.
-	 * @return a boolean value <code>true</code>in case of successful
-	 *         registration and <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful registration
+	 *         and {@code false} otherwise.
 	 * @throws ServiceException
 	 *             if a problem with data source or connection pool has occur.
 	 * @throws ServiceDataException
@@ -120,8 +120,8 @@ public interface TotalizatorService {
 	 * @param bean
 	 *            a value of {@link by.tr.totalizator.entity.dto.RegisterBetDTO}
 	 *            with data for making a bet.
-	 * @return a boolean value <code>true</code>in case of successful
-	 *         registration and <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful registration
+	 *         and {@code false} otherwise.
 	 * @throws ServiceException
 	 *             if a problem with data source or connection pool has occur.
 	 * @throws ServiceDataException
@@ -140,8 +140,8 @@ public interface TotalizatorService {
 	 * @param matchDTO
 	 *            a value of {@link by.tr.totalizator.entity.dto.MatchDTO} to
 	 *            register a new match.
-	 * @return a boolean value <code>true</code>in case of successful
-	 *         registration and <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful registration
+	 *         and {@code false} otherwise.
 	 * @throws ServiceException
 	 *             if a problem with data source or connection pool has occur.
 	 * @throws ServiceDataException
@@ -160,8 +160,8 @@ public interface TotalizatorService {
 	 * @param matchDTO
 	 *            a value of {@link by.tr.totalizator.entity.dto.MatchDTO} to
 	 *            edit.
-	 * @return a boolean value <code>true</code>in case of successful edit and
-	 *         <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful edit and
+	 *         {@code false} otherwise.
 	 * @throws ServiceException
 	 *             if a problem with data source or connection pool has occur.
 	 * @throws ServiceDataException
@@ -193,8 +193,8 @@ public interface TotalizatorService {
 	 * @param matchDTO
 	 *            a value of {@link by.tr.totalizator.entity.dto.MatchDTO} to
 	 *            edit.
-	 * @return a boolean value <code>true</code>in case of successful edit and
-	 *         <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful edit and
+	 *         {@code false} otherwise.
 	 * @throws ServiceException
 	 *             if a problem with data source or connection pool has occur.
 	 * @throws ServiceDataException
@@ -212,8 +212,8 @@ public interface TotalizatorService {
 	 * 
 	 * @param couponId
 	 *            a String value for coupon id.
-	 * @return a boolean value <code>true</code>in case of successful
-	 *         calculation and <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful calculation
+	 *         and {@code false} otherwise.
 	 * @throws NotAllFinishedMatchesServiceException
 	 *             if not all matches matching to this coupon has their results.
 	 * @throws ServiceException
@@ -268,8 +268,8 @@ public interface TotalizatorService {
 	 * @param couponDTO
 	 *            a value of {@link by.tr.totalizator.entity.dto.MatchDTO} to
 	 *            edit.
-	 * @return a boolean value <code>true</code>in case of successful edit and
-	 *         <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful edit and
+	 *         {@code false} otherwise.
 	 * @throws ServiceException
 	 *             if a problem with data source or connection pool has occur.
 	 * @throws ServiceDataException

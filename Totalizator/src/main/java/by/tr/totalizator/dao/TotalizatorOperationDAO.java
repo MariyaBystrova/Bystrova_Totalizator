@@ -10,8 +10,8 @@ import by.tr.totalizator.entity.bean.Coupon;
 import by.tr.totalizator.entity.bean.Match;
 
 /**
- * Represents an interface TotalizatorOperationDAO, implementation of which provides a
- * proper work with the specific data source.
+ * Represents an interface TotalizatorOperationDAO, implementation of which
+ * provides a proper work with the specific data source.
  * 
  * @author Mariya Bystrova
  *
@@ -79,8 +79,8 @@ public interface TotalizatorOperationDAO {
 	 *            time.
 	 * @param minBetAmount
 	 *            a value for coupon's minimal bet money amount.
-	 * @return a boolean value <code>true</code>in case of successful
-	 *         registration and <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful registration
+	 *         and {@code false} otherwise.
 	 * @throws DAOException
 	 *             if some problems with data source or connection pool has
 	 *             occur.
@@ -93,8 +93,8 @@ public interface TotalizatorOperationDAO {
 	 * @param match
 	 *            a value of {@link by.tr.totalizator.entity.bean.Match} object
 	 *            to be created.
-	 * @return a boolean value <code>true</code>in case of successful
-	 *         registration and <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful registration
+	 *         and {@code false} otherwise.
 	 * @throws DAOException
 	 *             if some problems with data source or connection pool has
 	 *             occur.
@@ -107,8 +107,8 @@ public interface TotalizatorOperationDAO {
 	 * @param match
 	 *            a value of {@link by.tr.totalizator.entity.bean.Match} object
 	 *            to be changed.
-	 * @return a boolean value <code>true</code>in case of successful update and
-	 *         <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful update and
+	 *         {@code false} otherwise.
 	 * @throws DAOException
 	 *             if some problems with data source or connection pool has
 	 *             occur.
@@ -132,8 +132,8 @@ public interface TotalizatorOperationDAO {
 	 * @param couponId
 	 *            a value of coupon's unique identifier, representing the coupon
 	 *            to make bet to.
-	 * @return a boolean value <code>true</code>in case of successful
-	 *         registration and <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful registration
+	 *         and {@code false} otherwise.
 	 * @throws DAOException
 	 *             if some problems with data source or connection pool has
 	 *             occur.
@@ -161,8 +161,8 @@ public interface TotalizatorOperationDAO {
 	 * @param match
 	 *            a value of {@link by.tr.totalizator.entity.bean.Match} object
 	 *            to be changed.
-	 * @return a boolean value <code>true</code>in case of successful edit and
-	 *         <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful edit and
+	 *         {@code false} otherwise.
 	 * @throws DAOException
 	 *             if some problems with data source or connection pool has
 	 *             occur.
@@ -176,8 +176,8 @@ public interface TotalizatorOperationDAO {
 	 * @param couponId
 	 *            a value of unique identifier, representing the coupon to be
 	 *            closed.
-	 * @return a boolean value <code>true</code>in case of successful edit and
-	 *         <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful edit and
+	 *         {@code false} otherwise.
 	 * @throws NotAllFinishedMatchesDAOException
 	 *             if not all matches matching to this coupon has their results.
 	 * @throws DAOException
@@ -222,8 +222,8 @@ public interface TotalizatorOperationDAO {
 	 * @param coupon
 	 *            a value of {@link by.tr.totalizator.entity.bean.Coupon} object
 	 *            to be changed.
-	 * @return a boolean value <code>true</code>in case of successful edit and
-	 *         <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful edit and
+	 *         {@code false} otherwise.
 	 * @throws DAOException
 	 *             if some problems with data source or connection pool has
 	 *             occur.

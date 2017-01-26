@@ -19,7 +19,7 @@ import by.tr.totalizator.entity.dto.UserDTO;
 public final class Validator {
 
 	private final static String LOGIN_PATTERN = "\\w+";
-	private final static String NAME_PATTERN = "[a-zA-Z]+";
+	private final static String NAME_PATTERN = "[a-zA-Zа-яА-Я]+";
 	private final static String EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z0-9-]+\\.[a-z]{2,}";
 	private final static String DATE_PATTERN = "([1-9]\\d{3})-([1-9]|([0-1][0-2])|(0[1-9]))-([1-9]|([0-3]\\d)) (\\d{2}):(\\d{2}):(\\d{2})(.\\d)*";
 	private final static String TEXT_PATTERN = "[\\w\\s-\\.:]+";
@@ -43,8 +43,7 @@ public final class Validator {
 	 *            a value of login to be validated.
 	 * @param password
 	 *            a value of password to be validated.
-	 * @return <code>true</code>, if validation passes, and <code>false</code>
-	 *         otherwise.
+	 * @return {@code true}, if validation passes, and {@code false} otherwise.
 	 */
 	public static boolean authenticationValidator(String login, byte[] password) {
 		if (login.isEmpty() || !matcher(LOGIN_PATTERN, login)) {
@@ -86,8 +85,7 @@ public final class Validator {
 	 * 
 	 * @param user
 	 *            a value of DTO user's object to be validated.
-	 * @return <code>true</code>, if validation passes, and <code>false</code>
-	 *         otherwise.
+	 * @return {@code true}, if validation passes, and {@code false} otherwise.
 	 */
 	public static boolean registrationValidator(UserDTO user) {
 
@@ -140,8 +138,7 @@ public final class Validator {
 	 * 
 	 * @param user
 	 *            a value of DTO user's object to be validated.
-	 * @return <code>true</code>, if validation passes, and <code>false</code>
-	 *         otherwise.
+	 * @return {@code true}, if validation passes, and {@code false} otherwise.
 	 */
 	public static boolean userPersonalInfoValidator(UserDTO user) {
 		if (user.getFirstName().isEmpty() || !matcher(NAME_PATTERN, user.getFirstName())) {
@@ -179,8 +176,7 @@ public final class Validator {
 	 *            a repeated value of password.
 	 * @param id
 	 *            a value of unique identifier.
-	 * @return <code>true</code>, if validation passes, and <code>false</code>
-	 *         otherwise.
+	 * @return {@code true}, if validation passes, and {@code false} otherwise.
 	 */
 	public static boolean userAccountInfoValidator(byte[] password, byte[] rpassword, int id) {
 		if (!Arrays.equals(password, rpassword) || (password.length < 1)) {
@@ -209,8 +205,7 @@ public final class Validator {
 	 *            a String value of end date and time.
 	 * @param minBetAmount
 	 *            a value of minimal bet money amount.
-	 * @return <code>true</code>, if validation passes, and <code>false</code>
-	 *         otherwise.
+	 * @return {@code true}, if validation passes, and {@code false} otherwise.
 	 */
 	public static boolean validateCoupon(String startDate, String endDate, int minBetAmount) {
 		if (!validateDate(startDate)) {
@@ -247,8 +242,7 @@ public final class Validator {
 	 * 
 	 * @param coupon
 	 *            a value of coupon's DTO to be validated.
-	 * @return <code>true</code>, if validation passes, and <code>false</code>
-	 *         otherwise.
+	 * @return {@code true}, if validation passes, and {@code false} otherwise.
 	 */
 	public static boolean validateCoupon(CouponDTO coupon) {
 		if (!validateDate(coupon.getStartDate())) {
@@ -280,8 +274,7 @@ public final class Validator {
 	 * 
 	 * @param couponId
 	 *            a String value of unique identifier to be validated.
-	 * @return <code>true</code>, if validation passes, and <code>false</code>
-	 *         otherwise.
+	 * @return {@code true}, if validation passes, and {@code false} otherwise.
 	 */
 	public static boolean validateCouponId(String couponId) {
 		if (!matcher(GREATER_THEN_ZERO_PATTERN, couponId)) {
@@ -306,8 +299,7 @@ public final class Validator {
 	 * 
 	 * @param match
 	 *            a value of match's DTO to be validated.
-	 * @return <code>true</code>, if validation passes, and <code>false</code>
-	 *         otherwise.
+	 * @return {@code true}, if validation passes, and {@code false} otherwise.
 	 */
 	public static boolean validateMatch(MatchDTO match) {
 		if (match.getCouponId() != null) {
@@ -354,8 +346,7 @@ public final class Validator {
 	 * 
 	 * @param match
 	 *            a value of match's DTO to be validated.
-	 * @return <code>true</code>, if validation passes, and <code>false</code>
-	 *         otherwise.
+	 * @return {@code true}, if validation passes, and {@code false} otherwise.
 	 */
 	public static boolean validateMatchDatesResultStatus(MatchDTO match) {
 		if (match.getId() != null) {
@@ -411,8 +402,7 @@ public final class Validator {
 	 *            a value of user's unique identifier to be validated.
 	 * @param couponId
 	 *            a value of coupon's unique identifier to be validated.
-	 * @return <code>true</code>, if validation passes, and <code>false</code>
-	 *         otherwise.
+	 * @return {@code true}, if validation passes, and {@code false} otherwise.
 	 */
 	public static boolean validateBet(Map<String, String> params, int amount, String creditCardNumber, int userId,
 			String couponId) {

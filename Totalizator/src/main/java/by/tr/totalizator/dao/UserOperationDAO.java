@@ -18,8 +18,8 @@ public interface UserOperationDAO {
 	 *            a value of user object to be created.
 	 * @param password
 	 *            a hash value of password.
-	 * @return a boolean value <code>true</code>, if user is created and
-	 *         <code>false</code>, if registration failed.
+	 * @return a boolean value {@code true}, if user is created and
+	 *         {@code false}, if registration failed.
 	 * @throws DAOException
 	 *             if a problem with data source or connection pool has
 	 *             occur.
@@ -47,8 +47,8 @@ public interface UserOperationDAO {
 	 *            be changed.
 	 * @param password
 	 *            a hash value of password to change.
-	 * @return a boolean value <code>true</code> in case of successful edit and
-	 *         <code>false</code> otherwise.
+	 * @return a boolean value {@code true} in case of successful edit and
+	 *         {@code false} otherwise.
 	 * @throws DAOException
 	 *             if a problem with data source or connection pool has
 	 *             occur.
