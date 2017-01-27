@@ -12,10 +12,7 @@
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-
-<title>Welcome admin</title>
-
+	
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
 <fmt:message bundle="${loc}" key="local.ru" var="ru" />
@@ -28,6 +25,10 @@
 <fmt:message bundle="${loc}" key="local.edit_match_results" var="edit_match_results" />
 <fmt:message bundle="${loc}" key="local.show_all_coupons" var="show_all_coupons" />
 <fmt:message bundle="${loc}" key="local.hello_admin" var="hello_admin" />
+<fmt:message bundle="${loc}" key="local.welcome_admin"
+	var="title" />
+
+<title><c:out value="${title}" /></title>
 
 <link rel="stylesheet" type="text/css" href="CSS/admin-style.css">
 

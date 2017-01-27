@@ -10,6 +10,7 @@ import by.tr.totalizator.command.impl.UnknownCommand;
 import by.tr.totalizator.command.impl.admin.AdminGoToGeneralCommand;
 import by.tr.totalizator.command.impl.admin.CloseCouponCommand;
 import by.tr.totalizator.command.impl.admin.CreateMatchCommand;
+import by.tr.totalizator.command.impl.admin.DeleteCouponCommand;
 import by.tr.totalizator.command.impl.admin.EditCouponInfoCommand;
 import by.tr.totalizator.command.impl.admin.GoToEditCouponInfoCommand;
 import by.tr.totalizator.command.impl.admin.GoToEditCurrentCouponCommand;
@@ -66,7 +67,7 @@ public final class CommandProvider {
 		commands.put(CommandName.EDIT_COUPON_INFO, new EditCouponInfoCommand());
 		commands.put(CommandName.EDIT_MATCH, new EditMatchCommand());
 		commands.put(CommandName.EDIT_MATCH_RESULT, new EditMatchResultCommand());
-		//commands.put(CommandName.REGISTER_MATCH, new CreateMatchCommand());
+		commands.put(CommandName.DELETE_COUPON, new DeleteCouponCommand());
 		commands.put(CommandName.CLOSE_COUPON, new CloseCouponCommand());
 
 		// general

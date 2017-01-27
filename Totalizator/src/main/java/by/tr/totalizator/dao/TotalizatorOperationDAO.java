@@ -20,7 +20,7 @@ public interface TotalizatorOperationDAO {
 	/**
 	 * Returns all matches related to a coupon represented by it's id.
 	 * 
-	 * @param cuponId
+	 * @param couponId
 	 *            a value for coupon's unique identifier.
 	 * @return a {@link java.util.List} of
 	 *         {@link by.tr.totalizator.entity.bean.Match} related to coupon id.
@@ -28,7 +28,7 @@ public interface TotalizatorOperationDAO {
 	 *             if some problems with data source or connection pool has
 	 *             occur.
 	 */
-	List<Match> getCuponMatches(int cuponId) throws DAOException;
+	List<Match> getCouponMatches(int couponId) throws DAOException;
 
 	/**
 	 * Returns all matches related to the current coupon.
@@ -229,4 +229,18 @@ public interface TotalizatorOperationDAO {
 	 *             occur.
 	 */
 	boolean editCouponInfo(Coupon coupon) throws DAOException;
+
+	/**
+	 * Deletes the coupon and it's matches from the data source.
+	 * 
+	 * @param couponId
+	 *            a value of coupon's unique identifier pointing a coupon to be
+	 *            deleted.
+	 * @return a boolean value {@code true} in case of successful edit and
+	 *         {@code false} otherwise.
+	 * @throws DAOException
+	 *             if some problems with data source or connection pool has
+	 *             occur.
+	 */
+	boolean deleteCoupon(int couponId) throws DAOException;
 }

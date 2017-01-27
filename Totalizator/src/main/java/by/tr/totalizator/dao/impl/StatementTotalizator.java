@@ -82,7 +82,8 @@ public final class StatementTotalizator {
 																							+" AND c.end_date < tmp.start_date "
 																							+"AND ((NOW()>tmp.end_date AND tmp.status_id = 5 AND tmp.real_result in ('1', '2', 'x'))"
 																							+" OR "
-																							+"(NOW()<tmp.end_date AND tmp.status_id in (2,4) AND tmp.real_result is NULL)) LIMIT 1)"
+																							+"(NOW()<tmp.end_date AND tmp.status_id in (2,4) AND tmp.real_result is NULL)"
+																								+ ") LIMIT 1)"
 																							+ " OR "
 																							+"(NOW()>tmp.end_date AND tmp.status_id = 4 AND tmp.real_result is NULL))  AS q "
 																	+"ON q.match_id=m.match_id "
@@ -97,4 +98,8 @@ public final class StatementTotalizator {
 	public final static String UPDATE_COUPON = "UPDATE `cupon`"+
 												" SET `start_date` = ?, `end_date` = ?, `min_bet_amount` = ?, `cupon_pull` = ?, `jackpot` = ?, `status_id` = ?"+
 												" WHERE `cupon_id` = ?;";
+	
+	public final static String DELETE_COUPON_MATCHES = "DELETE FROM `match` WHERE cupon_id=?;";
+	
+	public final static String DELETE_COUPON = "DELETE FROM `totalizator`.`cupon` WHERE cupon_id=? AND status_id=6;";
 }

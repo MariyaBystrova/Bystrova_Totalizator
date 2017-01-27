@@ -13,9 +13,6 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-
-<title>Edit coupon info</title>
-
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
 <fmt:message bundle="${loc}" key="local.ru" var="ru" />
@@ -39,6 +36,14 @@
 <fmt:message bundle="${loc}" key="local.status" var="status" />
 <fmt:message bundle="${loc}" key="local.edit_coupon_info_success" var="edit_coupon_info_success" />
 <fmt:message bundle="${loc}" key="local.edit_coupon_info_fail" var="edit_coupon_info_fail" />
+<fmt:message bundle="${loc}" key="local.edit_coupon"
+	var="edit_coupon" />
+<fmt:message bundle="${loc}" key="local.delete"
+	var="delete" />
+	
+
+<title><c:out value="${edit_coupon}" /></title>
+
 
 <link rel="stylesheet" type="text/css" href="CSS/admin-style.css">
 
@@ -98,7 +103,7 @@
 				<input type="hidden" name="command" value="edit-coupon-info">
 				<input type="hidden" name="coupon-id"
 					value="${requestScope.couponId}">
-				<h2>Edit coupon:</h2>
+				<h2><c:out value="${edit_coupon}" />:</h2>
 				<div>
 					<div>
 						<label for="coupon-start-date"><c:out
@@ -176,6 +181,14 @@
 				</div>
 				<input type="submit" value="${save}" class="btn btn-default">
 			</form>
+			<c:if test="${coupon.status eq 6}">
+			<form action="Controller" method="post">
+				<input type="hidden" name="command" value="delete-coupon">
+				<input type="hidden" name="coupon-id"
+					value="${requestScope.couponId}">
+					<input type="submit" value="${delete}" class="btn btn-default">
+			</form>
+			</c:if>
 		</div>
 	</div>
 </body>

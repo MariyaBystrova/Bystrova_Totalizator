@@ -251,6 +251,8 @@ function visibility() {
     document.getElementById("list-matches").style.visibility = "hidden";
     return true;
 }
+
+
 //
 //function makeEditableCouponLine(x){
 ////	alert(x);

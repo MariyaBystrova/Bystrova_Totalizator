@@ -19,8 +19,8 @@
 <fmt:message bundle="${loc}" key="local.make_bet" var="make_bet" />
 <fmt:message bundle="${loc}" key="local.amount" var="amount" />
 <fmt:message bundle="${loc}" key="local.enter_amount" var="enter_amount" />
-<fmt:message bundle="${loc}" key="local.message_coupon_add_success" var="message_success" />
-<fmt:message bundle="${loc}" key="local.message_coupon_add_failed" var="message_failed" />
+<fmt:message bundle="${loc}" key="local.message_bet_add_success" var="message_success" />
+<fmt:message bundle="${loc}" key="local.message_bet_add_failed" var="message_failed" />
 <fmt:message bundle="${loc}" key="local.wait_next_coupon" var="wait_next_coupon" />
 
 <link rel="stylesheet" type="text/css" href="CSS/style.css">

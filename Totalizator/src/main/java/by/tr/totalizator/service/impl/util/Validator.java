@@ -22,7 +22,7 @@ public final class Validator {
 	private final static String NAME_PATTERN = "[a-zA-Zа-яА-Я]+";
 	private final static String EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z0-9-]+\\.[a-z]{2,}";
 	private final static String DATE_PATTERN = "([1-9]\\d{3})-([1-9]|([0-1][0-2])|(0[1-9]))-([1-9]|([0-3]\\d)) (\\d{2}):(\\d{2}):(\\d{2})(.\\d)*";
-	private final static String TEXT_PATTERN = "[\\w\\s-\\.:]+";
+	private final static String TEXT_PATTERN = ".+";
 	private final static String GREATER_THEN_ZERO_PATTERN = "[1-9][0-9]*";
 	private final static String ZERO_OR_GREATER_PATTERN = "[0-9]+";
 	private final static String CREDIT_CARD_NUMBER_PATTERN = "[0-9]{16}";

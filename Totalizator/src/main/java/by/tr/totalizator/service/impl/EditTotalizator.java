@@ -55,7 +55,7 @@ public class EditTotalizator implements TotalizatorService {
 
 		List<Match> list = null;
 		try {
-			list = totoDAO.getCuponMatches(cuponId);
+			list = totoDAO.getCouponMatches(cuponId);
 		} catch (DAOException e) {
 			throw new ServiceException("Get coupon matches failed.", e);
 		}
@@ -160,8 +160,8 @@ public class EditTotalizator implements TotalizatorService {
 	 *            a string value for coupon's end date.
 	 * @param minBetAmount
 	 *            a value for coupon's minimal bet money amount.
-	 * @return a boolean value {@code true} in case of successful
-	 *         registration and {@code false} otherwise.
+	 * @return a boolean value {@code true} in case of successful registration
+	 *         and {@code false} otherwise.
 	 * @throws ServiceException
 	 *             if a problem with data source or connection pool has occur.
 	 * @throws ServiceDataException
@@ -209,8 +209,8 @@ public class EditTotalizator implements TotalizatorService {
 	 * @param bean
 	 *            a value of {@link by.tr.totalizator.entity.dto.RegisterBetDTO}
 	 *            with data for making a bet.
-	 * @return a boolean value {@code true} in case of successful
-	 *         registration and {@code false} otherwise.
+	 * @return a boolean value {@code true} in case of successful registration
+	 *         and {@code false} otherwise.
 	 * @throws ServiceException
 	 *             if a problem with data source or connection pool has occur.
 	 * @throws ServiceDataException
@@ -246,8 +246,8 @@ public class EditTotalizator implements TotalizatorService {
 	 * @param matchDTO
 	 *            a value of {@link by.tr.totalizator.entity.dto.MatchDTO} to
 	 *            register a new match.
-	 * @return a boolean value {@code true} in case of successful
-	 *         registration and {@code false} otherwise.
+	 * @return a boolean value {@code true} in case of successful registration
+	 *         and {@code false} otherwise.
 	 * @throws ServiceException
 	 *             if a problem with data source or connection pool has occur.
 	 * @throws ServiceDataException
@@ -429,8 +429,8 @@ public class EditTotalizator implements TotalizatorService {
 	 * 
 	 * @param couponId
 	 *            a String value for coupon id.
-	 * @return a boolean value {@code true} in case of successful
-	 *         calculation and {@code false} otherwise.
+	 * @return a boolean value {@code true} in case of successful calculation
+	 *         and {@code false} otherwise.
 	 * @throws NotAllFinishedMatchesServiceException
 	 *             if not all matches matching to this coupon has their results.
 	 * @throws ServiceException
@@ -568,6 +568,44 @@ public class EditTotalizator implements TotalizatorService {
 		} catch (DAOException e) {
 			throw new ServiceException("Edit coupon failed.", e);
 		}
+	}
+
+	/**
+	 * Deletes the coupon and it's matches.
+	 * <p>
+	 * Validates input parameter and throws
+	 * {@link by.tr.totalizator.service.exception.ServiceDataException} in case
+	 * of invalid data.
+	 * </p>
+	 * 
+	 * @param couponId
+	 *            a value of coupon's unique identifier pointing a coupon to be
+	 *            deleted.
+	 * @return a boolean value {@code true} in case of successful edit and
+	 *         {@code false} otherwise.
+	 * @throws ServiceException
+	 *             if a problem with data source or connection pool has occur.
+	 * @throws ServiceDataException
+	 *             if a problem with invalid data has occur.
+	 */
+	@Override
+	public boolean deleteCoupon(String couponId) throws ServiceException, ServiceDataException {
+		if (!Validator.validateCouponId(couponId)) {
+			throw new ServiceDataException("Invalid data.");
+		}
+
+		DAOFactory factory = DAOFactory.getInstance();
+		TotalizatorOperationDAO totoDAO = factory.getTotalizatorOperationDAO();
+
+		boolean result = false;
+		try {
+			result = totoDAO.deleteCoupon(Integer.valueOf(couponId));
+		} catch (NumberFormatException e) {
+			throw new ServiceDataException("Invalid data.");
+		} catch (DAOException e) {
+			throw new ServiceException("Delete coupon failed.", e);
+		}
+		return result;
 	}
 
 	/**

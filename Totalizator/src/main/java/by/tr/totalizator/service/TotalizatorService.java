@@ -276,4 +276,24 @@ public interface TotalizatorService {
 	 *             if a problem with invalid data has occur.
 	 */
 	boolean editCouponInfo(CouponDTO couponDTO) throws ServiceException, ServiceDataException;
+
+	/**
+	 * Deletes the coupon and it's matches.
+	 * <p>
+	 * Validates input parameter and throws
+	 * {@link by.tr.totalizator.service.exception.ServiceDataException} in case
+	 * of invalid data.
+	 * </p>
+	 * 
+	 * @param couponId
+	 *            a value of coupon's unique identifier pointing a coupon to be
+	 *            deleted.
+	 * @return a boolean value {@code true} in case of successful edit and
+	 *         {@code false} otherwise.
+	 * @throws ServiceException
+	 *             if a problem with data source or connection pool has occur.
+	 * @throws ServiceDataException
+	 *             if a problem with invalid data has occur.
+	 */
+	boolean deleteCoupon(String couponId) throws ServiceException, ServiceDataException;
 }

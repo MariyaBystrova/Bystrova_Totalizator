@@ -113,7 +113,6 @@ public class Match implements Serializable {
 		int res = 1;
 		res = prime * res + couponId;
 		res = prime * res + ((endDate == null) ? 0 : endDate.hashCode());
-		res = prime * res + id;
 		res = prime * res + ((name == null) ? 0 : name.hashCode());
 		res = prime * res + ((startDate == null) ? 0 : startDate.hashCode());
 		res = prime * res + ((teamOne == null) ? 0 : teamOne.hashCode());
@@ -145,8 +144,6 @@ public class Match implements Serializable {
 		} else if (!endDate.equals(other.endDate)) {
 			return false;
 		}
-		if (id != other.id)
-			return false;
 		if (name == null) {
 			if (other.name != null) {
 				return false;

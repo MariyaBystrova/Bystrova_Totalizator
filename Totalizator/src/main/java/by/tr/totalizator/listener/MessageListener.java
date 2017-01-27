@@ -18,6 +18,7 @@ public class MessageListener implements ServletRequestListener {
 	private final static String METHOD = "GET";
 	private final static String RESULT_ADD = "resultAdd";
 	private final static String RESULT_EDIT = "resultEdit";
+	private final static String RESULT_DELETE = "resultDelete";
 	private final static String RESULT_FINISHED_MATCHES = "resultFinishedMatches";
 	private final static String RESULT_CLOSE_COUPON = "resultCloseCoupon";
 
@@ -44,6 +45,9 @@ public class MessageListener implements ServletRequestListener {
 				}
 				if (request.getSession(false).getAttribute(RESULT_ADD) != null) {
 					request.getSession(false).removeAttribute(RESULT_ADD);
+				}
+				if (request.getSession(false).getAttribute(RESULT_DELETE) != null) {
+					request.getSession(false).removeAttribute(RESULT_DELETE);
 				}
 				if (request.getSession(false).getAttribute(RESULT_FINISHED_MATCHES) != null) {
 					request.getSession(false).removeAttribute(RESULT_FINISHED_MATCHES);

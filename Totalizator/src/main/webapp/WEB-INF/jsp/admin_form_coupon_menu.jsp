@@ -35,8 +35,10 @@
 	var="message_success" />
 <fmt:message bundle="${loc}" key="local.message_coupon_add_failed"
 	var="message_failed" />
+<fmt:message bundle="${loc}" key="local.forming_coupon"
+	var="title" />
 
-<title>Form coupon</title>
+<title><c:out value="${title}" /></title>
 
 <link rel="stylesheet" type="text/css" href="CSS/admin-style.css">
 

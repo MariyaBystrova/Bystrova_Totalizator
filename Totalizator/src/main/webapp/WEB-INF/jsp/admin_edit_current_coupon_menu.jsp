@@ -11,7 +11,7 @@
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<title>Edit current coupon</title>
+	
 
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
@@ -56,6 +56,10 @@
 	var="message_match_edit_success" />
 <fmt:message bundle="${loc}" key="local.message_match_edit_failed"
 	var="message_match_edit_failed" />
+<fmt:message bundle="${loc}" key="local.set_results"
+	var="title" />
+
+<title><c:out value="${title}" /></title>
 
 <link rel="stylesheet" type="text/css" href="CSS/admin-style.css">
 

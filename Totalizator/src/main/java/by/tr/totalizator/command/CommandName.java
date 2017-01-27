@@ -167,6 +167,12 @@ public enum CommandName {
 	 */
 	CLOSE_COUPON(Method.POST),
 	/**
+	 * Command name to delete a coupon specified by post method.
+	 * 
+	 * Represents {@link by.tr.totalizator.command.impl.admin.DeleteCouponCommand}
+	 */
+	DELETE_COUPON(Method.POST),
+	/**
 	 * Any other command name not declared in the system specified by get
 	 * method.
 	 * 

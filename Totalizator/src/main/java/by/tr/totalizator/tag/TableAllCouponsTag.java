@@ -92,8 +92,8 @@ public class TableAllCouponsTag extends TagSupport {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
 		try {
-			pageContext.getOut()
-					.write("<table class=\"mytable table table-striped table-bordered table-hover table-condensed\">");
+			pageContext.getOut().write("<table id=\"myTable\" class='table table-striped table-bordered table-hover'>"); 
+			pageContext.getOut().write("<thead>");
 			pageContext.getOut().write("<tr><th>");
 			pageContext.getOut().write("#" + "</th>");
 
@@ -104,7 +104,22 @@ public class TableAllCouponsTag extends TagSupport {
 			pageContext.getOut().write("<th class='min-width'>" + pool + "</th>");
 			pageContext.getOut().write("<th class='min-width'>" + status);
 			pageContext.getOut().write("</th></tr>");
+			pageContext.getOut().write("</thead>");
+			
+			pageContext.getOut().write("<tfoot>");
+			pageContext.getOut().write("<tr><th>");
+			pageContext.getOut().write("#" + "</th>");
 
+			pageContext.getOut().write("<th class='min-width'>" + startDate + "</th>");
+			pageContext.getOut().write("<th class='min-width'>" + endDate + "</th>");
+			pageContext.getOut().write("<th class='min-width'>" + minBetAmount + "</th>");
+			pageContext.getOut().write("<th class='min-width'>" + jackpot + "</th>");
+			pageContext.getOut().write("<th class='min-width'>" + pool + "</th>");
+			pageContext.getOut().write("<th class='min-width'>" + status);
+			pageContext.getOut().write("</th></tr>");
+			pageContext.getOut().write("</tfoot>");
+			
+			pageContext.getOut().write("<tbody>");
 			for (int i = 0; i < size; i++) {
 				Coupon coupon = list.getCouponElement();
 				pageContext.getOut().write("<tr id='line" + i + "'>");
@@ -131,6 +146,8 @@ public class TableAllCouponsTag extends TagSupport {
 				pageContext.getOut().write("</tr>");
 
 			}
+			pageContext.getOut().write("</tbody>");
+			
 			pageContext.getOut().write("</table>");
 		} catch (IOException e) {
 			throw new JspTagException(e.getMessage());
