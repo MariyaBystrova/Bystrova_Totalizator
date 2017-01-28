@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import by.tr.totalizator.command.Command;
 import by.tr.totalizator.entity.bean.User;
-import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.CouponService;
 import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
@@ -58,13 +58,15 @@ public class RegisterCouponCommand implements Command {
 		User user = (User) request.getSession(false).getAttribute(USER);
 		if (user != null && user.getRole().equals(ADMIN)) {
 			ServiceFactory sf = ServiceFactory.getInstance();
-			TotalizatorService totoService = sf.getTotaliztorService();
+			CouponService couponService = sf.getCouponService();
 			try {
-				boolean result = totoService.registerCoupon(request.getParameter(COUPON_START_DATE),
+				boolean result = couponService.registerCoupon(request.getParameter(COUPON_START_DATE),
 						request.getParameter(COUPON_END_DATE),
 						Integer.parseInt(request.getParameter(COUPON_MIN_BET_AMOUNT)));
 
 				request.getSession(false).setAttribute(RESULT, result);
+			} catch (NumberFormatException e) {
+				request.getSession(false).setAttribute(RESULT, false);
 			} catch (ServiceException | ServiceDataException e) {
 				logger.error(e);
 				request.getSession(false).setAttribute(RESULT, false);

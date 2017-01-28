@@ -32,7 +32,7 @@ public class LoginCommand implements Command {
 
 	/**
 	 * Provides the log in service that is available for every user. Creates a
-	 * session with user's/admin's information if authentication successfully
+	 * session with user's/admin's information if authorization successfully
 	 * passed.
 	 * 
 	 * @return an URL of command to go to general admin's (if the role of
@@ -53,7 +53,7 @@ public class LoginCommand implements Command {
 		byte[] password = request.getParameter(PASSWORD).getBytes();
 
 		try {
-			User user = userService.authentication(login, password);
+			User user = userService.authorization(login, password);
 			if (user != null) {
 				request.getSession(true).setAttribute(USER, user);
 				Cookie[] cookieArray = request.getCookies();

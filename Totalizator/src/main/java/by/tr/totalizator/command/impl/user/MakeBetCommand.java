@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import by.tr.totalizator.command.Command;
 import by.tr.totalizator.entity.bean.User;
 import by.tr.totalizator.entity.dto.RegisterBetDTO;
-import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.BetService;
 import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
@@ -65,7 +65,7 @@ public class MakeBetCommand implements Command {
 		if (user != null && user.getRole().equals(USER)) {
 
 			ServiceFactory sf = ServiceFactory.getInstance();
-			TotalizatorService totoService = sf.getTotaliztorService();
+			BetService betService = sf.getBetService();
 
 			try {
 				Map<String, String> map = new HashMap<String, String>();
@@ -75,11 +75,15 @@ public class MakeBetCommand implements Command {
 				}
 
 				int amount = 0;
-				amount = Integer.parseInt(request.getParameter(AMOUNT));
+				try {
+					amount = Integer.parseInt(request.getParameter(AMOUNT));
+				} catch (NumberFormatException e) {
+					request.getSession(false).setAttribute(RESULT_ADD, false);
+				}
 				String creditCard = request.getParameter(CREDIT_CARD).replace(DASH, EMPTY);
 				RegisterBetDTO bean = new RegisterBetDTO(map, amount, creditCard, user.getId(),
 						request.getParameter(COUPON_ID));
-				boolean result = totoService.registerBet(bean);
+				boolean result = betService.registerBet(bean);
 
 				request.getSession(false).setAttribute(RESULT_ADD, result);
 			} catch (ServiceException | ServiceDataException e) {

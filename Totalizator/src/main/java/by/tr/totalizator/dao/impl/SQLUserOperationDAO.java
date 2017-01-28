@@ -159,7 +159,7 @@ public class SQLUserOperationDAO implements UserOperationDAO {
 	 *             if some problems with database or connection pool has occur.
 	 */
 	@Override
-	public User authentication(String login, String password) throws DAOException {
+	public User authorization(String login, String password) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		java.sql.Connection con = null;
 

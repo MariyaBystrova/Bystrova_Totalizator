@@ -95,7 +95,7 @@ public interface UserService {
 			throws ServiceException, ServiceDataException;
 
 	/**
-	 * Provides an authentication service for user.
+	 * Provides an authorization service for user.
 	 * <p>
 	 * Validates input parameters and throws
 	 * {@link by.tr.totalizator.service.exception.ServiceDataException} in case
@@ -116,5 +116,5 @@ public interface UserService {
 	 * @throws ServiceDataException
 	 *             if a problem with invalid data has occur.
 	 */
-	User authentication(String login, byte[] password) throws ServiceException, ServiceDataException;
+	User authorization(String login, byte[] password) throws ServiceException, ServiceDataException;
 }

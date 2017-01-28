@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import by.tr.totalizator.command.Command;
 import by.tr.totalizator.entity.bean.User;
-import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.CouponService;
 import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
@@ -56,9 +56,9 @@ public class DeleteCouponCommand implements Command {
 		User user = (User) request.getSession(false).getAttribute(USER);
 		if (user != null && user.getRole().equals(ADMIN)) {
 			ServiceFactory sf = ServiceFactory.getInstance();
-			TotalizatorService totoService = sf.getTotaliztorService();
+			CouponService couponService = sf.getCouponService();
 			try {
-				boolean result = totoService.deleteCoupon(request.getParameter(COUPON_ID));
+				boolean result = couponService.deleteCoupon(request.getParameter(COUPON_ID));
 
 				request.getSession(false).setAttribute(RESULT, result);
 			} catch (ServiceException | ServiceDataException e) {

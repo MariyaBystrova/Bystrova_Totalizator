@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import by.tr.totalizator.command.Command;
 import by.tr.totalizator.entity.bean.User;
 import by.tr.totalizator.entity.dto.MatchDTO;
-import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.MatchService;
 import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
@@ -67,7 +67,7 @@ public class EditMatchCommand implements Command {
 		if (user != null && user.getRole().equals(ADMIN)) {
 
 			ServiceFactory sf = ServiceFactory.getInstance();
-			TotalizatorService totoService = sf.getTotaliztorService();
+			MatchService matchService = sf.getMatchService();
 
 			try {
 				MatchDTO match = new MatchDTO(request.getParameter(MATCH_NAME), request.getParameter(TEAM_ONE),
@@ -75,7 +75,7 @@ public class EditMatchCommand implements Command {
 						request.getParameter(END_DATE));
 				match.setId(request.getParameter(MATCH_ID));
 
-				boolean result = totoService.editMatch(match);
+				boolean result = matchService.editMatch(match);
 				request.getSession(false).setAttribute(RESULT, result);
 			} catch (ServiceException | ServiceDataException e) {
 				logger.error(e);

@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import by.tr.totalizator.command.Command;
 import by.tr.totalizator.entity.bean.User;
 import by.tr.totalizator.entity.dto.MatchDTO;
-import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.MatchService;
 import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
@@ -65,14 +65,14 @@ public class CreateMatchCommand implements Command {
 		if (user != null && user.getRole().equals(ADMIN)) {
 
 			ServiceFactory sf = ServiceFactory.getInstance();
-			TotalizatorService totoService = sf.getTotaliztorService();
+			MatchService matchService = sf.getMatchService();
 
 			try {
 				MatchDTO match = new MatchDTO(request.getParameter(MATCH_NAME), request.getParameter(COUPON_ID),
 						request.getParameter(TEAM_ONE), request.getParameter(TEAM_TWO),
 						request.getParameter(START_DATE), request.getParameter(END_DATE));
 
-				boolean result = totoService.registerMatch(match);
+				boolean result = matchService.registerMatch(match);
 				request.getSession(false).setAttribute(RESULT, result);
 			} catch (ServiceException | ServiceDataException e) {
 				logger.error(e);

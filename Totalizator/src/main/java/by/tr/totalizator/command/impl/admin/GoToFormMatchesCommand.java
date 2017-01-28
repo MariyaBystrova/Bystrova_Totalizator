@@ -12,7 +12,7 @@ import by.tr.totalizator.command.Command;
 import by.tr.totalizator.controller.PageName;
 import by.tr.totalizator.entity.bean.Coupon;
 import by.tr.totalizator.entity.bean.User;
-import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.CouponService;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 import by.tr.totalizator.tag.bean.JSPListBean;
@@ -68,10 +68,10 @@ public class GoToFormMatchesCommand implements Command {
 		if (user != null && user.getRole().equals(ADMIN)) {
 
 			ServiceFactory factory = ServiceFactory.getInstance();
-			TotalizatorService totoService = factory.getTotaliztorService();
+			CouponService couponService = factory.getCouponService();
 
 			try {
-				List<Coupon> list = totoService.getEmptyValidCoupons();
+				List<Coupon> list = couponService.getEmptyValidCoupons();
 				JSPListBean jsp = new JSPListBean(list);
 				request.setAttribute(COUPONS, jsp);
 				page = PageName.ADMIN_FORM_MATCHES_MENU_PAGE;

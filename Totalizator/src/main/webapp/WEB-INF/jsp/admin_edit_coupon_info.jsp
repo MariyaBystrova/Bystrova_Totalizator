@@ -175,18 +175,20 @@
 								<option value="4">cancelled</option>
 								<option value="6" selected>free</option>
 							</c:if>
-
+							<c:if test="${coupon.status eq 3 }">
+								<option value="3" selected>free</option>
+							</c:if>
 						</select>
 					</div>
 				</div>
-				<input type="submit" value="${save}" class="btn btn-default">
+				<input type="submit" value="${save}" class="btn btn-default delete-button">
 			</form>
 			<c:if test="${coupon.status eq 6}">
 			<form action="Controller" method="post">
 				<input type="hidden" name="command" value="delete-coupon">
 				<input type="hidden" name="coupon-id"
 					value="${requestScope.couponId}">
-					<input type="submit" value="${delete}" class="btn btn-default">
+					<input type="submit" value="${delete}" class="btn btn-default delete-button">
 			</form>
 			</c:if>
 		</div>

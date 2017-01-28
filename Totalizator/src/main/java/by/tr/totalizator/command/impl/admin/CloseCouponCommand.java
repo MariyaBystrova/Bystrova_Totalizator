@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import by.tr.totalizator.command.Command;
 import by.tr.totalizator.entity.bean.User;
-import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.CouponService;
 import by.tr.totalizator.service.exception.NotAllFinishedMatchesServiceException;
 import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
@@ -62,11 +62,11 @@ public class CloseCouponCommand implements Command {
 		if (user != null && user.getRole().equals(ADMIN)) {
 
 			ServiceFactory sf = ServiceFactory.getInstance();
-			TotalizatorService totoService = sf.getTotaliztorService();
+			CouponService couponService = sf.getCouponService();
 
 			boolean result;
 			try {
-				result = totoService.closeCoupon(request.getParameter(COUPON_ID));
+				result = couponService.closeCoupon(request.getParameter(COUPON_ID));
 				request.getSession(false).setAttribute(RESULT_CLOSE_COUPON, result);
 			} catch (NotAllFinishedMatchesServiceException e) {
 				logger.error(e);

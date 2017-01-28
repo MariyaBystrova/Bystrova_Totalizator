@@ -174,7 +174,7 @@ public class EditUser implements UserService {
 	}
 
 	/**
-	 * Provides an authentication service for user.
+	 * Provides an authorization service for user.
 	 * <p>
 	 * Validates input parameters and throws
 	 * {@link by.tr.totalizator.service.exception.ServiceDataException} in case
@@ -196,7 +196,7 @@ public class EditUser implements UserService {
 	 *             if a problem with invalid data has occur.
 	 */
 	@Override
-	public User authentication(String login, byte[] password) throws ServiceException, ServiceDataException {
+	public User authorization(String login, byte[] password) throws ServiceException, ServiceDataException {
 
 		User user = null;
 		if (!Validator.authenticationValidator(login, password)) {
@@ -208,7 +208,7 @@ public class EditUser implements UserService {
 		DAOFactory factory = DAOFactory.getInstance();
 		UserOperationDAO userOpDao = factory.getUserOperationDAO();
 		try {
-			user = userOpDao.authentication(login, passwordHash);
+			user = userOpDao.authorization(login, passwordHash);
 		} catch (DAOException e) {
 			throw new ServiceException("Autentication failed. ", e);
 		}

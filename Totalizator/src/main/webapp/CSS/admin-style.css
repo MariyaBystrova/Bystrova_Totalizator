@@ -84,6 +84,7 @@ li a:hover {
 }
 
 .coupon-registration-form input[type=submit] {
+	margin: 10px 0;
 	padding: 4px 10px 4px 10px;
 	border: 1px solid #b3b3b3;
 }
@@ -93,4 +94,13 @@ li a:hover {
 	width: 200px;
 	border: 1px solid #b3b3b3;
 	margin: 3px 0;
+	height: 30px;
+}
+
+.delete-button {
+	float: left;
+}
+
+.mytable input[type=submit]{
+	padding: 3px 7px 3px 7px;
 }

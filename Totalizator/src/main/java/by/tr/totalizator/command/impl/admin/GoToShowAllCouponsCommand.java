@@ -12,7 +12,7 @@ import by.tr.totalizator.command.Command;
 import by.tr.totalizator.controller.PageName;
 import by.tr.totalizator.entity.bean.Coupon;
 import by.tr.totalizator.entity.bean.User;
-import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.CouponService;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 import by.tr.totalizator.tag.bean.JSPListBean;
@@ -62,10 +62,10 @@ public class GoToShowAllCouponsCommand implements Command {
 		User user = (User) request.getSession(false).getAttribute(USER);
 		if (user != null && user.getRole().equals(ADMIN)) {
 			ServiceFactory factory = ServiceFactory.getInstance();
-			TotalizatorService totoService = factory.getTotaliztorService();
+			CouponService couponService = factory.getCouponService();
 
 			try {
-				List<Coupon> list = totoService.getAllCoupons();
+				List<Coupon> list = couponService.getAllCoupons();
 				JSPListBean jsp = new JSPListBean(list);
 				request.setAttribute(COUPON_LIST, jsp);
 

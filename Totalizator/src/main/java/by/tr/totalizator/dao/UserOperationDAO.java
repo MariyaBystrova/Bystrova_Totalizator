@@ -68,5 +68,5 @@ public interface UserOperationDAO {
 	 *             if a problem with data source or connection pool has
 	 *             occur.
 	 */
-	User authentication(String login, String password) throws DAOException;
+	User authorization(String login, String password) throws DAOException;
 }

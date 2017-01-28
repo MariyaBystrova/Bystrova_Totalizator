@@ -12,7 +12,7 @@ import by.tr.totalizator.command.Command;
 import by.tr.totalizator.controller.PageName;
 import by.tr.totalizator.entity.bean.Coupon;
 import by.tr.totalizator.entity.bean.User;
-import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.CouponService;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 import by.tr.totalizator.tag.bean.JSPListBean;
@@ -45,7 +45,7 @@ public class GoToEditCurrentCouponCommand implements Command {
 	 *         either the session time has expired or an authorized user's role
 	 *         is not "admin".
 	 *         <p>
-	 * 		Might return
+	 *         Might return
 	 *         {@link by.tr.totalizator.controller.PageName#ERROR_PAGE} in case
 	 *         of {@link by.tr.totalizator.service.exception.ServiceException}.
 	 *         </p>
@@ -65,10 +65,10 @@ public class GoToEditCurrentCouponCommand implements Command {
 		if (user != null && user.getRole().equals(ADMIN)) {
 
 			ServiceFactory factory = ServiceFactory.getInstance();
-			TotalizatorService totoService = factory.getTotaliztorService();
+			CouponService couponService = factory.getCouponService();
 
 			try {
-				List<Coupon> list = totoService.getCurrentCoupons();
+				List<Coupon> list = couponService.getCurrentCoupons();
 				JSPListBean jsp = new JSPListBean(list);
 				request.setAttribute(COUPONS, jsp);
 

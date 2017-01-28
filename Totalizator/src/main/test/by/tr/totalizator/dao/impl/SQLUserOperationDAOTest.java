@@ -41,7 +41,6 @@ public class SQLUserOperationDAOTest {
 
 	@Before
 	public void setUp() throws Exception {
-
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		con = connectionPool.takeConnection();
 	}
@@ -53,7 +52,6 @@ public class SQLUserOperationDAOTest {
 
 	@Test
 	public void createUserTest() {
-
 		int countBefore = getUserCount();
 
 		DAOFactory factory = DAOFactory.getInstance();
@@ -182,7 +180,7 @@ public class SQLUserOperationDAOTest {
 	}
 
 	@Test
-	public void authenticationTest() {
+	public void authorizationTest() {
 		User userBefore = new User("Kristine", "Brown", "F", "kristina_brown@gmail.com", "GB", "Liverpool",
 				"Pools, 122", "kristina_brown", "user");
 		String passwordBefore = HashMd5Coder.hashMd5("9090");
@@ -195,7 +193,7 @@ public class SQLUserOperationDAOTest {
 		UserOperationDAO userDAO = factory.getUserOperationDAO();
 		User userDB = null;
 		try {
-			userDB = userDAO.authentication(login, password);
+			userDB = userDAO.authorization(login, password);
 		} catch (DAOException e) {
 			fail("DAOException has occure: " + e);
 		}
@@ -222,6 +220,10 @@ public class SQLUserOperationDAOTest {
 		assertEquals("User info must be the same.", user, userDB);
 	}
 
+	
+	// --------------------- JDBC ----------------------
+	
+	
 	private int getUserCount() {
 		int count = -1;
 		try (Statement st = con.createStatement()) {

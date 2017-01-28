@@ -12,7 +12,7 @@ import by.tr.totalizator.command.Command;
 import by.tr.totalizator.controller.PageName;
 import by.tr.totalizator.entity.bean.Match;
 import by.tr.totalizator.entity.bean.User;
-import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.MatchService;
 import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
@@ -89,10 +89,10 @@ public class ShowCouponMatchesCommand implements Command {
 				couponId = Integer.parseInt(request.getParameter(COUPON_ID));
 			}
 			ServiceFactory factory = ServiceFactory.getInstance();
-			TotalizatorService totoService = factory.getTotaliztorService();
+			MatchService matchService = factory.getMatchService();
 
 			try {
-				List<Match> list = totoService.getCuponMatches(couponId);
+				List<Match> list = matchService.getCuponMatches(couponId);
 				if (list != null) {
 					JSPListBean jsp = new JSPListBean(list);
 					request.setAttribute(LIST, jsp);

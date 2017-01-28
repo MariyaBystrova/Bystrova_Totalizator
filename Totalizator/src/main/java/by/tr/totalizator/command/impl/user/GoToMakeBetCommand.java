@@ -14,7 +14,7 @@ import by.tr.totalizator.command.Command;
 import by.tr.totalizator.controller.PageName;
 import by.tr.totalizator.entity.bean.Match;
 import by.tr.totalizator.entity.bean.User;
-import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.MatchService;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
 import by.tr.totalizator.tag.bean.JSPListBean;
@@ -89,9 +89,9 @@ public class GoToMakeBetCommand implements Command {
 			request.setAttribute(AMOUNT, Integer.parseInt(request.getParameter(AMOUNT)));
 
 			ServiceFactory factory = ServiceFactory.getInstance();
-			TotalizatorService totoService = factory.getTotaliztorService();
+			MatchService matchService = factory.getMatchService();
 			try {
-				List<Match> list = totoService.getCurrentCupon();
+				List<Match> list = matchService.getCurrentCupon();
 				if (list != null && !list.isEmpty()) {
 					JSPListBean jsp = new JSPListBean(list);
 					request.setAttribute(LIST, jsp);

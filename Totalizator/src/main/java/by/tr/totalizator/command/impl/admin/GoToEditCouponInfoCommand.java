@@ -10,7 +10,7 @@ import by.tr.totalizator.command.Command;
 import by.tr.totalizator.controller.PageName;
 import by.tr.totalizator.entity.bean.Coupon;
 import by.tr.totalizator.entity.bean.User;
-import by.tr.totalizator.service.TotalizatorService;
+import by.tr.totalizator.service.CouponService;
 import by.tr.totalizator.service.exception.ServiceDataException;
 import by.tr.totalizator.service.exception.ServiceException;
 import by.tr.totalizator.service.factory.ServiceFactory;
@@ -63,10 +63,10 @@ public class GoToEditCouponInfoCommand implements Command {
 		if (user != null && user.getRole().equals(ADMIN)) {
 
 			ServiceFactory factory = ServiceFactory.getInstance();
-			TotalizatorService totoService = factory.getTotaliztorService();
+			CouponService couponService = factory.getCouponService();
 
 			try {
-				Coupon coupon = totoService.getCouponById(request.getParameter(COUPON_ID));
+				Coupon coupon = couponService.getCouponById(request.getParameter(COUPON_ID));
 				request.setAttribute(COUPONID, coupon.getId());
 				request.setAttribute(COUPON, coupon);
 
