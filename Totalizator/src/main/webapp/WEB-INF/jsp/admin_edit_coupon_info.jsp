@@ -82,7 +82,7 @@
 			</form>
 		</li>
 	</ul>
-	<div class="main">
+	<div class="main coupon-registration-form">
 
 		<div>
 			<div>

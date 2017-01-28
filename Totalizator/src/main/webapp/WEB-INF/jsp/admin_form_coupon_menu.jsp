@@ -11,6 +11,8 @@
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="CSS/admin-style.css">	
+
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
 <fmt:message bundle="${loc}" key="local.ru" var="ru" />
@@ -40,7 +42,6 @@
 
 <title><c:out value="${title}" /></title>
 
-<link rel="stylesheet" type="text/css" href="CSS/admin-style.css">
 
 </head>
 <body>
@@ -78,7 +79,7 @@
 		</li>
 	</ul>
 
-	<div class="main">
+	<div class="main coupon-registration-form">
 		<c:if
 			test="${not empty sessionScope.resultAdd and sessionScope.resultAdd}">
 			<c:out value="${message_success}" />
@@ -122,13 +123,13 @@
 							value="${min_bet_amount}" />:</label>
 				</div>
 				<div>
-					<input type="number" name="coupon-min-bet-amount"
+					<input  type="number" name="coupon-min-bet-amount"
 						id="coupon-min-bet-amount" value="0" required="required" />
 				</div>
 			</div>
 			<input type="submit" value="${create}" class="btn btn-default">
 		</form>
 	</div>
-
+	
 </body>
 </html>

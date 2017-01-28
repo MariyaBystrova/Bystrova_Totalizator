@@ -98,7 +98,7 @@
 					minBetAmount="${min_bet_amount}" jackpot="${jackpot}"
 					pool="${pool}" status="${status}" /> --%>
 				<table id="myTable"
-					class='table table-striped table-bordered table-hover'>
+					class='table table-striped table-bordered table-hover mytable'>
 					<thead>
 						<tr>
 							<th>#</th>
