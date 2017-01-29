@@ -19,7 +19,7 @@ import by.tr.totalizator.entity.dto.UserDTO;
 public final class Validator {
 
 	private final static String LOGIN_PATTERN = "\\w+";
-	private final static String NAME_PATTERN = "[a-zA-Zа-яА-Я]+";
+	private final static String NAME_PATTERN = "[a-zA-Zа-яА-Я \\-]+";
 	private final static String EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z0-9-]+\\.[a-z]{2,}";
 	private final static String DATE_PATTERN = "([1-9]\\d{3})-([1-9]|([0-1][0-2])|(0[1-9]))-([1-9]|([0-3]\\d)) (\\d{2}):(\\d{2}):(\\d{2})(.\\d)*";
 	private final static String TEXT_PATTERN = ".+";
@@ -66,7 +66,7 @@ public final class Validator {
 	 * </p>
 	 * <p>
 	 * 3. User's first name and last name must be not empty and match the
-	 * <code>"[a-zA-Z]+"</code> pattern.
+	 * <code>"[a-zA-Z \-]+"</code> pattern.
 	 * </p>
 	 * <p>
 	 * 4. Sex must be not empty.
