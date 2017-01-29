@@ -38,8 +38,15 @@
 	var="show_all_coupons" />
 <fmt:message bundle="${loc}" key="local.edit" var="edit" />
 <fmt:message bundle="${loc}" key="local.all_coupons" var="all_coupons" />
-<fmt:message bundle="${loc}" key="local.coupon_and_matches_delete_success" var="coupon_and_matches_delete_success" />
-<fmt:message bundle="${loc}" key="local.coupon_and_matches_delete_fail" var="coupon_and_matches_delete_fail" />
+<fmt:message bundle="${loc}"
+	key="local.coupon_and_matches_delete_success"
+	var="coupon_and_matches_delete_success" />
+<fmt:message bundle="${loc}" key="local.coupon_and_matches_delete_fail"
+	var="coupon_and_matches_delete_fail" />
+<fmt:message bundle="${loc}" key="local.open" var="open" />
+<fmt:message bundle="${loc}" key="local.closed" var="closed" />
+<fmt:message bundle="${loc}" key="local.cancelled" var="cancelled" />
+<fmt:message bundle="${loc}" key="local.free" var="free" />
 
 <title><c:out value="${all_coupons}" /></title>
 </head>
@@ -116,20 +123,26 @@
 							<c:set var="coupon" scope="page"
 								value="${couponList.couponElement}"></c:set>
 							<tr>
-								<form action="Controller" method="get">
-									<input type="hidden" name="command"
-										value="admin-go-to-edit-coupon-info" /> <input type="hidden"
-										name="coupon-id" value="${coupon.id}" />
-									<td>${i}</td>
-									<td>${coupon.startDate}</td>
-									<td>${coupon.endDate}</td>
-									<td>${coupon.minBetAmount}</td>
-									<td>${coupon.jackpot}</td>
-									<td>${coupon.pull}</td>
-									<td>${coupon.status}</td>
-									<td><input type="submit" value="${edit}"
-										class="btn btn-default" /></td>
-								</form>
+								<td>${i}</td>
+								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+										value="${coupon.startDate}" /></td>
+								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+										value="${coupon.endDate}" /></td>
+								<td>${coupon.minBetAmount}</td>
+								<td>${coupon.jackpot}</td>
+								<td>${coupon.pull}</td>
+								<td><c:if test="${coupon.status eq 1}">${open}</c:if> <c:if
+										test="${coupon.status eq 3}">${closed}</c:if> <c:if
+										test="${coupon.status eq 4}">${cancelled}</c:if> <c:if
+										test="${coupon.status eq 6}">${free}</c:if></td>
+								<td>
+									<form action="Controller" method="get">
+										<input type="hidden" name="command"
+											value="admin-go-to-edit-coupon-info" /> <input type="hidden"
+											name="coupon-id" value="${coupon.id}" /><input type="submit"
+											value="${edit}" class="btn btn-default" />
+									</form>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

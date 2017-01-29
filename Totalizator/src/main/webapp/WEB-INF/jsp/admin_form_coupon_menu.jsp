@@ -93,8 +93,7 @@
 			<input type="hidden" name="command" value="register-coupon">
 			<div>
 				<h2>
-					<c:out value="${forming_coupon}" />
-					:
+					<c:out value="${forming_coupon}" />:
 				</h2>
 			</div>
 			<div>

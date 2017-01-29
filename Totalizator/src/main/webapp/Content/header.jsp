@@ -16,13 +16,22 @@
 <fmt:message bundle="${loc}" key="local.help" var="help" />
 <fmt:message bundle="${loc}" key="local.page_language"
 	var="page_language" />
+<fmt:message bundle="${loc}" key="banner_authorization"
+	var="banner_authorization" />
 <link href="https://fonts.googleapis.com/css?family=Pattaya"
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto"
 	rel="stylesheet">
 
+
 <link rel="stylesheet" type="text/css" href="CSS/style.css">
 <title>Insert title here</title>
+
+<script type="text/javascript">
+	function alert_banner(message) {
+		alert(message);
+	}
+</script>
 </head>
 <body>
 	<h1>
@@ -35,9 +44,10 @@
 	</section>
 	<section>
 		<ul>
-			<li><a href="/Totalizator" class="a-dec"><c:out
-						value="${main}" /></a></li>
-			<li><a href="#" class="a-dec"><c:out value="${toto}" /></a></li>
+			<li><a href="index.jsp" class="a-dec"><c:out value="${main}" /></a></li>
+			<li><a href="index.jsp" class="a-dec"
+				onclick="alert_banner('You need to be authorized to see the coupon and to make bets. Please, log in the system or go to the registration page.')"><c:out
+						value="${toto}" /></a></li>
 			<li><a href="#" class="a-dec"><c:out value="${results}" /></a></li>
 			<li><a href="#" class="a-dec"><c:out value="${help}" /></a></li>
 

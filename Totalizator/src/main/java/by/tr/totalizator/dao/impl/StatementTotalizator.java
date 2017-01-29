@@ -17,7 +17,8 @@ public final class StatementTotalizator {
 															+ "WHERE m.`cupon_id`=?;";
 	//можно ставить на прошедший купон, если статус = 1 (open)
 //	public final static String SELECT_CURRENT_COUPON_MATCHES = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date`, m.`real_result`, m.`status_id` "
-//	+ " WHERE m.`cupon_id` = 5;";
+//			+ "FROM `match` AS m "
+//			+ " WHERE m.`cupon_id` = 8;";
 
 	//правильна
 	public final static String SELECT_CURRENT_COUPON_MATCHES = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date`, m.`real_result`, m.`status_id` "

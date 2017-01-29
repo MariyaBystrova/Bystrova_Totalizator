@@ -34,13 +34,17 @@
 <fmt:message bundle="${loc}" key="local.jackpot" var="jackpot" />
 <fmt:message bundle="${loc}" key="local.pool" var="pool" />
 <fmt:message bundle="${loc}" key="local.status" var="status" />
-<fmt:message bundle="${loc}" key="local.edit_coupon_info_success" var="edit_coupon_info_success" />
-<fmt:message bundle="${loc}" key="local.edit_coupon_info_fail" var="edit_coupon_info_fail" />
-<fmt:message bundle="${loc}" key="local.edit_coupon"
-	var="edit_coupon" />
-<fmt:message bundle="${loc}" key="local.delete"
-	var="delete" />
-	
+<fmt:message bundle="${loc}" key="local.edit_coupon_info_success"
+	var="edit_coupon_info_success" />
+<fmt:message bundle="${loc}" key="local.edit_coupon_info_fail"
+	var="edit_coupon_info_fail" />
+<fmt:message bundle="${loc}" key="local.edit_coupon" var="edit_coupon" />
+<fmt:message bundle="${loc}" key="local.delete" var="delete" />
+<fmt:message bundle="${loc}" key="local.open" var="open" />
+<fmt:message bundle="${loc}" key="local.closed" var="closed" />
+<fmt:message bundle="${loc}" key="local.cancelled" var="cancelled" />
+<fmt:message bundle="${loc}" key="local.free" var="free" />
+
 
 <title><c:out value="${edit_coupon}" /></title>
 
@@ -103,7 +107,10 @@
 				<input type="hidden" name="command" value="edit-coupon-info">
 				<input type="hidden" name="coupon-id"
 					value="${requestScope.couponId}">
-				<h2><c:out value="${edit_coupon}" />:</h2>
+				<h2>
+					<c:out value="${edit_coupon}" />
+					:
+				</h2>
 				<div>
 					<div>
 						<label for="coupon-start-date"><c:out
@@ -161,35 +168,36 @@
 					<div>
 						<select name="coupon-status">
 							<c:if test="${coupon.status eq 1 }">
-								<option value="1" selected>open</option>
-								<option value="4">cancelled</option>
-								<option value="6">free</option>
+								<option value="1" selected>${open}</option>
+								<option value="4">${cancelled}</option>
+								<option value="6">${free}</option>
 							</c:if>
 							<c:if test="${coupon.status eq 4 }">
-								<option value="1">open</option>
-								<option value="4" selected>cancelled</option>
-								<option value="6">free</option>
+								<option value="1">${open}</option>
+								<option value="4" selected>${cancelled}</option>
+								<option value="6">${free}</option>
 							</c:if>
 							<c:if test="${coupon.status eq 6 }">
-								<option value="1">open</option>
-								<option value="4">cancelled</option>
-								<option value="6" selected>free</option>
+								<option value="1">${open}</option>
+								<option value="4">${cancelled}</option>
+								<option value="6" selected>${free}</option>
 							</c:if>
 							<c:if test="${coupon.status eq 3 }">
-								<option value="3" selected>free</option>
+								<option value="3" selected>${closed}</option>
 							</c:if>
 						</select>
 					</div>
 				</div>
-				<input type="submit" value="${save}" class="btn btn-default delete-button">
+				<input type="submit" value="${save}"
+					class="btn btn-default delete-button">
 			</form>
 			<c:if test="${coupon.status eq 6}">
-			<form action="Controller" method="post">
-				<input type="hidden" name="command" value="delete-coupon">
-				<input type="hidden" name="coupon-id"
-					value="${requestScope.couponId}">
-					<input type="submit" value="${delete}" class="btn btn-default delete-button">
-			</form>
+				<form action="Controller" method="post">
+					<input type="hidden" name="command" value="delete-coupon">
+					<input type="hidden" name="coupon-id"
+						value="${requestScope.couponId}"> <input type="submit"
+						value="${delete}" class="btn btn-default delete-button">
+				</form>
 			</c:if>
 		</div>
 	</div>

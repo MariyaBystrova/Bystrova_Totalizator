@@ -120,6 +120,7 @@ public class SQLBetOperationDAO implements BetOperationDAO {
 			}
 
 			con.commit();
+			return true;
 		} catch (SQLException | ConnectionPoolException e) {
 			try {
 				con.rollback();
@@ -130,6 +131,5 @@ public class SQLBetOperationDAO implements BetOperationDAO {
 		} finally {
 			connectionPool.closeConnection(con);
 		}
-		return false;
 	}
 }
