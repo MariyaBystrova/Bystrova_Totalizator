@@ -83,30 +83,6 @@ function validateLastName() {
 	}
 	return result;
 }
-//
-// function validateAge() {
-// var result = true,
-// errAge = document.getElementById("err-age");
-//    
-// errAge.innerHTML = "";
-//   
-// var age = document.getElementById("age").value;
-// document.getElementById("age").style.cssText = "border: 1px solid #ccc;";
-//
-// if (!age) {
-// errAge.innerHTML = FILL_FIEAD;
-// result = false;
-// } else {
-// if (age < 7 || age > 120) {
-// errAge.innerHTML = AGE_VALIDATION;
-// result = false;
-// }
-// }
-// if (!result) {
-// document.getElementById("age").style.cssText = "border: 1px solid red;";
-// }
-// return result;
-// }
 
 function validateLogin() {
 	var result = true, errLogin = document.getElementById("err-login");
@@ -251,3 +227,35 @@ function visibility() {
     document.getElementById("list-matches").style.visibility = "hidden";
     return true;
 }
+
+function check_all_choices(){
+	var elementsCount = 15;
+	var result_bool = true;
+	var i;
+	for(i=1; i<=15; i++){
+		var result = document.document.getElementsByClassName("result"+i);
+//		if(!result[0].value && !result[1].checked && !result[2].checked){
+//			document.getElementById("error_results").innerHTML = "andkjadwhoa";
+//			result_bool=false;
+//		}
+		
+		//console.log(i+ ": "+result[0].value+ " "+result[1].value+ " "+result[2].value);
+		console.log(i+ ": "+result[0].checked+ " "+result[1].checked+ " "+result[2].checked);
+		//console.log(result.value);
+//		if(!result.checked){
+//			document.getElementById("error_results").innerHTML = "andkjadwhoa";
+//			result_bool=false;
+//		}
+//		if(result.value!="1" && result.value!="2" && result.value!="X"){
+//			document.getElementById("error_results").innerHTML = "andkjadwhoa";
+//			result_bool=false;
+//		} 
+	}
+	if(result_bool){
+		document.getElementById("error_results").innerHTML = "";
+	}
+	return result_bool;
+
+}
+
+

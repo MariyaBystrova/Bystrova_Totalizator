@@ -15,12 +15,7 @@ public final class StatementTotalizator {
 	public final static String SELECT_MATCHES_WHERE_CUPONID = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date`, m.`real_result`, m.`status_id` "
 															+ "FROM `match` AS m "
 															+ "WHERE m.`cupon_id`=?;";
-	//можно ставить на прошедший купон, если статус = 1 (open)
-//	public final static String SELECT_CURRENT_COUPON_MATCHES = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date`, m.`real_result`, m.`status_id` "
-//			+ "FROM `match` AS m "
-//			+ " WHERE m.`cupon_id` = 8;";
 
-	//правильна
 	public final static String SELECT_CURRENT_COUPON_MATCHES = "SELECT m.`match_id`, m.`match_name`, m.`cupon_id`, m.`team_one`, m.`team_two`, m.`start_date`, m.`end_date`, m.`real_result`, m.`status_id` "
 															+ "FROM `match` AS m "
 															+ "JOIN `cupon` AS c ON c.`cupon_id`=m.`cupon_id` "
@@ -28,12 +23,6 @@ public final class StatementTotalizator {
 	
 	public final static String SELECT_MIN_BET_AMOUNT_BY_COUPONID = "SELECT `min_bet_amount` FROM `cupon` WHERE `cupon_id`=?;";
 	
-	//не правильная для формирования купона, который уже прошел
-//	public final static String SELECT_FREE_VALID_COUPONS = "SELECT c.`cupon_id`,c.`start_date`,c.`end_date`, c.`min_bet_amount`, c.`cupon_pull`, c.`jackpot`, c.`status_id` "
-//															+ "FROM `cupon` AS c "
-//															+ "WHERE c.`status_id` = 6;";
-//	
-	//правильная
 	public final static String SELECT_FREE_VALID_COUPONS = "SELECT c.`cupon_id`,c.`start_date`,c.`end_date`, c.`min_bet_amount`, c.`cupon_pull`, c.`jackpot`, c.`status_id` "
 														+ "FROM `cupon` AS c "
 														+ "WHERE c.`start_date`> NOW() AND c.`status_id` = 6;";
@@ -57,9 +46,6 @@ public final class StatementTotalizator {
 																	+ "WHERE c.cupon_id=ma.cupon_id AND c.status_id=6 AND  DATE_ADD(c.end_date, INTERVAL 2 DAY) > tmp.start_date AND c.end_date < tmp.start_date) "
 													+ "LIMIT 1) AS q ON q.match_id=m.match_id "
 											+ "SET m.`match_name` = q.match_name, m.`team_one` = q.team_one, m.`team_two` = q.team_two, m.`start_date` = q.start_date, m.`end_date` = q.end_date;";
-	
-	//без проверки минимальной суммы ставки
-	//public final static String INSERT_INTO_BET = "INSERT INTO `bet` (`user_id`,`cupon_id`,`bet_amount`,`transaction_date`,`creditcard_number`,`win_match_count`,`win_bet_amount`) VALUES(?,?,?,NOW(),?,NULL,NULL);";
 	
 	public final static String INSERT_INTO_BET = "INSERT INTO `bet` (`user_id`,`cupon_id`,`bet_amount`,`transaction_date`,`creditcard_number`,`win_match_count`,`win_bet_amount`) "
 												+"SELECT * FROM (SELECT ? as user_id, ? as cupon_id, ? as bet_amount, NOW() as transaction_date, ? as creditcard_number, NULL as win_match_count, NULL as win_bet_amount) AS tmp "

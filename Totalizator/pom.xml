@@ -53,9 +53,6 @@
 		<finalName>Totalizator</finalName>
 		<testSourceDirectory>src/main/test</testSourceDirectory>
 
-		<!-- <resources> <resource> <directory>src/main/resources</directory> <excludes> 
-			<exclude>**/*.java</exclude> </excludes> </resource> <resource> <directory>src/main/webapp</directory> 
-			<excludes> <exclude>**/*.java</exclude> </excludes> </resource> </resources> -->
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>

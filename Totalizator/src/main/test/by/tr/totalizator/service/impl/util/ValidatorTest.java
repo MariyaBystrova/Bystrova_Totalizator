@@ -118,13 +118,9 @@ public class ValidatorTest {
 	@Test
 	public void userAccountInfoValidatorTest() {
 		assertTrue(Validator.userAccountInfoValidator("dsdsvisndkjv".getBytes(), "dsdsvisndkjv".getBytes(), 1));
-
 		assertFalse(Validator.userAccountInfoValidator("dsdsvisndkjv".getBytes(), "ds".getBytes(), 1));
-
 		assertFalse(Validator.userAccountInfoValidator("".getBytes(), "".getBytes(), 1));
-
 		assertFalse(Validator.userAccountInfoValidator("dsdsvisndkjv".getBytes(), "dsdsvisndkjv".getBytes(), -21));
-
 		assertFalse(Validator.userAccountInfoValidator("dsdsvisndkjv".getBytes(), "dsdsvisndkjv".getBytes(), 0));
 	}
 

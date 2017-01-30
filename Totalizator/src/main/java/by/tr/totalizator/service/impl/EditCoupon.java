@@ -118,7 +118,7 @@ public class EditCoupon implements CouponService {
 		try {
 			Coupon couponEntity = new Coupon();
 			couponEntity.setId(Integer.parseInt(couponDTO.getId()));
-			couponEntity.setPull(Integer.parseInt(couponDTO.getPull()));
+			couponEntity.setPool(Integer.parseInt(couponDTO.getPool()));
 			couponEntity.setJackpot(Integer.parseInt(couponDTO.getJackpot()));
 			couponEntity.setMinBetAmount(Integer.parseInt(couponDTO.getMinBetAmount()));
 			couponEntity.setStatus(Integer.parseInt(couponDTO.getStatus()));

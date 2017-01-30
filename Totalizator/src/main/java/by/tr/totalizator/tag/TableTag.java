@@ -94,15 +94,15 @@ public class TableTag extends TagSupport {
 				pageContext.getOut().write("</td>");
 				pageContext.getOut().write("<td>");
 				pageContext.getOut().write(
-						"<input type=\"radio\" name=\"result" + new Integer(i + 1).toString() + "\" value=\"1\">");
+						"<input type=\"radio\" class=\"result" + new Integer(i + 1).toString() + "\" name=\"result" + new Integer(i + 1).toString() + "\" value=\"1\">");
 				pageContext.getOut().write("</td>");
 				pageContext.getOut().write("<td>");
 				pageContext.getOut().write(
-						"<input type=\"radio\" name=\"result" + new Integer(i + 1).toString() + "\" value=\"X\">");
+						"<input type=\"radio\" class=\"result" + new Integer(i + 1).toString() + "\" name=\"result" + new Integer(i + 1).toString() + "\" value=\"X\">");
 				pageContext.getOut().write("</td>");
 				pageContext.getOut().write("<td>");
 				pageContext.getOut().write(
-						"<input type=\"radio\" name=\"result" + new Integer(i + 1).toString() + "\" value=\"2\">");
+						"<input type=\"radio\" class=\"result" + new Integer(i + 1).toString() + "\" name=\"result" + new Integer(i + 1).toString() + "\" value=\"2\">");
 				pageContext.getOut().write("</td>");
 				pageContext.getOut().write("</tr>");
 			}

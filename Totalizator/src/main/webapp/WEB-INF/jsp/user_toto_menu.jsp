@@ -76,6 +76,7 @@
 						<div>
 							<tag:table-tag list="${list}" date="${date}" teams="${match}"
 								result1="1" result2="X" result3="2" />
+							<!-- <p id='error_results'>Select all games.</p> -->
 						</div>
 						<div class="form-group">
 							<div>
@@ -85,7 +86,7 @@
 								<input type="text" name="amount"
 									value="${requestScope.minBetAmount}" id="amount"
 									class="form-control" placeholder="${enter_amount}"
-									required="required" />
+									required="required"/>
 							</div>
 						</div>
 						<input type="submit" value="${make_bet}" class="btn btn-default">
@@ -98,5 +99,7 @@
 	<footer class="bottom bottom_clearfix">
 		<%@include file="../../Content/footer.jsp"%>
 	</footer>
+	
+	<script src="JS/script.js"></script>
 </body>
 </html>

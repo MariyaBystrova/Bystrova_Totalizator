@@ -130,7 +130,7 @@
 										value="${coupon.endDate}" /></td>
 								<td>${coupon.minBetAmount}</td>
 								<td>${coupon.jackpot}</td>
-								<td>${coupon.pull}</td>
+								<td>${coupon.pool}</td>
 								<td><c:if test="${coupon.status eq 1}">${open}</c:if> <c:if
 										test="${coupon.status eq 3}">${closed}</c:if> <c:if
 										test="${coupon.status eq 4}">${cancelled}</c:if> <c:if

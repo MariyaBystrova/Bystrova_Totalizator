@@ -89,7 +89,7 @@ public class SQLCouponOperationDAO implements CouponOperationDAO {
 				ps.setTimestamp(1, coupon.getStartDate());
 				ps.setTimestamp(2, coupon.getEndDate());
 				ps.setInt(3, coupon.getMinBetAmount());
-				ps.setInt(4, coupon.getPull());
+				ps.setInt(4, coupon.getPool());
 				ps.setInt(5, coupon.getJackpot());
 				ps.setInt(6, coupon.getStatus());
 				ps.setInt(7, coupon.getId());

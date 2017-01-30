@@ -137,7 +137,7 @@ public class TableAllCouponsTag extends TagSupport {
 						"<td id='endDate" + i + "'>" + sdf.format(coupon.getEndDate()).replace('T', ' ') + "</td>");
 				pageContext.getOut().write("<td id='minBetAmount" + i + "'>" + coupon.getMinBetAmount() + "</td>");
 				pageContext.getOut().write("<td id='jackpot" + i + "'>" + coupon.getJackpot() + "</td>");
-				pageContext.getOut().write("<td id='jackpot" + i + "'>" + coupon.getPull() + "</td>");
+				pageContext.getOut().write("<td id='jackpot" + i + "'>" + coupon.getPool() + "</td>");
 				pageContext.getOut().write("<td id='status" + i + "'>" + statusNameById(coupon.getStatus()) + "</td>");
 				pageContext.getOut().write("<td>");
 				pageContext.getOut().write("<input type=\"submit\" value=\"Edit\" class=\"btn btn-default\"/>");

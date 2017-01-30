@@ -149,7 +149,7 @@
 					</div>
 					<div>
 						<input type="number" name="coupon-pull" id="coupon-pull"
-							value="${coupon.pull}" required="required" />
+							value="${coupon.pool}" required="required" />
 					</div>
 				</div>
 				<div>

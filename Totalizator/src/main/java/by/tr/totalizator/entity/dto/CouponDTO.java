@@ -16,28 +16,28 @@ public class CouponDTO implements Serializable {
 	private String endDate;
 	private String minBetAmount;
 	private String jackpot;
-	private String pull;
+	private String pool;
 	private String status;
 
 	public CouponDTO() {
 
 	}
 
-	public CouponDTO(String id, String startDate, String endDate, String minBetAmount, String jackpot, String pull,
+	public CouponDTO(String id, String startDate, String endDate, String minBetAmount, String jackpot, String pool,
 			String status) {
 		this.id = id;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.minBetAmount = minBetAmount;
 		this.jackpot = jackpot;
-		this.pull = pull;
+		this.pool = pool;
 		this.status = status;
 	}
 
 	@Override
 	public String toString() {
 		return "CouponBean [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", minBetAmount="
-				+ minBetAmount + ", jackpot=" + jackpot + ", pull=" + pull + ", status=" + status + "]";
+				+ minBetAmount + ", jackpot=" + jackpot + ", pool=" + pool + ", status=" + status + "]";
 	}
 	
 	
@@ -50,7 +50,7 @@ public class CouponDTO implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((jackpot == null) ? 0 : jackpot.hashCode());
 		result = prime * result + ((minBetAmount == null) ? 0 : minBetAmount.hashCode());
-		result = prime * result + ((pull == null) ? 0 : pull.hashCode());
+		result = prime * result + ((pool == null) ? 0 : pool.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
@@ -85,10 +85,10 @@ public class CouponDTO implements Serializable {
 				return false;
 		} else if (!minBetAmount.equals(other.minBetAmount))
 			return false;
-		if (pull == null) {
-			if (other.pull != null)
+		if (pool == null) {
+			if (other.pool != null)
 				return false;
-		} else if (!pull.equals(other.pull))
+		} else if (!pool.equals(other.pool))
 			return false;
 		if (startDate == null) {
 			if (other.startDate != null)
@@ -143,12 +143,12 @@ public class CouponDTO implements Serializable {
 		this.jackpot = jackpot;
 	}
 
-	public String getPull() {
-		return pull;
+	public String getPool() {
+		return pool;
 	}
 
-	public void setPull(String pull) {
-		this.pull = pull;
+	public void setPull(String pool) {
+		this.pool = pool;
 	}
 
 	public String getStatus() {

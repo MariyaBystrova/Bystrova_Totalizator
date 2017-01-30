@@ -16,7 +16,7 @@
 <fmt:message bundle="${loc}" key="local.help" var="help" />
 <fmt:message bundle="${loc}" key="local.page_language"
 	var="page_language" />
-<fmt:message bundle="${loc}" key="banner_authorization"
+<fmt:message bundle="${loc}" key="local.banner_authorization"
 	var="banner_authorization" />
 <link href="https://fonts.googleapis.com/css?family=Pattaya"
 	rel="stylesheet">
@@ -46,7 +46,7 @@
 		<ul>
 			<li><a href="index.jsp" class="a-dec"><c:out value="${main}" /></a></li>
 			<li><a href="index.jsp" class="a-dec"
-				onclick="alert_banner('You need to be authorized to see the coupon and to make bets. Please, log in the system or go to the registration page.')"><c:out
+				onclick="alert_banner('${banner_authorization}')"><c:out
 						value="${toto}" /></a></li>
 			<li><a href="#" class="a-dec"><c:out value="${results}" /></a></li>
 			<li><a href="#" class="a-dec"><c:out value="${help}" /></a></li>

@@ -257,7 +257,7 @@ public final class Validator {
 		if (!matcher(ZERO_OR_GREATER_PATTERN, coupon.getJackpot())) {
 			return false;
 		}
-		if (!matcher(ZERO_OR_GREATER_PATTERN, coupon.getPull())) {
+		if (!matcher(ZERO_OR_GREATER_PATTERN, coupon.getPool())) {
 			return false;
 		}
 		if (!matcher("[1346]{1}", coupon.getStatus())) {

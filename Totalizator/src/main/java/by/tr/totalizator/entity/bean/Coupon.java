@@ -17,7 +17,7 @@ public class Coupon implements Serializable {
 	private Timestamp startDate;
 	private Timestamp endDate;
 	private int minBetAmount;
-	private int pull;
+	private int pool;
 	private int jackpot;
 	/**
 	 * Available values: 1 - open - process of gathering bets; 3 - closed - all
@@ -44,11 +44,11 @@ public class Coupon implements Serializable {
 	 * @param jackpot
 	 *            coupon's jackPot
 	 */
-	public Coupon(Timestamp startDate, Timestamp endDate, int minBetAmount, int pull, int jackpot) {
+	public Coupon(Timestamp startDate, Timestamp endDate, int minBetAmount, int pool, int jackpot) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.minBetAmount = minBetAmount;
-		this.pull = pull;
+		this.pool = pool;
 		this.jackpot = jackpot;
 	}
 
@@ -78,7 +78,7 @@ public class Coupon implements Serializable {
 	@Override
 	public String toString() {
 		return "Coupon [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", minBetAmount="
-				+ minBetAmount + ", pull=" + pull + ", jackpot=" + jackpot + ", status=" + status + "]";
+				+ minBetAmount + ", pool=" + pool + ", jackpot=" + jackpot + ", status=" + status + "]";
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class Coupon implements Serializable {
 		result = prime * result + id;
 		result = prime * result + jackpot;
 		result = prime * result + minBetAmount;
-		result = prime * result + pull;
+		result = prime * result + pool;
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		result = prime * result + status;
 		return result;
@@ -123,7 +123,7 @@ public class Coupon implements Serializable {
 		if (minBetAmount != other.minBetAmount) {
 			return false;
 		}
-		if (pull != other.pull) {
+		if (pool != other.pool) {
 			return false;
 		}
 		if (startDate == null) {
@@ -191,12 +191,12 @@ public class Coupon implements Serializable {
 		this.minBetAmount = minBetAmount;
 	}
 
-	public int getPull() {
-		return pull;
+	public int getPool() {
+		return pool;
 	}
 
-	public void setPull(int pull) {
-		this.pull = pull;
+	public void setPool(int pool) {
+		this.pool = pool;
 	}
 
 	public int getJackpot() {
