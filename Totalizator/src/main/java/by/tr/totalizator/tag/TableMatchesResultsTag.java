@@ -106,6 +106,7 @@ public class TableMatchesResultsTag extends TagSupport {
 	 * </p>
 	 */
 	private String result;
+	private String edit;
 
 	public int doStartTag() throws JspTagException {
 		int size = new Integer(list.getSize());
@@ -204,7 +205,8 @@ public class TableMatchesResultsTag extends TagSupport {
 				pageContext.getOut().write("</td>");
 
 				pageContext.getOut().write("<td>");
-				pageContext.getOut().write("<input type=\"submit\" value=\"Edit\" class=\"btn btn-default\" />");
+				pageContext.getOut()
+						.write("<input type=\"submit\" value=\"" + edit + "\" class=\"btn btn-default\" />");
 				pageContext.getOut().write("</td>");
 
 				pageContext.getOut().write("</form>");
@@ -262,6 +264,14 @@ public class TableMatchesResultsTag extends TagSupport {
 
 	public void setTeamTwo(String teamTwo) {
 		this.teamTwo = teamTwo;
+	}
+
+	public String getEdit() {
+		return edit;
+	}
+
+	public void setEdit(String edit) {
+		this.edit = edit;
 	}
 
 	public String getStartDate() {

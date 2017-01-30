@@ -71,6 +71,10 @@ public class TableTagMatches extends TagSupport {
 	 */
 	private String endDate;
 
+	private String add;
+
+	private String edit;
+
 	public int doStartTag() throws JspTagException {
 		int size = new Integer(list.getSize());
 		int fullSize = 15;
@@ -127,7 +131,8 @@ public class TableTagMatches extends TagSupport {
 				pageContext.getOut().write("</td>");
 				pageContext.getOut().write("<td>");
 
-				pageContext.getOut().write("<input type=\"submit\" value=\"Edit\" class=\"btn btn-default\" />");
+				pageContext.getOut()
+						.write("<input type=\"submit\" value=\"" + edit + "\" class=\"btn btn-default\" />");
 
 				pageContext.getOut().write("</td>");
 				pageContext.getOut().write("</form>");
@@ -156,7 +161,7 @@ public class TableTagMatches extends TagSupport {
 				pageContext.getOut().write(
 						"<td><input type=\"datetime-local\" name=\"match-end-date\" placeholder=\"yyyy-mm-dd hh:mm\" value=\"\"required=\"required\" /></td>");
 				pageContext.getOut().write("<td>");
-				pageContext.getOut().write("<input type=\"submit\" value=\"Add\" class=\"btn btn-default\" />");
+				pageContext.getOut().write("<input type=\"submit\" value=\"" + add + "\" class=\"btn btn-default\" />");
 				pageContext.getOut().write("</td>");
 				pageContext.getOut().write("</form>");
 				pageContext.getOut().write("</tr>");
@@ -214,6 +219,26 @@ public class TableTagMatches extends TagSupport {
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getAdd() {
+		return add;
+	}
+
+	public void setAdd(String add) {
+		this.add = add;
+	}
+
+	public String getEdit() {
+		return edit;
+	}
+
+	public void setEdit(String edit) {
+		this.edit = edit;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

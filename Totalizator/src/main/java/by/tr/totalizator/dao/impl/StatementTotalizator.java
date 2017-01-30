@@ -49,7 +49,7 @@ public final class StatementTotalizator {
 	
 	public final static String INSERT_INTO_BET = "INSERT INTO `bet` (`user_id`,`cupon_id`,`bet_amount`,`transaction_date`,`creditcard_number`,`win_match_count`,`win_bet_amount`) "
 												+"SELECT * FROM (SELECT ? as user_id, ? as cupon_id, ? as bet_amount, NOW() as transaction_date, ? as creditcard_number, NULL as win_match_count, NULL as win_bet_amount) AS tmp "
-												+"WHERE EXISTS (SELECT c.cupon_id FROM `cupon` as c WHERE c.min_bet_amount<=tmp.bet_amount);";
+												+"WHERE EXISTS (SELECT c.cupon_id FROM `cupon` as c WHERE c.min_bet_amount<=tmp.bet_amount AND c.cupon_id=tmp.cupon_id);";
 	
 	public final static String LAST_INSERTED_ID = "SELECT LAST_INSERT_ID();";
 	

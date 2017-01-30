@@ -11,7 +11,7 @@
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	
+
 
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
@@ -56,8 +56,8 @@
 	var="message_match_edit_success" />
 <fmt:message bundle="${loc}" key="local.message_match_edit_failed"
 	var="message_match_edit_failed" />
-<fmt:message bundle="${loc}" key="local.set_results"
-	var="title" />
+<fmt:message bundle="${loc}" key="local.set_results" var="title" />
+<fmt:message bundle="${loc}" key="local.edit" var="edit" />
 
 <title><c:out value="${title}" /></title>
 
@@ -163,7 +163,7 @@
 						<tag:table-matches-result-tag list="${list}" matchName="${name}"
 							teamOne="${team_one}" teamTwo="${team_two}"
 							startDate="${start_date}" endDate="${end_date}"
-							result="${result}" status="${status}" />
+							result="${result}" status="${status}" edit="${edit}" />
 					</div>
 				</div>
 				<div>

@@ -83,10 +83,10 @@
 								<label for="amount"><c:out value="${amount}" />:</label>
 							</div>
 							<div>
-								<input type="text" name="amount"
+								<input type="number" name="amount"
 									value="${requestScope.minBetAmount}" id="amount"
 									class="form-control" placeholder="${enter_amount}"
-									required="required"/>
+									required="required" min="${requestScope.minBetAmount}"/>
 							</div>
 						</div>
 						<input type="submit" value="${make_bet}" class="btn btn-default">

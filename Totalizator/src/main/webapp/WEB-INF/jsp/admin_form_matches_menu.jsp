@@ -47,6 +47,8 @@
 	var="message_match_edit_failed" />
 <fmt:message bundle="${loc}" key="local.fill_coupon"
 	var="title" />
+<fmt:message bundle="${loc}" key="local.edit" var="edit" />
+<fmt:message bundle="${loc}" key="local.add" var="add" />
 
 <title><c:out value="${title}" /></title>
 
@@ -146,7 +148,7 @@
 							class="by.tr.totalizator.tag.bean.JSPListBean" scope="request" />
 						<tag:table-tag-matches list="${list}" matchName="${name}"
 							teamOne="${team_one}" teamTwo="${team_two}"
-							startDate="${start_date}" endDate="${end_date}" />
+							startDate="${start_date}" endDate="${end_date}" add="${add}" edit="${edit}"/>
 					</div>
 				</div>
 			</c:if>
