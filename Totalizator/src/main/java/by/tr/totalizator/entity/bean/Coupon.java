@@ -39,7 +39,7 @@ public class Coupon implements Serializable {
 	 *            coupon's planning end date and time
 	 * @param minBetAmount
 	 *            coupon's minimal bet money amount
-	 * @param pull
+	 * @param pool
 	 *            coupon's pool
 	 * @param jackpot
 	 *            coupon's jackPot
