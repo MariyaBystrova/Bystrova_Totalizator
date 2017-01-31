@@ -76,10 +76,11 @@ public class ShowCouponMatchesCommand implements Command {
 		if (request.getSession(false) == null) {
 			return PageName.INDEX_PAGE;
 		}
-
+		if (request.getParameter(COUPON_ID) != null) {
 		request.getSession(false).setAttribute(CURRENT_URL, URL + request.getParameter(COUPON_ID) + AMP + PAGE + EQUALS
 				+ request.getParameter(PAGE) + AMP + COUPON + EQUALS + request.getParameter(COUPON_ID));
-
+		}
+		
 		int couponId = 0;
 		String page = null;
 		User user = (User) request.getSession(false).getAttribute(USER);

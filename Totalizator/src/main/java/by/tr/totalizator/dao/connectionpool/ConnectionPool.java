@@ -98,7 +98,11 @@ public final class ConnectionPool {
 	 */
 	public final static ConnectionPool getInstance() {
 		if (null == instance) {
-			instance = new ConnectionPool();
+			synchronized (ConnectionPool.class) {
+				if (null == instance) {
+					instance = new ConnectionPool();
+				}
+			}
 		}
 		return instance;
 
